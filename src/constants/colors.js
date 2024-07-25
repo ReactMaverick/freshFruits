@@ -1,0 +1,16 @@
+export const colors = {
+  PrimaryColor: '#7CBA1E',
+  PrimaryColorlight10: '#F2F8E8',
+  PrimaryColorlight60: '#B0D678',
+  MediumGrayColor: '#72776C',
+  DarkGrayColor: '#52574B',
+  LightGrayColor: '#A3A5A1',
+  HeadingColor: '#30352B',
+  background: '#FDFFFA',
+  SecondoryColor: '#FFAB25',
+  Redtone: '#EA533F',
+  Yellow: '#FAFD74',
+  White: '#FFFFFF',
+  otp: '#F0F0F0',
+  sliderBg: '#D8EBBC',
+};

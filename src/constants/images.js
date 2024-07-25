@@ -1,0 +1,13 @@
+export const LOGO = require('../assets/images/logo.png');
+export const WELCOMEBG = require('../assets/images/WelcomeBg.png');
+export const SLIDER1 = require('../assets/images/slider1.png');
+export const SLIDER2 = require('../assets/images/slider2.png');
+export const SLIDER3 = require('../assets/images/slider3.png');
+export const FRESHFOODLOGO = require('../assets/images/FreshFruitLOGO.png');
+export const SWITCHOFF = require('../assets/images/SwitchLemon.png');
+export const SWITCHON = require('../assets/images/SwitchLemonActive.png');
+export const GOOGLE = require('../assets/images/google.png');
+export const FACEBOOK = require('../assets/images/facebook.png');
+export const BAR = require('../assets/images/bar.png');
+export const FILTER = require('../assets/images/filter.png');
+export const BANNERSLIDER1 = require('../assets/images/bannerSlider1.png');
