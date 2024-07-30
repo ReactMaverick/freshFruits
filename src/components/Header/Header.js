@@ -90,7 +90,7 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                                 </Pressable>
                                 <Pressable
                                     style={styles.SideBarBtn}
-                                    onPress={() => { console.log(navigation); }}
+                                    onPress={() => { navigation.toggleDrawer() }}
                                 >
                                     <Image source={BAR} style={styles.SideBarIcon} />
                                 </Pressable>

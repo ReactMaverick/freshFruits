@@ -164,15 +164,6 @@ function HomeTabs() {
   );
 }
 
-function MyDrawer() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Article" component={Home} />
-    </Drawer.Navigator>
-  );
-}
-
 const LoginStack = () => {
   return (
     <Stack.Navigator>
@@ -324,6 +315,29 @@ const LoginStack = () => {
 //   );
 // };
 
+const MyDrawer = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName="LoginStack"
+      screenOptions={{
+        drawerPosition: 'right',
+        headerShown: false,
+      }}
+    >
+      <Drawer.Screen name="LoginStack" component={LoginStack} />
+      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Notification" component={Notification} />
+      <Drawer.Screen name="Wishlist" component={Wishlist} />
+      <Drawer.Screen name="MyOrder" component={MyOrder} />
+      <Drawer.Screen name="MyCart" component={MyCart} />
+      <Drawer.Screen name="ProductDetails" component={ProductDetails} />
+      <Drawer.Screen name="Checkout" component={Checkout} />
+      <Drawer.Screen name="PaymentDetails" component={PaymentDetails} />
+      <Drawer.Screen name="PaymentSuccessful" component={PaymentSuccessful} />
+    </Drawer.Navigator>
+  );
+};
+
 export default function Router() {
   // const isUserLoggedIn = useSelector(isLoggedIn);
   // Change this to true to see the Home screen (@Suraj)
@@ -335,7 +349,7 @@ export default function Router() {
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       {/* {isUserLoggedIn ? <HomeStack /> : <LoginStack />} */}
-      <LoginStack />
+      <MyDrawer />
     </>
   );
 }
