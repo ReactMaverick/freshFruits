@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useState, useEffect, useRef } from 'react';
 import { styles } from './Style';
 import { Badge, Text } from 'react-native-elements';
@@ -67,7 +68,15 @@ export default function Header({ leftContent, MiddleContent, rightContent, navig
                                 <Octicons name="chevron-down" style={styles.locationIcon} />
                             </Pressable>
                         </View>}
+                    {leftContent == "backBtn" && <View style={styles.backbtn}>
+                        <Pressable onPress={() => navigation.goBack()}>
+                            <Ionicons name="arrow-back" style={styles.BackBtnArrow} />
+                        </Pressable>
+                    </View>}
 
+                    {MiddleContent == "Title" && <View style={styles.CenterBar}>
+                        <Text style={styles.TitleText}>Home</Text>
+                    </View>}
 
                     {rightContent == "blankBox" && <View style={styles.blankBox}></View>}
 
@@ -76,7 +85,7 @@ export default function Header({ leftContent, MiddleContent, rightContent, navig
                         <View style={styles.RightSide}>
                             <Pressable
                                 style={styles.bellBtn}
-                            // onPress={handlePress}
+                                onPress={() => { navigation.navigate('Notification') }}
                             >
                                 <Animated.View style={[animatedStyle, styles.NotificationBellIcon]}>
                                     <FontAwesome name="bell" style={styles.NotificationIcon} /></Animated.View>

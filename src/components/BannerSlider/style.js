@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     paginationStyleItem: {
-        width: 8,
-        height: 8,
+        width: 6,
+        height: 6,
         borderRadius: deviceHeight * 0.01,
         marginHorizontal: 0,
     },
     paginationStyleItemActive: {
-        width: 35,
-        height: 8,
+        width: 12,
+        height: 6,
         borderRadius: deviceHeight * 0.01,
         marginHorizontal: 0,
     }

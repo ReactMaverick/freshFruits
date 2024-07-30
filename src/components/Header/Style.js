@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-
     },
     headerLeft: {
         flex: 4,
@@ -128,6 +127,17 @@ export const styles = StyleSheet.create({
         width: deviceWidth * 0.05,
         height: deviceWidth * 0.05,
         objectFit: 'cover',
-
+    },
+    backbtn: {
+        width: deviceWidth * 0.1,
+        height: deviceWidth * 0.1,
+        borderRadius: deviceWidth * 0.1,
+        backgroundColor: colors.White,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    BackBtnArrow: {
+        color: colors.White,
+        fontSize: H5,
     },
 });

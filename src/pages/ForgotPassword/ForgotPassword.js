@@ -39,7 +39,6 @@ export default function ForgotPassword({ navigation }) {
               labelTextStyle={styles.labelTextStyle}
               placeholderText="Email/ Mobile no."
               hideLabel
-
             />
             <Pressable style={styles.loginBtn}
               onPress={() => navigation.navigate('OTP')} >

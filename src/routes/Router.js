@@ -26,6 +26,15 @@ import WelcomeScreen from '../pages/WelcomeScreen/WelcomeScreen';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OTP from '../pages/OTP/OTP';
 import Home from '../pages/Home/Home';
+import Profile from '../pages/Profile/Profile';
+import Notification from '../pages/Notification/Notification';
+import Wishlist from '../pages/Wishlist/Wishlist';
+import MyOrder from '../pages/MyOrder/MyOrder';
+import MyCart from '../pages/MyCart/MyCart';
+import ProductDetails from '../pages/ProductDetails/ProductDetails';
+import Checkout from '../pages/Checkout/Checkout';
+import PaymentDetails from '../pages/PaymentDetails/PaymentDetails';
+import PaymentSuccessful from '../pages/PaymentSuccessful/PaymentSuccessful';
 // // import { IMAGE_BASE_URL } from "../values/api/url";
 // import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -204,6 +213,70 @@ const LoginStack = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Wishlist"
+        component={Wishlist}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MyOrder"
+        component={MyOrder}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="MyCart"
+        component={MyCart}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={Checkout}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PaymentDetails"
+        component={PaymentDetails}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PaymentSuccessful"
+        component={PaymentSuccessful}
+        options={{
+          headerShown: false,
+        }}
+      />
+
     </Stack.Navigator>
   );
 };

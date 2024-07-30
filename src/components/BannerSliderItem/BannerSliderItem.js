@@ -6,6 +6,7 @@ import {
     Text,
     Image,
     ImageBackground,
+    Pressable,
 } from 'react-native';
 import styles from './style';
 import { commonStyles } from '../../constants/styles';
@@ -19,9 +20,13 @@ export default function BannerSliderItem({ navigation }) {
             style={commonStyles.keyboardAvoidingView}>
             <SafeAreaView>
                 <View style={styles.sliderCardMain}>
-                    <ImageBackground source={BANNERSLIDER1} resizeMode='contain' style={styles.sliderCard}>
+                    <ImageBackground source={BANNERSLIDER1} resizeMode='cover' style={styles.sliderCard}>
                         <View style={styles.sliderCardLeft}>
-                            <Text style={styles.sliderText}>Spring Harvest Sale</Text>
+                            <Text style={styles.sliderText}>Spring Harvest<Text style={styles.TextColorChange}> Sale</Text></Text>
+                            <Text style={styles.sliderSubText}>Create your perfect fruit basket and save<Text style={styles.TextColorChange}> 20%</Text></Text>
+                            <Pressable style={styles.sliderButton}>
+                                <Text style={styles.sliderButtonText}>Shop Now</Text>
+                            </Pressable>
                         </View>
                     </ImageBackground>
                 </View>
