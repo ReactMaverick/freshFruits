@@ -25,11 +25,11 @@ export default function PaymentDetails({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         < Header
+          pageName={"Payment Details"}
           navigation={navigation}
-          leftContent={'backBtn'}
-          MiddleContent={'pageTitle'}
-          rightContent={'blankBox'}
-          BGCOLOR={'transparent'}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
         />
         <ScrollView style={styles.ScrollView}>
           <View style={styles.MainBox}>

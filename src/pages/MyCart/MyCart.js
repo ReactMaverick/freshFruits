@@ -24,11 +24,11 @@ export default function MyCart({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         < Header
+          pageName={"My Cart"}
           navigation={navigation}
-          leftContent={'backBtn'}
-          MiddleContent={'pageTitle'}
-          rightContent={'blankBox'}
-          BGCOLOR={'transparent'}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
         />
 
         <View style={styles.MainBox}>

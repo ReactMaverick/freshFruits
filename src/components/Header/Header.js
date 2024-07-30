@@ -7,7 +7,7 @@ import {
 import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { useState, useEffect, useRef } from 'react';
 import { styles } from './Style';
 import { Badge, Text } from 'react-native-elements';
@@ -27,7 +27,7 @@ const truncateText = (text, maxWords) => {
     return text;
 };
 
-export default function Header({ leftContent, MiddleContent, rightContent, navigation, pageName, BGCOLOR, BottomBar }) {
+export default function Header({ leftContent, HomeHeader, InnerPagesHeader, rightContent, navigation, pageName, BGCOLOR, BottomBar, BlankBox, WishListBtn, ClearAllBtn, BackBtn, CenterBox }) {
     const locationText = "2972 Westheimer Rd. Santa Ana, Illinois";
     // notification bell animation 
     const [notificationCount, setNotificationCount] = useState(0);
@@ -54,73 +54,92 @@ export default function Header({ leftContent, MiddleContent, rightContent, navig
         <KeyboardAvoidingView
             behavior={platform === 'ios' ? 'padding' : 'height'}
             style={commonStyles.keyboardAvoidingView1}>
-            <View style={[styles.headerAreaOuter, { backgroundColor: BGCOLOR }]}>
-                <View style={styles.headerArea}>
-                    {leftContent == "HomeLeft" &&
-                        <View style={styles.headerLeft}>
-                            <Text style={styles.leftTitle}>Deliver In</Text>
-                            <Text style={styles.leftSubTitle}>Every Fruit 10 minutes</Text>
-                            {/* location box */}
-                            <Pressable style={styles.locationBox}>
-                                <Octicons name="location"
-                                    style={styles.locationIcon} />
-                                <Text style={styles.locationText}> {truncateText(locationText, 5)}</Text>
-                                <Octicons name="chevron-down" style={styles.locationIcon} />
+            {HomeHeader == "HomeHeader" &&
+                <View style={[styles.headerAreaOuter, { backgroundColor: BGCOLOR }]}>
+                    <View style={styles.headerArea}>
+                        {leftContent == "HomeLeft" &&
+                            <View style={styles.headerLeft}>
+                                <Text style={styles.leftTitle}>Deliver In</Text>
+                                <Text style={styles.leftSubTitle}>Every Fruit 10 minutes</Text>
+                                {/* location box */}
+                                <Pressable style={styles.locationBox}>
+                                    <Octicons name="location"
+                                        style={styles.locationIcon} />
+                                    <Text style={styles.locationText}> {truncateText(locationText, 5)}</Text>
+                                    <Octicons name="chevron-down" style={styles.locationIcon} />
+                                </Pressable>
+                            </View>}
+
+                        {rightContent == "HomeRight" &&
+                            <View style={styles.RightSide}>
+                                <Pressable
+                                    style={styles.bellBtn}
+                                    onPress={() => { navigation.navigate('Notification') }}
+                                >
+                                    <Animated.View style={[animatedStyle, styles.NotificationBellIcon]}>
+                                        <FontAwesome name="bell" style={styles.NotificationIcon} /></Animated.View>
+                                    <Badge value={notificationCount > 0 ? notificationCount.toString() : ""}
+                                        status="success"
+                                        badgeStyle={{ backgroundColor: colors.SecondoryColor }}
+                                        containerStyle={{
+                                            position: 'absolute',
+                                            top: notificationCount ? 8 : 15,
+                                            right: notificationCount ? 8 : 15
+                                        }}
+                                    />
+                                </Pressable>
+                                <Pressable
+                                    style={styles.SideBarBtn}
+                                    onPress={() => { console.log(navigation); }}
+                                >
+                                    <Image source={BAR} style={styles.SideBarIcon} />
+                                </Pressable>
+                            </View>}
+                    </View>
+                    {BottomBar == "SearchBox" &&
+                        <View style={styles.SearchBox}>
+                            <FormInput
+                                mainContainerStyle={styles.mainContainerStyle}
+                                inputContainerStyle={styles.inputContainerStyle}
+                                textInputProps={{ style: styles.textInputStyle }}
+                                hideLabel
+                                placeholderText="Search fruit....."
+                                leftIcon
+                                renderLeftIcon={() => <FontAwesome name="search" style={styles.textInputIcon} />}
+                                rightIcon
+                                rightIconOnPress={() => { }}
+                                renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
+                            />
+                        </View>}
+                </View>}
+            {InnerPagesHeader == "InnerHeader" &&
+                <View style={[styles.InnerHeader, { backgroundColor: BGCOLOR }]}>
+                    {BackBtn == "BackBtn" &&
+                        <View style={styles.InnerHeaderLeft}>
+                            <Pressable style={styles.BackBtn} onPress={() => navigation.goBack()}>
+                                <FontAwesome6 name="angle-left" style={styles.BackBtnArrow} />
                             </Pressable>
                         </View>}
-                    {leftContent == "backBtn" && <View style={styles.backbtn}>
-                        <Pressable onPress={() => navigation.goBack()}>
-                            <Ionicons name="arrow-back" style={styles.BackBtnArrow} />
-                        </Pressable>
-                    </View>}
-
-                    {MiddleContent == "Title" && <View style={styles.CenterBar}>
-                        <Text style={styles.TitleText}>Home</Text>
-                    </View>}
-
-                    {rightContent == "blankBox" && <View style={styles.blankBox}></View>}
-
-                    {/* notification bell button  */}
-                    {rightContent == "HomeRight" &&
-                        <View style={styles.RightSide}>
-                            <Pressable
-                                style={styles.bellBtn}
-                                onPress={() => { navigation.navigate('Notification') }}
-                            >
-                                <Animated.View style={[animatedStyle, styles.NotificationBellIcon]}>
-                                    <FontAwesome name="bell" style={styles.NotificationIcon} /></Animated.View>
-                                <Badge value={notificationCount > 0 ? notificationCount.toString() : ""}
-                                    status="success"
-                                    badgeStyle={{ backgroundColor: colors.SecondoryColor }}
-                                    containerStyle={{
-                                        position: 'absolute',
-                                        top: notificationCount ? 8 : 15,
-                                        right: notificationCount ? 8 : 15
-                                    }}
-                                />
-                            </Pressable>
-                            <Pressable
-                                style={styles.SideBarBtn}>
-                                <Image source={BAR} style={styles.SideBarIcon} />
-                            </Pressable>
+                    {CenterBox == "TitleBox" &&
+                        <View style={styles.InnerHeaderCenter}>
+                            <Text style={styles.InnerHeaderTitle}>{pageName}</Text>
                         </View>}
-                </View>
-                {BottomBar == "SearchBox" &&
-                    <View style={styles.SearchBox}>
-                        <FormInput
-                            mainContainerStyle={styles.mainContainerStyle}
-                            inputContainerStyle={styles.inputContainerStyle}
-                            textInputProps={{ style: styles.textInputStyle }}
-                            hideLabel
-                            placeholderText="Search fruit....."
-                            leftIcon
-                            renderLeftIcon={() => <FontAwesome name="search" style={styles.textInputIcon} />}
-                            rightIcon
-                            rightIconOnPress={() => { }}
-                            renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
-                        />
-                    </View>}
-            </View>
+                    <View style={styles.InnerHeaderRight}>
+                        {BlankBox == "Blank" &&
+                            <View style={styles.BlankBox} />}
+                        {WishListBtn == "WishList" &&
+                            <View style={styles.WishListBox}>
+                                <FontAwesome name="heart" style={styles.WishListIcon} />
+                            </View>}
+                        {ClearAllBtn == "ClearAll" &&
+                            <Pressable style={styles.ClearAllBox}>
+                                <Text style={styles.ClearAllText}>Clear All</Text>
+                            </Pressable>}
+
+
+                    </View>
+                </View>}
+
         </KeyboardAvoidingView>
     );
 }

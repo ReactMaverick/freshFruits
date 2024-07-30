@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import {
     View,
     Image,
@@ -12,6 +13,15 @@ import { BTNCARTTEXT, DISCOUNT, PRO2 } from '../../constants/images';
 import Feather from 'react-native-vector-icons/Feather';
 
 export default function MyCartItem({ navigation }) {
+    const [quantity, setQuantity] = useState(1); // Initialize quantity state
+
+    const incrementQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    const decrementQuantity = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
     return (
         <View style={styles.CardOuter}>
             <View style={styles.CardInner}>
@@ -37,11 +47,11 @@ export default function MyCartItem({ navigation }) {
                                 $29</Text> </Text>
                         </View>
                         <View style={styles.quantityPlusMinus}>
-                            <Pressable style={styles.MinusBtn}>
+                            <Pressable style={styles.MinusBtn} onPress={decrementQuantity}>
                                 <Feather name="minus" style={styles.MinusIcon} />
                             </Pressable>
-                            <Text style={styles.quantityText}>1Kg</Text>
-                            <Pressable style={styles.plusBtn}>
+                            <Text style={styles.quantityText}>{quantity}Kg</Text>
+                            <Pressable style={styles.plusBtn} onPress={incrementQuantity}>
                                 <Feather name="plus" style={styles.plusIcon} />
                             </Pressable>
                         </View>

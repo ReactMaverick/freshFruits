@@ -128,16 +128,88 @@ export const styles = StyleSheet.create({
         height: deviceWidth * 0.05,
         objectFit: 'cover',
     },
-    backbtn: {
+
+
+    // InnerHeader
+    InnerHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: deviceHeight * 0.02,
+        paddingHorizontal: deviceWidth * 0.04,
+        backgroundColor: "transparent",
+
+    },
+    InnerHeaderLeft: {
+        flex: 1,
+        alignItems: 'flex-start',
+        height: deviceWidth * 0.1,
+        borderRadius: deviceWidth * 0.1,
+        justifyContent: 'flex-start',
+    },
+    BackBtn: {
         width: deviceWidth * 0.1,
         height: deviceWidth * 0.1,
         borderRadius: deviceWidth * 0.1,
         backgroundColor: colors.White,
         justifyContent: 'center',
         alignItems: 'center',
+        shadowColor: 'rgba(77, 104, 36, 0.80)',
+        shadowOffset: { width: 5, height: 20 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10,
     },
     BackBtnArrow: {
-        color: colors.White,
+        color: colors.HeadingColor,
         fontSize: H5,
+    },
+    InnerHeaderCenter: {
+        flex: 3,
+        alignItems: 'center',
+    },
+    InnerHeaderRight: {
+        flex: 1,
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        gap: deviceWidth * 0.04,
+
+    },
+    InnerHeaderTitle: {
+        color: colors.HeadingColor,
+        fontSize: H5,
+        fontFamily: fontFamily.Bold,
+    },
+    BlankBox: {
+        width: deviceWidth * 0.1,
+        height: deviceWidth * 0.1,
+    },
+    WishListBox: {
+        width: deviceWidth * 0.1,
+        height: deviceWidth * 0.1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: deviceWidth * 0.1,
+        backgroundColor: "#f6faef",
+        shadowColor: 'rgba(77, 104, 36, 0.80)',
+        shadowOffset: { width: 5, height: 20 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 10,
+    },
+    WishListIcon: {
+        color: colors.PrimaryColor,
+        fontSize: H5,
+    },
+    ClearAllBox: {
+        padding: deviceWidth * 0.02,
+        borderRadius: deviceWidth * 0.1,
+        backgroundColor: colors.White,
+    },
+    ClearAllText: {
+        color: colors.HeadingColor,
+        fontSize: H6,
+        fontFamily: fontFamily.Bold,
     },
 });

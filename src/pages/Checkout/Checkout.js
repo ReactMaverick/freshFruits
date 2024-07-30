@@ -26,11 +26,11 @@ export default function Checkout({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         < Header
+          pageName={"Checkout"}
           navigation={navigation}
-          leftContent={'backBtn'}
-          MiddleContent={'pageTitle'}
-          rightContent={'blankBox'}
-          BGCOLOR={'transparent'}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
         />
         <View style={styles.MainBox}>
           <ScrollView style={styles.ScrollView}>

@@ -4,20 +4,38 @@ import {
   View,
   ScrollView,
   Pressable,
+  Text,
+  ActivityIndicator,
 } from 'react-native';
 import { styles } from './Style';
 import { commonStyles } from '../../constants/styles';
 import { platform } from '../../constants/constants';
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import { colors } from '../../constants/colors';
-import { Text } from 'react-native';
 import BannerSlider from '../../components/BannerSlider/BannerSlider';
 import CatagoriesSlider from '../../components/CategoriesSlider/CategoriesSlider';
 import PopularFruitsSlider from '../../components/PopularFruitsSlider/PopularFruitsSlider';
 import ProductItem from '../../components/ProductItem/ProductItem';
+import Loader from '../../components/Loader/Loader';
 
 export default function Home({ navigation }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <KeyboardAvoidingView
@@ -29,6 +47,7 @@ export default function Home({ navigation }) {
         rightContent={'HomeRight'}
         BGCOLOR={colors.White}
         BottomBar={'SearchBox'}
+        HomeHeader={'HomeHeader'}
       />
       <ScrollView>
         <SafeAreaView>
@@ -44,13 +63,12 @@ export default function Home({ navigation }) {
               <Text style={styles.HeadingText}>Popular Fruits</Text>
               <Pressable style={styles.ViewAllBtn}
                 // onPress={() => navigation.navigate('Wishlist')}
-                // onPress={() => navigation.navigate('MyCart')}
-                // onPress={() => navigation.navigate('ProductDetails')}
-                // onPress={() => navigation.navigate('Checkout')}
-                // onPress={() => navigation.navigate('PaymentDetails')}
-                onPress={() => navigation.navigate('PaymentSuccessful')}
-
-
+                // onPress={() => navigation.navigate('MyOrder')}
+                onPress={() => navigation.navigate('MyCart')}
+              // onPress={() => navigation.navigate('ProductDetails')}
+              // onPress={() => navigation.navigate('Checkout')}
+              // onPress={() => navigation.navigate('PaymentDetails')}
+              // onPress={() => navigation.navigate('PaymentSuccessful')}
               >
                 <Text style={styles.ViewAllBtnText}>See All</Text>
               </Pressable>

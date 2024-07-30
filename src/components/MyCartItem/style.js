@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         color: colors.PrimaryColor,
         paddingHorizontal: deviceWidth * 0.02,
         textAlign: 'center',
-        width: deviceWidth * 0.12,
+        width: deviceWidth * 0.13,
     },
     plusBtn: {
         height: deviceHeight * 0.03,

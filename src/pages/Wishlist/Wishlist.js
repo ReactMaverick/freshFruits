@@ -29,11 +29,11 @@ export default function Wishlist({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         < Header
+          pageName={"Wishlist"}
           navigation={navigation}
-          leftContent={'backBtn'}
-          MiddleContent={'pageTitle'}
-          rightContent={'blankBox'}
-          BGCOLOR={'transparent'}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
         />
         <ScrollView style={styles.ScrollView}>
           <View style={styles.MainBox}>

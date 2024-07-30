@@ -19,13 +19,14 @@ export const styles = StyleSheet.create({
     minHeight: deviceHeight * 1,
     backgroundColor: "#F9F9f9",
     position: 'relative',
-    paddingBottom: deviceHeight * 0.12,
+    paddingBottom: deviceHeight * 0.09,
   },
   ProductDetailsBox: {
     minHeight: deviceHeight * 0.4,
     paddingHorizontal: deviceWidth * 0.04,
-    paddingTop: deviceHeight * 0.1,
+    // paddingTop: deviceHeight * 0.1,
     paddingBottom: deviceHeight * 0.05,
+
   },
   ProductDetailsTitle: {
     fontFamily: fontFamily.Bold,
@@ -179,8 +180,6 @@ export const styles = StyleSheet.create({
 
   ////////////////////// AddToCartBox //////////////////////
   AddToCartBox: {
-    position: 'absolute',
-    bottom: deviceHeight * 0.0,
     minWidth: deviceWidth * 1,
     backgroundColor: "#FDFFFA",
     paddingHorizontal: deviceWidth * 0.04,
@@ -188,7 +187,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    zIndex: 1,
   },
   AddToCartTextBox: {
     flex: 1,

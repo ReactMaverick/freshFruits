@@ -3,9 +3,9 @@ import {
     View,
     Text,
     Pressable,
+    FlatList,
 } from 'react-native';
 import styles from './style';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { colors } from '../../constants/colors';
 
 export default function CategoriesSlider({ navigation }) {
@@ -29,25 +29,18 @@ export default function CategoriesSlider({ navigation }) {
     ];
 
     return (
-
-        <SwiperFlatList
-            index={0}
-            loop={false}
-            showPagination={false}
-            paginationStyle={styles.paginationStyle}
-            paginationStyleItem={styles.paginationStyleItem}
-            paginationStyleItemActive={styles.paginationStyleItemActive}
-            paginationActiveColor={colors.PrimaryColor}
-            paginationDefaultColor={'#AAADA6'}
-        >
-            {fruits.map((item, index) => (
-                <View style={styles.categoryBox} key={index}>
-                    <Pressable style={styles.categoryBtn} key={index}>
+        <FlatList
+            data={fruits}
+            horizontal
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+                <View style={styles.categoryBox}>
+                    <Pressable style={styles.categoryBtn}>
                         <Text style={styles.categoryBtnText}>{item}</Text>
                     </Pressable>
                 </View>
-            ))
-            }
-        </SwiperFlatList>
+            )}
+            showsHorizontalScrollIndicator={false}
+        />
     );
 }

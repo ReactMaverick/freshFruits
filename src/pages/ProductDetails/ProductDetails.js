@@ -19,6 +19,7 @@ import { colors } from '../../constants/colors';
 
 import Feather from 'react-native-vector-icons/Feather';
 import OtherFruitsSlider from '../../components/OtherFruitsSlider/OtherFruitsSlider';
+import Header from '../../components/Header/Header';
 
 
 export default function ProductDetails({ navigation }) {
@@ -28,6 +29,13 @@ export default function ProductDetails({ navigation }) {
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
+        < Header
+          navigation={navigation}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
+          BGCOLOR={"#FFE8E8"}
+        />
         <View style={styles.MainBox}>
           <ScrollView style={styles.ScrollView}>
             <ImageBackground source={PRODETAILSBG} resizeMode='cover' style={styles.ProductDetailsBox}>

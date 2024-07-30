@@ -9,6 +9,11 @@ export const commonStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   borderBox: {
     backgroundColor: colors.white,
     borderRadius: deviceHeight * 0.03,

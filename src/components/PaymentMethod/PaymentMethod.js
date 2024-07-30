@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Image,
@@ -9,6 +9,11 @@ import styles from './style';
 import { GPAY, MASTERCARD1, TOGGLEICON, TOGGLEICONINACTIVE, VISA } from '../../constants/images';
 
 export default function PaymentMethod({ navigation }) {
+    const [selectedMethod, setSelectedMethod] = useState(null); // Initialize state for selected payment method
+
+    const handleToggle = (method) => {
+        setSelectedMethod(method);
+    };
     return (
         <View style={styles.PaymentMethodOuter}>
             <View style={styles.PaymentMethodInner}>
@@ -18,8 +23,8 @@ export default function PaymentMethod({ navigation }) {
                             <Image source={VISA} style={styles.PaymentMethodLiImage} />
                             <Text style={styles.PaymentMethodText}>Visa Card</Text>
                         </View>
-                        <Pressable style={styles.PaymentMethodLiRadio}>
-                            <Image source={TOGGLEICON} style={styles.PaymentMethodLiRadioImage} />
+                        <Pressable style={styles.PaymentMethodLiRadio} onPress={() => handleToggle('VISA')}>
+                            <Image source={selectedMethod === 'VISA' ? TOGGLEICON : TOGGLEICONINACTIVE} style={styles.PaymentMethodLiRadioImage} />
                         </Pressable>
                     </View>
                     <View style={styles.PaymentMethodLi}>
@@ -27,8 +32,8 @@ export default function PaymentMethod({ navigation }) {
                             <Image source={MASTERCARD1} style={styles.PaymentMethodLiImage} />
                             <Text style={styles.PaymentMethodText}>Master Card</Text>
                         </View>
-                        <Pressable style={styles.PaymentMethodLiRadio}>
-                            <Image source={TOGGLEICONINACTIVE} style={styles.PaymentMethodLiRadioImage} />
+                        <Pressable style={styles.PaymentMethodLiRadio} onPress={() => handleToggle('MASTERCARD')}>
+                            <Image source={selectedMethod === 'MASTERCARD' ? TOGGLEICON : TOGGLEICONINACTIVE} style={styles.PaymentMethodLiRadioImage} />
                         </Pressable>
                     </View>
                     <View style={styles.PaymentMethodLi}>
@@ -36,8 +41,8 @@ export default function PaymentMethod({ navigation }) {
                             <Image source={GPAY} style={styles.PaymentMethodLiImage} />
                             <Text style={styles.PaymentMethodText}>UPI Payment</Text>
                         </View>
-                        <Pressable style={styles.PaymentMethodLiRadio}>
-                            <Image source={TOGGLEICONINACTIVE} style={styles.PaymentMethodLiRadioImage} />
+                        <Pressable style={styles.PaymentMethodLiRadio} onPress={() => handleToggle('GPAY')}>
+                            <Image source={selectedMethod === 'GPAY' ? TOGGLEICON : TOGGLEICONINACTIVE} style={styles.PaymentMethodLiRadioImage} />
                         </Pressable>
                     </View>
                 </View>
