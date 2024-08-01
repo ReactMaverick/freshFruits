@@ -14,12 +14,14 @@ import { deviceWidth, deviceHeight } from '../../constants/constants';
 export const styles = StyleSheet.create({
   MainBox: {
     flex: 1,
-    paddingBottom: deviceHeight * 0.12,
+    paddingBottom: deviceHeight * 0.18,
     minHeight: deviceHeight * 1,
     backgroundColor: "#F9F9f9",
     position: 'relative',
   },
-
+  OrderBox: {
+    paddingBottom: deviceHeight * 0.02,
+  },
   OrderSummaryRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -64,14 +66,11 @@ export const styles = StyleSheet.create({
     shadowColor: 'rgba(72, 92, 40, 0.50)',
   },
   OrderSummaryBox: {
-    position: 'absolute',
-    bottom: deviceHeight * 0.06,
     minWidth: deviceWidth * 1,
     backgroundColor: "transparent",
     paddingHorizontal: deviceWidth * 0.04,
     paddingVertical: deviceHeight * 0.02,
     minHeight: deviceHeight * 0.15,
-    zIndex: 1,
   },
   divider: {
     backgroundColor: '#DFE0DD',

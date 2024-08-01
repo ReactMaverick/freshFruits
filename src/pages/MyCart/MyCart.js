@@ -39,47 +39,48 @@ export default function MyCart({ navigation }) {
               <MyCartItem navigation={navigation} />
               <MyCartItem navigation={navigation} />
             </View>
-          </ScrollView>
-          <View style={styles.OrderSummaryBox}>
-            <View style={styles.OrderSummary}>
-              <Divider style={styles.divider} />
-              <View style={styles.OrderSummaryRow}>
-                <Text style={styles.OrderSummaryLeftText}>Total items</Text>
-                <Text style={styles.OrderSummaryRightText}>03</Text>
+            <View style={styles.OrderSummaryBox}>
+              <View style={styles.OrderSummary}>
+                <Divider style={styles.divider} />
+                <View style={styles.OrderSummaryRow}>
+                  <Text style={styles.OrderSummaryLeftText}>Total items</Text>
+                  <Text style={styles.OrderSummaryRightText}>03</Text>
+                </View>
+                <View style={styles.OrderSummaryRow}>
+                  <Text style={styles.OrderSummaryLeftText}>Price</Text>
+                  <Text style={styles.OrderSummaryRightText}>$55</Text>
+                </View>
+                <View style={styles.OrderSummaryRow}>
+                  <Text style={styles.OrderSummaryLeftText}>Delivery</Text>
+                  <Text style={styles.OrderSummaryRightText}>$3</Text>
+                </View>
+                <View style={styles.OrderSummaryRow}>
+                  <Text style={styles.OrderSummaryLeftText}>Discount</Text>
+                  <Text style={styles.OrderSummaryRightText}>$18</Text>
+                </View>
+                <View style={styles.TotalPriceRow}>
+                  <Text style={styles.TotalPriceLeftText}>Total Price</Text>
+                  <Text style={styles.TotalPriceRightText}>$55</Text>
+                </View>
+                <View style={styles.ApplyCouponBox}>
+                  <FormInput
+                    mainContainerStyle={styles.mainContainerStyle}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    textInputProps={{ style: styles.textInputStyle }}
+                    hideLabel
+                    placeholderText="Apply Coupon"
+                  />
+                </View>
+                {/* Checkout button  */}
+                <Pressable style={styles.CheckoutBtn}
+                  onPress={() => navigation.navigate('Checkout')}
+                >
+                  <Text style={styles.CheckoutBtnText}>Checkout</Text>
+                </Pressable>
               </View>
-              <View style={styles.OrderSummaryRow}>
-                <Text style={styles.OrderSummaryLeftText}>Price</Text>
-                <Text style={styles.OrderSummaryRightText}>$55</Text>
-              </View>
-              <View style={styles.OrderSummaryRow}>
-                <Text style={styles.OrderSummaryLeftText}>Delivery</Text>
-                <Text style={styles.OrderSummaryRightText}>$3</Text>
-              </View>
-              <View style={styles.OrderSummaryRow}>
-                <Text style={styles.OrderSummaryLeftText}>Discount</Text>
-                <Text style={styles.OrderSummaryRightText}>$18</Text>
-              </View>
-              <View style={styles.TotalPriceRow}>
-                <Text style={styles.TotalPriceLeftText}>Total Price</Text>
-                <Text style={styles.TotalPriceRightText}>$55</Text>
-              </View>
-              <View style={styles.ApplyCouponBox}>
-                <FormInput
-                  mainContainerStyle={styles.mainContainerStyle}
-                  inputContainerStyle={styles.inputContainerStyle}
-                  textInputProps={{ style: styles.textInputStyle }}
-                  hideLabel
-                  placeholderText="Apply Coupon"
-                />
-              </View>
-              {/* Checkout button  */}
-              <Pressable style={styles.CheckoutBtn}
-                onPress={() => navigation.navigate('Checkout')}
-              >
-                <Text style={styles.CheckoutBtnText}>Checkout</Text>
-              </Pressable>
             </View>
-          </View>
+          </ScrollView>
+
         </View>
 
       </SafeAreaView >

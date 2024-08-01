@@ -200,17 +200,16 @@ export default function PaymentDetails({ navigation }) {
                 />
               </View>
             </View>
-
-            {/* Pay Now button  */}
-            <View style={styles.PayNowBox}>
-              <Pressable style={styles.CheckOutButton}
-                onPress={() => navigation.navigate('Checkout')}
-              >
-                <Text style={styles.CheckOutButtonText}>Pay Now $55</Text>
-              </Pressable>
-            </View>
           </View>
         </ScrollView>
+        {/* Pay Now button  */}
+        <View style={styles.PayNowBox}>
+          <Pressable style={styles.CheckOutButton}
+            onPress={() => navigation.navigate('Checkout')}
+          >
+            <Text style={styles.CheckOutButtonText}>Pay Now $55</Text>
+          </Pressable>
+        </View>
       </SafeAreaView >
     </KeyboardAvoidingView >
   );

@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     marginLeft: deviceWidth * 0.02,
   },
   CheckOutButtonBox: {
-    paddingTop: deviceHeight * 0.2,
+    paddingTop: deviceHeight * 0.02,
     paddingBottom: deviceHeight * 0.01,
   },
   CheckOutButton: {

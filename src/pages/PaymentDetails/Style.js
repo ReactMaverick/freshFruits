@@ -36,10 +36,6 @@ export const styles = StyleSheet.create({
     marginLeft: deviceWidth * 0.02,
   },
   PayNowBox: {
-    position: 'absolute',
-    flex: 1,
-    bottom: deviceHeight * 0.09,
-    width: deviceWidth * 1,
     justifyContent: 'center',
     flexDirection: 'row',
     minHeight: deviceHeight * 0.05,

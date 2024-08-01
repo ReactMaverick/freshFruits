@@ -31,11 +31,12 @@ export default function Notification({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         < Header
+          pageName={"Notification"}
           navigation={navigation}
-          leftContent={'backBtn'}
-          MiddleContent={'pageTitle'}
-          rightContent={'blankBox'}
-          BGCOLOR={'transparent'}
+          InnerPagesHeader={'InnerHeader'}
+          BackBtn={'BackBtn'}
+          CenterBox={"TitleBox"}
+          ClearAllBtn={"ClearAll"}
         />
         <ScrollView style={styles.ScrollView}>
           <View style={styles.MainBox}>

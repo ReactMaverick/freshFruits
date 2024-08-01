@@ -17,6 +17,7 @@ import { Image } from 'react-native';
 import { BAR, FILTER } from '../../constants/images';
 import { colors } from '../../constants/colors';
 import { FormInput } from 'react-native-formtastic';
+import LocationBottomSheet from '../LocationBottomSheet/LocationBottomSheet';
 
 // import Animated from 'react-native-reanimated';
 const truncateText = (text, maxWords) => {
@@ -48,7 +49,11 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
             }
         ]
     };
+    const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
 
+    const toggleBottomSheet = () => {
+        setBottomSheetVisible(!isBottomSheetVisible);
+    };
 
     return (
         <KeyboardAvoidingView
@@ -62,11 +67,12 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                                 <Text style={styles.leftTitle}>Deliver In</Text>
                                 <Text style={styles.leftSubTitle}>Every Fruit 10 minutes</Text>
                                 {/* location box */}
-                                <Pressable style={styles.locationBox}>
+                                <Pressable onPress={toggleBottomSheet} style={styles.locationBox}>
                                     <Octicons name="location"
                                         style={styles.locationIcon} />
                                     <Text style={styles.locationText}> {truncateText(locationText, 5)}</Text>
                                     <Octicons name="chevron-down" style={styles.locationIcon} />
+                                    <LocationBottomSheet isVisible={isBottomSheetVisible} onClose={toggleBottomSheet} />
                                 </Pressable>
                             </View>}
 

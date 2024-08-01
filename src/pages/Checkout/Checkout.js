@@ -52,12 +52,13 @@ export default function Checkout({ navigation }) {
               <Text style={styles.OrderTitle}>Payment Method</Text>
             </View>
             <PaymentMethod />
-            <View style={styles.CheckOutButtonBox}>
-              <Pressable style={styles.CheckOutButton}>
-                <Text style={styles.CheckOutButtonText}>Checkout</Text>
-              </Pressable>
-            </View>
           </ScrollView>
+          <View style={styles.CheckOutButtonBox}>
+            <Pressable style={styles.CheckOutButton}
+              onPress={() => navigation.navigate('PaymentDetails')}>
+              <Text style={styles.CheckOutButtonText}>Pay Now</Text>
+            </Pressable>
+          </View>
         </View>
       </SafeAreaView >
     </KeyboardAvoidingView >

@@ -203,13 +203,13 @@ export const styles = StyleSheet.create({
         fontSize: H5,
     },
     ClearAllBox: {
-        padding: deviceWidth * 0.02,
-        borderRadius: deviceWidth * 0.1,
-        backgroundColor: colors.White,
+        flex: 1,
+        paddingVertical: deviceHeight * 0.008,
     },
     ClearAllText: {
         color: colors.HeadingColor,
-        fontSize: H6,
+        fontSize: small,
         fontFamily: fontFamily.Bold,
+        textAlign: 'center',
     },
 });

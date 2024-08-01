@@ -2,21 +2,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn } from '@/redux/reducers/authReducer';
 import {
-  Image,
-  ImageBackground,
   StatusBar,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { deviceWidth } from "../constants/constants";
-import { colors } from "../constants/colors";
 // import { PROFILE_AVATAR } from "../constants/images";
-import { logout, selectUser } from '../redux/reducers/authReducer';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import { useState } from 'react';
@@ -35,14 +27,10 @@ import ProductDetails from '../pages/ProductDetails/ProductDetails';
 import Checkout from '../pages/Checkout/Checkout';
 import PaymentDetails from '../pages/PaymentDetails/PaymentDetails';
 import PaymentSuccessful from '../pages/PaymentSuccessful/PaymentSuccessful';
-import FontAwesome6Icon from "react-native-vector-icons/FontAwesome6";
-// // import { IMAGE_BASE_URL } from "../values/api/url";
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// import Settings from "../pages/Settings/Settings";
-// import Question from "../pages/Question/Question";
-// import Report from "../pages/Report/Report";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustomDrawerContent from "../components/CustomDrawerContent/CustomDrawerContent";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -92,16 +80,20 @@ function MyTabBar({ state, descriptors, navigation }) {
             onLongPress={onLongPress}
             key={index}
           >
-            {label === 'Home' && <Ionicons name={
+            <></>
+            {label === 'Home' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
               isFocused ? 'home' : 'home-outline'
-            } size={20} color={isFocused ? '#0F89F4' : '#fff'} />}
-            {label === 'Report' && <Ionicons name={
-              isFocused ? 'arrow-trend-up' : 'arrow-trend-up'
-            } size={20} color={isFocused ? '#0F89F4' : '#fff'} />}
-            {label === 'Settings' && <Ionicons name={
+            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
+            {label === 'Wishlist' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><FontAwesome name={
+              isFocused ? 'heart' : 'heart-o'
+            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
+            {label === 'My Order' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
               isFocused ? 'settings' : 'settings-outline'
-            } size={20} color={isFocused ? '#0F89F4' : '#fff'} />}
-            <Text style={{ color: isFocused ? '#0F89F4' : '#fff' }}>
+            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
+            {label === 'Cart' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
+              isFocused ? 'bag' : 'bag-outline'
+            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
+            <Text style={[styles.LabelText, { color: isFocused ? '#7CBA1E' : '#72776C' }]}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -119,11 +111,14 @@ function HomeTabs() {
 
       if (route.name === 'HomeTab') {
         iconName = focused ? 'home' : 'home-outline';
-      } else if (route.name === 'Profile') {
+      } else if (route.name === 'Wishlist') {
         iconName = focused ? 'person' : 'person-outline';
-      } else if (route.name === 'Settings') {
+      } else if (route.name === 'My Order') {
+        iconName = focused ? 'settings' : 'settings-outline';
+      } else if (route.name === 'Cart') {
         iconName = focused ? 'settings' : 'settings-outline';
       }
+
 
       return <Icon name={iconName} size={size} color={color} />;
     },
@@ -146,17 +141,29 @@ function HomeTabs() {
         }}
       />
       <Tab.Screen
-        name="Report"
-        component={Home}
+        name="Wishlist"
+        component={Wishlist}
         options={{
           headerShown: false,
+          tabBarLabel: 'Wishlist',
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={Home}
+        name="My Order"
+        component={MyOrder}
         options={{
           headerShown: false,
+          tabBarLabel: 'My Order',
+
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={MyCart}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Cart',
+
         }}
       />
     </Tab.Navigator>
@@ -318,7 +325,8 @@ const LoginStack = () => {
 const MyDrawer = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="LoginStack"
+      initialRouteName="Home"
+      drawerContent={(props) => <CustomDrawerContent {...props} />} // Use custom drawer content
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
