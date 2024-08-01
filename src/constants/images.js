@@ -60,3 +60,5 @@ export const INFORMATION = require('../assets/images/information.png');
 export const SHARE = require('../assets/images/share.png');
 export const INFOBG = require('../assets/images/sidebarInfoBg.png');
 export const TICK = require('../assets/images/SuccessIcon.png');
+export const BEST = require('../assets/images/best.png');
+export const STAR = require('../assets/images/star.png');
