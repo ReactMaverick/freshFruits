@@ -55,5 +55,4 @@ export const styles = StyleSheet.create({
     color: colors.White,
   },
 
-
 });

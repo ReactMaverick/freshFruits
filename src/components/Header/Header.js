@@ -18,6 +18,7 @@ import { BAR, FILTER } from '../../constants/images';
 import { colors } from '../../constants/colors';
 import { FormInput } from 'react-native-formtastic';
 import LocationBottomSheet from '../LocationBottomSheet/LocationBottomSheet';
+import FilterPopup from '../FilterPopup/FilterPopup';
 
 // import Animated from 'react-native-reanimated';
 const truncateText = (text, maxWords) => {
@@ -53,6 +54,11 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
 
     const toggleBottomSheet = () => {
         setBottomSheetVisible(!isBottomSheetVisible);
+    };
+    const [isFilterPopupVisible, setFilterPopupVisible] = useState(false);
+
+    const toggleFilterPopup = () => {
+        setFilterPopupVisible(!isFilterPopupVisible);
     };
 
     return (
@@ -113,9 +119,10 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                                 leftIcon
                                 renderLeftIcon={() => <FontAwesome name="search" style={styles.textInputIcon} />}
                                 rightIcon
-                                rightIconOnPress={() => { }}
+                                rightIconOnPress={toggleFilterPopup}
                                 renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
                             />
+                            <FilterPopup isVisible={isFilterPopupVisible} onClose={toggleFilterPopup} />
                         </View>}
                 </View>}
             {InnerPagesHeader == "InnerHeader" &&

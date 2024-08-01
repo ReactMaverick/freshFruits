@@ -119,13 +119,17 @@ export const styles = StyleSheet.create({
     filterIconBox: {
         position: 'absolute',
         right: deviceWidth * 0.01,
+        top: -11,
         borderLeftColor: colors.MediumGrayColor,
         borderLeftWidth: 1,
         paddingLeft: deviceWidth * 0.03,
+        width: deviceWidth * 0.1,
+        height: deviceWidth * 0.1,
+        padding: deviceWidth * 0.02,
     },
     filterIcon: {
-        width: deviceWidth * 0.05,
-        height: deviceWidth * 0.05,
+        height: "100%",
+        width: "100%",
         objectFit: 'cover',
     },
 
