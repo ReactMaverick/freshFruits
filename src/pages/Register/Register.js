@@ -8,19 +8,101 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { styles } from './Style';
-import { commonStyles } from '../../constants/styles';
-import { platform } from '../../constants/constants';
-import { FACEBOOK, FRESHFOODLOGO, GOOGLE, SWITCHOFF, SWITCHON, } from '../../constants/images';
-import { FormInput } from 'react-native-formtastic';
+import {styles} from './Style';
+import {commonStyles} from '../../constants/styles';
+import {platform} from '../../constants/constants';
+import {
+  FACEBOOK,
+  FRESHFOODLOGO,
+  GOOGLE,
+  SWITCHOFF,
+  SWITCHON,
+} from '../../constants/images';
+import {FormInput} from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { useState } from 'react';
+import {useState} from 'react';
 
+export default function Register({navigation}) {
+  // const dispatch = useDispatch();
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  // const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    fullname: '',
+    email: '',
+    phone: '',
+    password: '',
+  });
 
-export default function Register({ navigation }) {
+  const [errors, setErrors] = useState({
+    fullname: '',
+    email: '',
+    phone: '',
+    password: '',
+  });
+
+  const resetErrors = () => {
+    let updatedErrors = {
+      fullname: '',
+      email: '',
+      phone: '',
+      password: '',
+    };
+    setErrors(updatedErrors);
+  };
+
+  const handleSubmit = () => {
+ 
+    let updatedErrors = {};
+    console.log('response from login page', formData);
+
+    // Keyboard.dismiss(); // Dissmisses the keyboard
+
+    // const isEmail =formData.email.trim() !== "" && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+    //   formData.email
+    // );
+    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+      formData.email
+    );
+    const isMobile = /^[0-9]{10}$/.test(formData.phone);
+
+    if (!formData.fullname) {
+      updatedErrors.fullname = 'Name is required';
+      setErrors(updatedErrors);
+      return;
+    } else if (!formData.phone) {
+      console.log('phone', errors);
+      updatedErrors.phone = 'Mobile No. is required';
+      setErrors(updatedErrors);
+      return;
+    } else if (!isMobile) {
+      updatedErrors.phone = 'Please enter a valid 10-digit mobile number';
+      setErrors(updatedErrors);
+      return;
+    } else if (!isEmail) {
+      updatedErrors.email = 'Please enter a valid Email';
+      setErrors(updatedErrors);
+      return;
+    } else if (!formData.password) {
+      updatedErrors.password = 'Password is required';
+      setErrors(updatedErrors);
+      return;
+    } else if (formData.password.length < 6) {
+      updatedErrors.password = 'Password should be at least 6 characters';
+      setErrors(updatedErrors);
+      return;
+    } else {
+      // setIsLoading(true);
+
+      console.log('data', formData);
+
+    
+    }
+  };
+
+  //check or uncheck
   const [isChecked, setIsChecked] = useState(false);
-
   const handlePress = () => {
     setIsChecked(!isChecked);
   };
@@ -32,10 +114,7 @@ export default function Register({ navigation }) {
       <ScrollView>
         <SafeAreaView>
           <View style={styles.MainBox}>
-            <Image
-              style={styles.FreshFoodLogo}
-              source={FRESHFOODLOGO}
-            />
+            <Image style={styles.FreshFoodLogo} source={FRESHFOODLOGO} />
             <View style={styles.TitleBox}>
               <Text style={styles.LoginText}>Created Account</Text>
               <Text style={styles.LoginPara}>Sign up to get started!</Text>
@@ -44,34 +123,93 @@ export default function Register({ navigation }) {
             <View style={styles.formBox}>
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{ style: styles.textInputStyle }}
+                textInputProps={{style: styles.textInputStyle}}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Name"
+                value={formData.fullname}
+                onTextChange={fullname => {
+                  setFormData({
+                    ...formData,
+                    fullname,
+                  });
+                  resetErrors();
+                }}
+                error={errors.fullname !== ''}
+                errorText={errors.fullname}
                 hideLabel
                 leftIcon
-                renderLeftIcon={() => <Feather name="user" style={styles.textInputIcon} />}
+                renderLeftIcon={() => (
+                  <Feather name="user" style={styles.textInputIcon} />
+                )}
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{ style: styles.textInputStyle }}
+                textInputProps={{style: styles.textInputStyle}}
                 labelTextStyle={styles.labelTextStyle}
-                placeholderText="Email/ Mobile no."
+                placeholderText="Email"
+                value={formData.email}
+                onTextChange={email => {
+                  setFormData({
+                    ...formData,
+                    email,
+                  });
+                  resetErrors();
+                }}
+                error={errors.email !== ''}
+                errorText={errors.email}
                 hideLabel
                 leftIcon
-                renderLeftIcon={() => <Feather name="mail" style={styles.textInputIcon} />}
+                renderLeftIcon={() => (
+                  <Feather name="mail" style={styles.textInputIcon} />
+                )}
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{ style: styles.textInputStyle }}
+                textInputProps={{style: styles.textInputStyle}}
+                labelTextStyle={styles.labelTextStyle}
+                placeholderText="Mobile No."
+                value={formData.phone}
+                onTextChange={phone => {
+                  setFormData({
+                    ...formData,
+                    phone,
+                  });
+                  resetErrors();
+                }}
+                error={errors.phone !== ''}
+                errorText={errors.phone}
+                hideLabel
+                leftIcon
+                renderLeftIcon={() => (
+                  <Feather name="mail" style={styles.textInputIcon} />
+                )}
+              />
+              <FormInput
+                inputContainerStyle={styles.inputContainerStyle}
+                textInputProps={{style: styles.textInputStyle}}
                 labelTextStyle={styles.labelTextStyle}
                 inputType="password"
+                value={formData.password}
+                onTextChange={password => {
+                  setFormData({
+                    ...formData,
+                    password,
+                  });
+                  resetErrors();
+                }}
+                error={errors.password !== ''}
+                errorText={errors.password}
                 hideLabel
                 hiddenText
                 placeholderText="Password"
                 leftIcon
-                renderLeftIcon={() => <AntDesign name="lock" style={styles.textInputIcon} />}
+                renderLeftIcon={() => (
+                  <AntDesign name="lock" style={styles.textInputIcon} />
+                )}
                 rightIcon
-                renderRightIcon={() => <Feather name="eye-off" style={styles.textInputEyeIcon} />}
+                renderRightIcon={() => (
+                  <Feather name="eye-off" style={styles.textInputEyeIcon} />
+                )}
               />
               <View style={styles.RowBox}>
                 {/* customCheckBox with images */}
@@ -84,12 +222,18 @@ export default function Register({ navigation }) {
                 </Pressable>
               </View>
 
-              <Pressable style={styles.loginBtn}>
+              <Pressable
+                onPress={() => {
+                  handleSubmit();
+                }}
+                style={styles.loginBtn}>
                 <Text style={styles.loginBtnText}>Sign Up</Text>
               </Pressable>
 
               <View style={styles.dontHaveAccount}>
-                <Text style={styles.dontHaveAccountText}>You have an account</Text>
+                <Text style={styles.dontHaveAccountText}>
+                  You have an account
+                </Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                   <Text style={styles.registerText}>Sign In</Text>
                 </TouchableOpacity>
@@ -103,24 +247,17 @@ export default function Register({ navigation }) {
                 </View>
                 <View style={styles.socialLoginBox}>
                   <Pressable style={styles.socialLoginBtn}>
-                    <Image
-                      style={styles.socialIcon}
-                      source={FACEBOOK}
-                    />
+                    <Image style={styles.socialIcon} source={FACEBOOK} />
                   </Pressable>
                   <Pressable style={styles.socialLoginBtn}>
-                    <Image
-                      style={styles.socialIcon}
-                      source={GOOGLE}
-                    />
+                    <Image style={styles.socialIcon} source={GOOGLE} />
                   </Pressable>
                 </View>
               </View>
             </View>
           </View>
-        </SafeAreaView >
+        </SafeAreaView>
       </ScrollView>
-    </KeyboardAvoidingView >
+    </KeyboardAvoidingView>
   );
 }
-
