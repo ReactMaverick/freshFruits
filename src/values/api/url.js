@@ -2,15 +2,17 @@
 // export const API_URL = 'http://192.168.29.39:4006/wanderInn/api/v1/'; //Localhost IP Saikat
 // export const API_URL = 'http://194.163.131.163:4006/wanderInn/api/v1/'; //Server IP
 
-export const BASE_URL = 'http://194.163.131.163:4008';
+// export const BASE_URL = 'http://194.163.131.163:4008';
+export const BASE_URL ='http://194.163.131.163/';
 
-export const API_URL = BASE_URL + '/intelliTalks/api/v1/'; //Server IP
+//export const API_URL = BASE_URL + '/intelliTalks/api/v1/'; //Server IP
+export const API_URL = BASE_URL + 'greenway/public/api/'; //Server IP
 
-export const IMAGE_BASE_URL = BASE_URL + '/intelliTalks/';
+// export const IMAGE_BASE_URL = BASE_URL + '/intelliTalks/';
 
-export const REGISTER_URL = `${API_URL}register`;
+export const REGISTER_URL = `${API_URL}processSignup`;
 
-export const LOGIN_URL = `${API_URL}login`;
+export const LOGIN_URL = `${API_URL}signIn`;
 
 export const VERIFY_OTP_URL = `${API_URL}verifyOTP`;
 

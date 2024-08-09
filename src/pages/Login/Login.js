@@ -8,18 +8,76 @@ import {
   View,
   Animated,
 } from 'react-native';
-import { styles } from './Style';
-import { commonStyles } from '../../constants/styles';
-import { platform } from '../../constants/constants';
-import { FRESHFOODLOGO, SWITCHOFF, SWITCHON, } from '../../constants/images';
-import { FormInput } from 'react-native-formtastic';
+import {styles} from './Style';
+import {commonStyles} from '../../constants/styles';
+import {platform} from '../../constants/constants';
+import {FRESHFOODLOGO, SWITCHOFF, SWITCHON} from '../../constants/images';
+import {FormInput} from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import {login} from '../../redux/reducers/authReducer';
+import {useDispatch} from 'react-redux';
 
-export default function Login({ navigation }) {
+export default function Login({navigation}) {
+ 
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    user_name: '',
+    password: '',
+  });
+
+  const [errors, setErrors] = useState({
+    user_name: '',
+    password: '',
+  });
+
+  const resetErrors = () => {
+    let updatedErrors = {
+      user_name: '',
+      password: '',
+    };
+    setErrors(updatedErrors);
+  };
+
+  const handleSubmit = () => {
+    let updatedErrors = {};
+    // Keyboard.dismiss(); // Dissmisses the keyboard
+
+    if (!formData.user_name) {
+      updatedErrors.user_name = 'User Name is required';
+      setErrors(updatedErrors);
+      return;
+    }
+    if (!formData.password) {
+      updatedErrors.password = 'password is required';
+      setErrors(updatedErrors);
+      return;
+    } else if (formData.password.length < 6) {
+      updatedErrors.password = 'Password should be at least 6 characters';
+      setErrors(updatedErrors);
+      return;
+    } else {
+      // setIsLoading(true);
+    }
+
+    dispatch(login(formData))
+      .then(res => {
+        if (res.type === 'auth/login/fulfilled') {
+          navigation.navigate('Home');
+        } else {
+          // showToast('error', res.payload);
+        }
+      })
+      .catch(err => {
+        console.log('Error ==> ', err);
+      })
+      .finally(() => {
+        // setIsLoading(false);
+      });
+  };
+
   const [isChecked, setIsChecked] = useState(false);
-
   const handlePress = () => {
     setIsChecked(!isChecked);
   };
@@ -30,10 +88,7 @@ export default function Login({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         <View style={styles.MainBox}>
-          <Image
-            style={styles.FreshFoodLogo}
-            source={FRESHFOODLOGO}
-          />
+          <Image style={styles.FreshFoodLogo} source={FRESHFOODLOGO} />
           <View style={styles.TitleBox}>
             <Text style={styles.LoginText}>Welcome Back</Text>
             <Text style={styles.LoginPara}>Login your account</Text>
@@ -42,25 +97,50 @@ export default function Login({ navigation }) {
           <View style={styles.formBox}>
             <FormInput
               inputContainerStyle={styles.inputContainerStyle}
-              textInputProps={{ style: styles.textInputStyle }}
+              textInputProps={{style: styles.textInputStyle}}
               labelTextStyle={styles.labelTextStyle}
-              placeholderText="Email/ Mobile no."
+              placeholderText="Email Or Mobile Number"
+              value={formData.user_name}
+              onTextChange={userName => {
+                setFormData({
+                  ...formData,
+                  user_name: userName,
+                });
+                resetErrors();
+              }}
+              error={errors.user_name !== ''}
+              errorText={errors.user_name}
               hideLabel
               leftIcon
-              renderLeftIcon={() => <Feather name="mail" style={styles.textInputIcon} />}
+              renderLeftIcon={() => (
+                <Feather name="mail" style={styles.textInputIcon} />
+              )}
             />
             <FormInput
               inputContainerStyle={styles.inputContainerStyle}
-              textInputProps={{ style: styles.textInputStyle }}
+              textInputProps={{style: styles.textInputStyle}}
               labelTextStyle={styles.labelTextStyle}
-              inputType="password"
+              // inputType="text"
+              placeholderText="Passwords"
+              value={formData.password}
+              onTextChange={password => {
+                setFormData({
+                  ...formData,
+                  password,
+                });
+                resetErrors();
+              }}
+              error={errors.password !== ''}
+              errorText={errors.password}
               hideLabel
-              hiddenText
-              placeholderText="Password"
               leftIcon
-              renderLeftIcon={() => <AntDesign name="lock" style={styles.textInputIcon} />}
+              renderLeftIcon={() => (
+                <AntDesign name="lock" style={styles.textInputIcon} />
+              )}
               rightIcon
-              renderRightIcon={() => <Feather name="eye-off" style={styles.textInputEyeIcon} />}
+              renderRightIcon={() => (
+                <Feather name="eye-off" style={styles.textInputEyeIcon} />
+              )}
             />
             <View style={styles.RowBox}>
               {/* customCheckBox with images */}
@@ -71,29 +151,30 @@ export default function Login({ navigation }) {
                 />
                 <Text style={styles.customCheckBoxText}>Remember me</Text>
               </Pressable>
-              <Pressable
-                onPress={() => navigation.navigate('ForgotPassword')}
-              >
+              <Pressable onPress={() => navigation.navigate('ForgotPassword')}>
                 <Text style={styles.forgotPasswordText}>Forgot Password</Text>
               </Pressable>
             </View>
 
-            <Pressable style={styles.loginBtn}
-              onPress={() => navigation.navigate('Home')}
-            >
+            <Pressable
+              style={styles.loginBtn}
+              onPress={() => {
+                handleSubmit();
+              }}>
               <Text style={styles.loginBtnText}>Login</Text>
             </Pressable>
 
             <View style={styles.dontHaveAccount}>
-              <Text style={styles.dontHaveAccountText}>Don't have an account</Text>
+              <Text style={styles.dontHaveAccountText}>
+                Don't have an account
+              </Text>
               <TouchableOpacity onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.registerText}>Sign Up</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </View>
-      </SafeAreaView >
-    </KeyboardAvoidingView >
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

@@ -5,15 +5,18 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { styles } from "./Style";
 import { INFOBG, INFORMATION, LOCK, PROFILEPIC, RECEIPT, SETTINGS, SHARE, SHOP, SIDEBAR, TICKET } from '../../constants/images';
+import { useSelector } from 'react-redux';
+import { selectUser_name } from '../../redux/reducers/authReducer';
 
 
 export default function CustomDrawerContent(props) {
+    const userName=useSelector(selectUser_name)
     return (
         <DrawerContentScrollView {...props}>
             <ImageBackground source={SIDEBAR} style={styles.drawerHeader}>
                 <Image source={PROFILEPIC} style={styles.profilePic} />
                 <View style={styles.profileContent}>
-                    <Text style={styles.drawerHeaderName}>Jenny Wilson</Text>
+                    <Text style={styles.drawerHeaderName}>{userName}</Text>
                     <Pressable>
                         <Text style={styles.drawerHeaderText}>View profile</Text>
                     </Pressable>

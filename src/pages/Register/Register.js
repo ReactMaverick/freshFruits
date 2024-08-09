@@ -22,9 +22,11 @@ import {FormInput} from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {useState} from 'react';
+import {register} from '../../redux/reducers/authReducer';
+import {useDispatch} from 'react-redux';
 
 export default function Register({navigation}) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const [isLoading, setIsLoading] = useState(false);
   // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   // const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
@@ -53,17 +55,11 @@ export default function Register({navigation}) {
   };
 
   const handleSubmit = () => {
- 
     let updatedErrors = {};
-    console.log('response from login page', formData);
-
     // Keyboard.dismiss(); // Dissmisses the keyboard
 
-    // const isEmail =formData.email.trim() !== "" && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-    //   formData.email
-    // );
     const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-      formData.email
+      formData.email,
     );
     const isMobile = /^[0-9]{10}$/.test(formData.phone);
 
@@ -80,6 +76,11 @@ export default function Register({navigation}) {
       updatedErrors.phone = 'Please enter a valid 10-digit mobile number';
       setErrors(updatedErrors);
       return;
+    } else if (!formData.email) {
+      console.log('email', errors);
+      updatedErrors.email = 'Email is required';
+      setErrors(updatedErrors);
+      return;
     } else if (!isEmail) {
       updatedErrors.email = 'Please enter a valid Email';
       setErrors(updatedErrors);
@@ -94,11 +95,23 @@ export default function Register({navigation}) {
       return;
     } else {
       // setIsLoading(true);
-
-      console.log('data', formData);
-
-    
     }
+    dispatch(register(formData))
+      .then(res => {
+        if (res.type === 'auth/register/fulfilled') {
+          navigation.navigate('Login');
+        } else {
+          // showToast('error', res.payload);
+        }
+      })
+      .catch(err => {
+        console.log('\n');
+        console.log('\n');
+        console.log('Error ==> ', err);
+      })
+      .finally(() => {
+        // setIsLoading(false);
+      });
   };
 
   //check or uncheck
@@ -188,7 +201,7 @@ export default function Register({navigation}) {
                 inputContainerStyle={styles.inputContainerStyle}
                 textInputProps={{style: styles.textInputStyle}}
                 labelTextStyle={styles.labelTextStyle}
-                inputType="password"
+                inputType="text"
                 value={formData.password}
                 onTextChange={password => {
                   setFormData({
@@ -200,7 +213,7 @@ export default function Register({navigation}) {
                 error={errors.password !== ''}
                 errorText={errors.password}
                 hideLabel
-                hiddenText
+                // hiddenText
                 placeholderText="Password"
                 leftIcon
                 renderLeftIcon={() => (

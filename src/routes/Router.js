@@ -1,19 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {
-  StatusBar,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
 // import { PROFILE_AVATAR } from "../constants/images";
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
-import { useState } from 'react';
+import {useState} from 'react';
 import SplashScreen from '../pages/SplashScreen/SplashScreen';
-import { styles } from './Style';
+import {styles} from './Style';
 import WelcomeScreen from '../pages/WelcomeScreen/WelcomeScreen';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OTP from '../pages/OTP/OTP';
@@ -27,26 +22,29 @@ import ProductDetails from '../pages/ProductDetails/ProductDetails';
 import Checkout from '../pages/Checkout/Checkout';
 import PaymentDetails from '../pages/PaymentDetails/PaymentDetails';
 import PaymentSuccessful from '../pages/PaymentSuccessful/PaymentSuccessful';
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import CustomDrawerContent from "../components/CustomDrawerContent/CustomDrawerContent";
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import CustomDrawerContent from '../components/CustomDrawerContent/CustomDrawerContent';
+import { useSelector } from 'react-redux';
+import { selectUser_isLoggedIn } from '../redux/reducers/authReducer';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function MyTabBar({ state, descriptors, navigation }) {
+
+function MyTabBar({state, descriptors, navigation}) {
   return (
     <View style={styles.BottomBar}>
       {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
+        const {options} = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-              ? options.title
-              : route.name;
+            ? options.title
+            : route.name;
 
         const isFocused = state.index === index;
 
@@ -73,27 +71,86 @@ function MyTabBar({ state, descriptors, navigation }) {
           <TouchableOpacity
             style={styles.BottomBarBtn}
             accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            key={index}
-          >
+            key={index}>
             <></>
-            {label === 'Home' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
-              isFocused ? 'home' : 'home-outline'
-            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
-            {label === 'Wishlist' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><FontAwesome name={
-              isFocused ? 'heart' : 'heart-o'
-            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
-            {label === 'My Order' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
-              isFocused ? 'settings' : 'settings-outline'
-            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
-            {label === 'Cart' && <View style={[styles.Iconbox, { backgroundColor: isFocused ? 'rgba(124, 186, 30, 0.2)' : 'transparent' }]}><Ionicons name={
-              isFocused ? 'bag' : 'bag-outline'
-            } size={20} color={isFocused ? '#7CBA1E' : '#72776C'} /></View>}
-            <Text style={[styles.LabelText, { color: isFocused ? '#7CBA1E' : '#72776C' }]}>
+            {label === 'Home' && (
+              <View
+                style={[
+                  styles.Iconbox,
+                  {
+                    backgroundColor: isFocused
+                      ? 'rgba(124, 186, 30, 0.2)'
+                      : 'transparent',
+                  },
+                ]}>
+                <Ionicons
+                  name={isFocused ? 'home' : 'home-outline'}
+                  size={20}
+                  color={isFocused ? '#7CBA1E' : '#72776C'}
+                />
+              </View>
+            )}
+            {label === 'Wishlist' && (
+              <View
+                style={[
+                  styles.Iconbox,
+                  {
+                    backgroundColor: isFocused
+                      ? 'rgba(124, 186, 30, 0.2)'
+                      : 'transparent',
+                  },
+                ]}>
+                <FontAwesome
+                  name={isFocused ? 'heart' : 'heart-o'}
+                  size={20}
+                  color={isFocused ? '#7CBA1E' : '#72776C'}
+                />
+              </View>
+            )}
+            {label === 'My Order' && (
+              <View
+                style={[
+                  styles.Iconbox,
+                  {
+                    backgroundColor: isFocused
+                      ? 'rgba(124, 186, 30, 0.2)'
+                      : 'transparent',
+                  },
+                ]}>
+                <Ionicons
+                  name={isFocused ? 'settings' : 'settings-outline'}
+                  size={20}
+                  color={isFocused ? '#7CBA1E' : '#72776C'}
+                />
+              </View>
+            )}
+            {label === 'Cart' && (
+              <View
+                style={[
+                  styles.Iconbox,
+                  {
+                    backgroundColor: isFocused
+                      ? 'rgba(124, 186, 30, 0.2)'
+                      : 'transparent',
+                  },
+                ]}>
+                <Ionicons
+                  name={isFocused ? 'bag' : 'bag-outline'}
+                  size={20}
+                  color={isFocused ? '#7CBA1E' : '#72776C'}
+                />
+              </View>
+            )}
+            <Text
+              style={[
+                styles.LabelText,
+                {color: isFocused ? '#7CBA1E' : '#72776C'},
+              ]}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -104,9 +161,8 @@ function MyTabBar({ state, descriptors, navigation }) {
 }
 
 function HomeTabs() {
-
-  const customScreenOptions = ({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
+  const customScreenOptions = ({route}) => ({
+    tabBarIcon: ({focused, color, size}) => {
       let iconName;
 
       if (route.name === 'HomeTab') {
@@ -119,15 +175,11 @@ function HomeTabs() {
         iconName = focused ? 'settings' : 'settings-outline';
       }
 
-
       return <Icon name={iconName} size={size} color={color} />;
     },
-  })
-
+  });
 
   return (
-
-
     <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen
         name="HomeTab"
@@ -135,7 +187,7 @@ function HomeTabs() {
         options={{
           headerShown: false,
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <Ionicons name="home" color={color} size={size} />
           ),
         }}
@@ -154,7 +206,6 @@ function HomeTabs() {
         options={{
           headerShown: false,
           tabBarLabel: 'My Order',
-
         }}
       />
       <Tab.Screen
@@ -163,11 +214,9 @@ function HomeTabs() {
         options={{
           headerShown: false,
           tabBarLabel: 'Cart',
-
         }}
       />
     </Tab.Navigator>
-
   );
 }
 
@@ -216,14 +265,34 @@ const LoginStack = () => {
           headerShown: false,
         }}
       />
+    </Stack.Navigator>
+  );
+};
 
-      <Stack.Screen
+const HomeStack = () => {
+  return (
+    <Stack.Navigator>
+       <Stack.Screen
+        name="SplashScreen"
+        component={SplashScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+       <Stack.Screen
         name="Home"
         component={HomeTabs}
         options={{
           headerShown: false,
         }}
       />
+       {/* <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      /> */}
       <Stack.Screen
         name="Profile"
         component={Profile}
@@ -288,51 +357,34 @@ const LoginStack = () => {
         }}
       />
 
+      {/* <Stack.Screen
+        name="Question"
+        component={Question}
+        options={{
+          headerShown: false,
+        }}
+      /> */}
+
     </Stack.Navigator>
   );
 };
 
-// const HomeStack = () => {
-//   return (
-//     <Stack.Navigator>
-//       <Stack.Screen
-//         name="Home"
-//         component={HomeTabs}
-//         options={{
-//           headerShown: false,
-//         }}
-//       />
-//       <Stack.Screen
-//         name="Report"
-//         component={Report}
-//         options={{
-//           headerShown: false,
-//         }}
-//       />
-
-//       <Stack.Screen
-//         name="Question"
-//         component={Question}
-//         options={{
-//           headerShown: false,
-//         }}
-//       />
-
-//     </Stack.Navigator>
-//   );
-// };
-
 const MyDrawer = () => {
+  const isUserLoggedIn=useSelector(selectUser_isLoggedIn)
   return (
     <Drawer.Navigator
       initialRouteName="Home"
-      drawerContent={(props) => <CustomDrawerContent {...props} />} // Use custom drawer content
+      drawerContent={props => <CustomDrawerContent {...props} />} // Use custom drawer content
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
-      }}
-    >
-      <Drawer.Screen name="LoginStack" component={LoginStack} />
+      }}>
+
+      {isUserLoggedIn ? (
+        <Drawer.Screen name="HomeStack" component={HomeStack} />
+      ) : (
+        <Drawer.Screen name="LoginStack" component={LoginStack} />
+     )}
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="Wishlist" component={Wishlist} />
@@ -347,9 +399,10 @@ const MyDrawer = () => {
 };
 
 export default function Router() {
-  // const isUserLoggedIn = useSelector(isLoggedIn);
+  // const UserLoggedIn=useSelector(selectUser_isLoggedIn)
+
   // Change this to true to see the Home screen (@Suraj)
-  const [isUserLoggedIn, setUserLoggedIn] = useState(true);
+  // const [isUserLoggedIn, setUserLoggedIn] = useState(UserLoggedIn);
 
   // console.log('isLoggedIn ==> ', isUserLoggedIn);
 
