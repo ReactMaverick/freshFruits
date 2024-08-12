@@ -14,6 +14,23 @@ export const REGISTER_URL = `${API_URL}processSignup`;
 
 export const LOGIN_URL = `${API_URL}signIn`;
 
+export const ALL_PRODUCTS_URL = `${API_URL}newArrivedProduct`;
+
+export const VIEW_CART_URL = (customersId,sessionId) => `${API_URL}viewCart?session_id=${sessionId}&customers_id=${customersId}`;
+
+export const ADD_TO_CART_URL = `${API_URL}addToCart`;
+
+export const UPDATE_CART_QUANTITY_URL = `${API_URL}updateCartQuantity`;
+
+export const DELETE_CART_PRODUCT_URL=(id)=>`${API_URL}deleteCartItem?id=${id}`
+
+
+
+
+
+
+
+
 export const VERIFY_OTP_URL = `${API_URL}verifyOTP`;
 
 export const UPDATE_USER_URL = (id) => `${API_URL}updateUser/${id}`;

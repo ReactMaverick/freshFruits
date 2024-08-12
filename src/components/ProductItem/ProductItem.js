@@ -11,9 +11,9 @@ import styles from './style';
 import { BTNCARTTEXT, DISCOUNT, PRO2 } from '../../constants/images';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default function ProductItem({ navigation }) {
+export default function ProductItem({ navigation,productItem,item_key }) {
     return (
-        <View style={styles.CardOuter}>
+        <View key={item_key} style={styles.CardOuter}>
             <View style={styles.CardInner}>
                 <View style={styles.ProductImageBox}>
                     <ImageBackground source={DISCOUNT} resizeMode='contain' style={styles.Discount}>
@@ -24,18 +24,18 @@ export default function ProductItem({ navigation }) {
                 <View style={styles.ProductDetails}>
                     <View style={styles.ProductDetailsTop}>
                         <View style={styles.ProductDetailsLeft}>
-                            <Text style={styles.ProductName}>Avocado</Text>
+                            <Text style={styles.ProductName}>{productItem.products_name}</Text>
                             <Text style={styles.ProductWeight}>1kg</Text>
                         </View>
                         <View style={styles.ratingBox}>
-                            <Text style={styles.ratingText}>4.5</Text>
+                            <Text style={styles.ratingText}>{productItem.rating}</Text>
                             <AntDesign name="star" style={styles.ratingIcon} />
                         </View>
                     </View>
                     <View style={styles.sliderCardBottom}>
                         <View style={styles.sliderCardPriceBox}>
-                            <Text style={styles.sliderCardText}> $13/<Text style={styles.sliderCardTextCut}>
-                                $29</Text> </Text>
+                            <Text style={styles.sliderCardText}> ${productItem.discounted_price}/<Text style={styles.sliderCardTextCut}>
+                                ${productItem.products_price}</Text> </Text>
                         </View>
                         <Pressable
                             onPress={() => Alert.alert('Add to Cart')}

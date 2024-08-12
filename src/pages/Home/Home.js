@@ -18,16 +18,31 @@ import CatagoriesSlider from '../../components/CategoriesSlider/CategoriesSlider
 import PopularFruitsSlider from '../../components/PopularFruitsSlider/PopularFruitsSlider';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import Loader from '../../components/Loader/Loader';
+import { getData, postData } from '../../values/api/apiprovider';
+import { ALL_PRODUCTS_URL } from '../../values/api/url';
 
 export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
-
+  const [allProductsData,setAllProductsData]=useState([])
+  const getProductsList=async()=>{
+    try {
+      const response = await getData(ALL_PRODUCTS_URL);
+      const data = await response;
+      if (data.status) {
+  setAllProductsData(data.product_list.product_data)
+  // console.log("---",data.product_list.product_data)
+  // console.log("-----",data.product_list.product_data[0].rating)
+      }
+    } catch (error) {
+      console.error('Error fetching meeting data:', error);
+    }
+  }
   useEffect(() => {
     // Simulate a loading delay
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000); // Adjust the delay as needed
-
+    getProductsList()
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,6 +51,9 @@ export default function Home({ navigation }) {
       <Loader />
     );
   }
+
+
+
 
   return (
     <KeyboardAvoidingView
@@ -75,7 +93,7 @@ export default function Home({ navigation }) {
             </View>
             {/* HeadingBox */}
             {/* PopularFruitsSlider  */}
-            <PopularFruitsSlider navigation={navigation} />
+            <PopularFruitsSlider navigation={navigation} products={allProductsData} />
             {/* PopularFruitsSlider  */}
             {/* HeadingBox */}
             <View style={styles.HeadingBox}>
@@ -88,10 +106,14 @@ export default function Home({ navigation }) {
             </View>
             {/* HeadingBox */}
             {/* Today Offer */}
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
+
+            {allProductsData.map(item=>(
+              <ProductItem item_key={item.products_id} navigation={navigation} productItem={item}  />
+              
+              
+            ))}
+            {/* <ProductItem /> */}
+            
 
             {/* Today Offer */}
           </View>

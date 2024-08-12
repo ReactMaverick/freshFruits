@@ -10,7 +10,7 @@ import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import { colors } from '../../constants/colors'; // Ensure colors is imported if used
 import PopularFruitsSliderItem from '../PopularFruitsSliderItem/PopularFruitsSliderItem';
 
-export default function PopularFruitsSlider({ navigation }) {
+export default function PopularFruitsSlider({ navigation,products }) {
     return (
         <SwiperFlatList
             index={0}
@@ -21,25 +21,15 @@ export default function PopularFruitsSlider({ navigation }) {
             paginationActiveColor={colors.PrimaryColor}
             paginationDefaultColor={'#AAADA6'}
         >
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
-            <PopularFruitsSliderItem navigation={navigation} />
+            
+           
+            
+           {products.map(item=>(
+            <PopularFruitsSliderItem item_key={item.products_id} navigation={navigation} productItem={item} />
+           ))}
 
+            {/* <PopularFruitsSliderItem navigation={navigation} /> */}
+        
         </SwiperFlatList>
     );
 }

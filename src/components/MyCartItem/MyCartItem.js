@@ -11,40 +11,48 @@ import {
 import styles from './style';
 import { BTNCARTTEXT, DISCOUNT, PRO2 } from '../../constants/images';
 import Feather from 'react-native-vector-icons/Feather';
+import { deleteCartproducts, updateProductQuantity } from '../../values/CartUrls';
 
-export default function MyCartItem({ navigation }) {
-    const [quantity, setQuantity] = useState(1); // Initialize quantity state
+export default function MyCartItem({ navigation,item }) {
+    const [quantity, setQuantity] = useState(item.customers_basket_quantity); // Initialize quantity state
 
     const incrementQuantity = () => {
-        setQuantity(prevQuantity => prevQuantity + 1);
+        let newQuantity = quantity + 1;
+    setQuantity(newQuantity);
+
+        updateProductQuantity(item.customers_basket_id,item.products_id,newQuantity,item.attributes[0].products_attributes_id)
+        
     };
 
     const decrementQuantity = () => {
-        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+        let newQuantity = quantity - 1;
+        setQuantity(newQuantity);
+        
+        updateProductQuantity(item.customers_basket_id,item.products_id,newQuantity,item.attributes[0].products_attributes_id)
     };
     return (
-        <View style={styles.CardOuter}>
+        <View key={item.products_id} style={styles.CardOuter}>
             <View style={styles.CardInner}>
                 <View style={styles.ProductImageBox}>
                     <ImageBackground source={DISCOUNT} resizeMode='contain' style={styles.Discount}>
-                        <Text style={styles.DiscountText}>50%</Text>
+                        <Text style={styles.DiscountText}>{Math.abs(item.prodDiscountRate)}%</Text>
                     </ImageBackground>
                     <Image source={PRO2} style={styles.ProductImage} />
                 </View>
                 <View style={styles.ProductDetails}>
                     <View style={styles.ProductDetailsTop}>
                         <View style={styles.ProductDetailsLeft}>
-                            <Text style={styles.ProductName}>Avocado</Text>
+                            <Text style={styles.ProductName}>{item.products_name}</Text>
                             <Text style={styles.ProductWeight}>1kg</Text>
                         </View>
-                        <Pressable style={styles.RemoveBtn}>
+                        <Pressable onPress={()=>deleteCartproducts(item.customers_basket_id)} style={styles.RemoveBtn}>
                             <Feather name="trash-2" style={styles.RemoveBtnIcon} />
                         </Pressable>
                     </View>
                     <View style={styles.sliderCardBottom}>
                         <View style={styles.sliderCardPriceBox}>
-                            <Text style={styles.sliderCardText}> $13 <Text style={styles.sliderCardTextCut}>
-                                $29</Text> </Text>
+                            <Text style={styles.sliderCardText}> ${Number(item.afterDiscountPrice)} <Text style={styles.sliderCardTextCut}>
+                                ${Number(item.final_price)}</Text> </Text>
                         </View>
                         <View style={styles.quantityPlusMinus}>
                             <Pressable style={styles.MinusBtn} onPress={decrementQuantity}>

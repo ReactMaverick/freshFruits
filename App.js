@@ -6,6 +6,7 @@ import './gesture-handler';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import { persistor, store } from './src/redux/store';
+import Toast from 'react-native-toast-message';
 export default function App() {
 
   return (
@@ -14,6 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Router />
     </NavigationContainer>
+    <Toast/>
     </PersistGate>
     </Provider>
   );
