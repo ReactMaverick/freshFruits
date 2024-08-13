@@ -11,9 +11,10 @@ import styles from './style';
 import { BTNCARTTEXT, DISCOUNT, PRO2 } from '../../constants/images';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default function ProductItem({ navigation,productItem,item_key }) {
+export default function ProductItem({ navigation,productItem }) {
     return (
-        <View key={item_key} style={styles.CardOuter}>
+        // <View key={item_key} style={styles.CardOuter}>
+        <View  style={styles.CardOuter}>
             <View style={styles.CardInner}>
                 <View style={styles.ProductImageBox}>
                     <ImageBackground source={DISCOUNT} resizeMode='contain' style={styles.Discount}>

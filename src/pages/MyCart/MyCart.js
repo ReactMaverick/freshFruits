@@ -16,33 +16,41 @@ import {Divider} from 'react-native-elements';
 import {FormInput} from 'react-native-formtastic';
 import {useIsFocused} from '@react-navigation/native';
 import {viewCartProducts} from '../../values/CartUrls';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   selectUser_Id,
   selectUser_session_Id,
 } from '../../redux/reducers/authReducer';
+import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
 
 export default function MyCart({navigation}) {
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
   const isFocused = useIsFocused();
   const [cartProducts, setCartProducts] = useState([]);
+ const cartItems = useSelector(state => state.cart.cartItems);
+const dispatch=useDispatch();
 
   useEffect(() => {
     if (isFocused) {
-      // Screen is focused, perform actions here
+      console.log("fetching cart poducrts")
       const fetchCartProducts = async () => {
         try {
           const products = await viewCartProducts(user_Id, userSession_Id);
-          setCartProducts(products); // Set the cart products
+          // dispatch(storeCartItems(products))
+          setCartProducts([...products])
+          // console.log("the cart product is ",products[0].customers_basket_quantity)
+          console.log("the response is",products)
         } catch (error) {
-          // setError(error.message); // Set the error if any
+          console.log("error occureed in view cart --",error)
         }
       };
-
       fetchCartProducts();
     }
   }, [isFocused]);
+
+
+  
   return (
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
@@ -55,17 +63,23 @@ export default function MyCart({navigation}) {
           BackBtn={'BackBtn'}
           CenterBox={'TitleBox'}
         />
-        {/* <Pressable  onPress={() => console.log('ok')  }>
-          <Text>ghfg</Text>
+        {/* <Pressable  onPress={() => {
+        console.log("the value of")  
+        }}>
+          <Text>{text}</Text>
         </Pressable> */}
         <View style={styles.MainBox}>
           <ScrollView style={styles.ScrollView}>
             <View style={styles.OrderBox}>
               {cartProducts.map(cartElements => (
-                <MyCartItem item={cartElements} navigation={navigation} />
+                <MyCartItem key={cartElements.products_id} item={cartElements} navigation={navigation} />
               ))}
               {/* <MyCartItem navigation={navigation} /> */}
             </View>
+
+
+
+
             <View style={styles.OrderSummaryBox}>
               <View style={styles.OrderSummary}>
                 <Divider style={styles.divider} />

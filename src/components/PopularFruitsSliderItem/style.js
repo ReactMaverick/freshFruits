@@ -30,9 +30,13 @@ const styles = StyleSheet.create({
         width: deviceWidth * 0.08,
         borderRadius: deviceHeight * 0.02,
         backgroundColor: "rgba(124, 186, 30, 0.07)",
+        //backgroundColor:"red",
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 1,
+    },
+    wishlistBtn_active:{
+ backgroundColor:"red",
     },
     wishlistIcon: {
         fontSize: p,

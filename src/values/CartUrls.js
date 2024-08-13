@@ -6,18 +6,35 @@ import {ADD_TO_CART_URL, DELETE_CART_PRODUCT_URL, UPDATE_CART_QUANTITY_URL, VIEW
 
 //adding products to cart
 export const addToCart = async (userId,sessionId,products_id,productAttributesId) => {
+  console.log("item is being adding")
   try {
       const response = await postData(ADD_TO_CART_URL,{
         products_id,prod_attributeids:productAttributesId,
         customers_id:userId,session_id:sessionId,quantity:1
       });
       const data = await response;
-      console.log("the data of add to cart is --- ",data)
+      //console.log("the data of add to cart is -<<<-------> ",data)
+      // console.log("the response message is ",data)
       if (data.status) {
-        showToast('success',"Item Added to Cart")
+        console.log("message from add cart",data.message)
+     return {
+      success:true,
+      messgae:data.message,
+     }}
+     else if(!data.status){
+      console.log("message from add cart",data.message)
+      return {
+        success:false,
+        message:data.message
+      }
+     }
     }
-    } catch (error) {
-      console.error('Error fetching  data:', error);
+     catch (error) {
+      console.error('Error adding item to cart :', error.message);
+      return {
+        success:false,
+        message:"Server is in Maintainence..."
+      }
     }
 };
 
@@ -29,12 +46,13 @@ export const viewCartProducts = async (customerId, sessionId) => {
     const response = await getData(VIEW_CART_URL(customerId, sessionId));
     const data = await response;
     if (data.status) {
-        // console.log("the data is ",data.cart)
+        // console.log("the data is view cart is updated and api called success")
         return data.cart
-    }
-  } catch (error) {
-    console.error('Error fetching meeting data:', error);
-    return "Something went wrong"
+      }
+    } catch (error) {
+      console.error('Error fetching cart data: ------ ---- ------ >>>>', error);
+      console.log("the data not fetched properly")
+      return "Something went wrong"
   }
 };
 

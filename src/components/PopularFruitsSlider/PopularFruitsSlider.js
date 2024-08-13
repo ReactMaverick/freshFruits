@@ -25,7 +25,7 @@ export default function PopularFruitsSlider({ navigation,products }) {
            
             
            {products.map(item=>(
-            <PopularFruitsSliderItem item_key={item.products_id} navigation={navigation} productItem={item} />
+            <PopularFruitsSliderItem key={item.products_id} navigation={navigation} productItem={item} />
            ))}
 
             {/* <PopularFruitsSliderItem navigation={navigation} /> */}

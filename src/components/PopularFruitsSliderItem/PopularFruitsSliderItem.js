@@ -1,45 +1,70 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {View, Image, Text, Pressable, Alert} from 'react-native';
 import styles from './style';
 import {BTNCART, PRO1} from '../../constants/images';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useIsFocused} from '@react-navigation/native';
 import {addToCart} from '../../values/CartUrls';
 import {
   selectUser_Id,
   selectUser_session_Id,
 } from '../../redux/reducers/authReducer';
 import {useSelector} from 'react-redux';
+import Loader from '../Loader/Loader';
+import {showToast} from '../../constants/constants';
+import { addWishlistProduct } from '../../Utils/WishList_Func';
 
 export default function PopularFruitsSliderItem({
   navigation,
   productItem,
-  item_key,
+  
 }) {
-  const isFocused = useIsFocused();
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
-  useEffect(() => {
-    let productId = productItem.products_id;
-    let productAttributesId =
-      productItem.attributes[0].values1[0].products_attributes_id;
-    if (isFocused) {
-      // addToCart(user_Id,userSession_Id,productId,productAttributesId)
-    }
-  }, [isFocused]);
+  const [loader, setLoader] = useState(false);
 
+  const addItemsToCartFunc = async () => {
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 4000);
+    const returnData = await addToCart(
+      user_Id,
+      userSession_Id,
+      productItem.products_id,
+      productItem.attributes[0].values1[0].products_attributes_id,
+    );
+
+    if (returnData.success) {
+      setLoader(false);
+      showToast('success', returnData.messgae);
+    } else {
+      setLoader(false);
+      showToast('info', returnData.message);
+    }
+  };
+
+  
   return (
-    <View key={item_key} style={styles.sliderCardOuter}>
+    // <View key={item_key} style={styles.sliderCardOuter}>
+    <View  style={styles.sliderCardOuter}>
       <View style={styles.sliderCardMain}>
         {/* wishlisted button  */}
         <Pressable
-          onPress={() => navigation.navigate('Wishlist')}
+          // onPress={() => navigation.navigate('Wishlist')}
+          onPress={() => {
+            addWishlistProduct(user_Id,productItem.products_id,productItem.attributes[0].values1[0].products_attributes_id)
+            console.log("ok")
+          }}
           style={styles.wishlistBtn}>
           <AntDesign name="hearto" style={styles.wishlistIcon} />
         </Pressable>
-        <Image
+        {/* <Image
           style={styles.sliderCardImage}
           source={{uri: productItem.image_path ?? PRO1}}
+        /> */}
+        <Image
+          style={styles.sliderCardImage}
+          source={PRO1}
         />
         <View style={styles.sliderCardContent}>
           <View style={styles.sliderCardTop}>
@@ -63,26 +88,14 @@ export default function PopularFruitsSliderItem({
                 1Kg
               </Text>
             </View>
-            {/* <Pressable
-                            onPress={() => Alert.alert('Add to Cart')}
-                            style={styles.AddToCartBtn}>
-                            <Image source={BTNCART} style={styles.AddToCartBtnImage} />
-                        </Pressable> */}
 
-            <Pressable
-              onPress={() =>{
-                addToCart(
-                    user_Id,
-                    userSession_Id,
-                    productItem.products_id,
-                    productItem.attributes[0].values1[0].products_attributes_id,
-                  );
-                //   Alert.alert('Add to Cart')
-                 
-              }
-              }
-              style={styles.AddToCartBtn}>
-              <Image source={BTNCART} style={styles.AddToCartBtnImage} />
+            {/* Alert.alert('Add to Cart') */}
+            <Pressable onPress={addItemsToCartFunc} style={styles.AddToCartBtn}>
+              {!loader ? (
+                <Image source={BTNCART} style={styles.AddToCartBtnImage} />
+              ) : (
+                <Loader />
+              )}
             </Pressable>
           </View>
         </View>

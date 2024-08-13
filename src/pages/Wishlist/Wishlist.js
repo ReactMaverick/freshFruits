@@ -7,21 +7,50 @@ import {
 } from 'react-native';
 import { styles } from './Style';
 import { commonStyles } from '../../constants/styles';
-import { platform } from '../../constants/constants';
-import React, { } from 'react';
+import { platform, showToast } from '../../constants/constants';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import PopularFruitsSliderItem from '../../components/PopularFruitsSliderItem/PopularFruitsSliderItem';
+import { getData } from '../../values/api/apiprovider';
+import { VIEW_WISHLIST_URL } from '../../values/api/url';
+import { useSelector } from 'react-redux';
+import { selectUser_Id } from '../../redux/reducers/authReducer';
+import { useIsFocused } from '@react-navigation/native';
 
-const data = [
-  { id: '1' },
-  { id: '2' },
-  { id: '3' },
-  { id: '4' },
-  { id: '5' },
-  { id: '6' },
-  { id: '7' },
-];
+// const data = [
+//   { id: '1' },
+//   { id: '2' },
+//   { id: '3' },
+//   { id: '4' },
+//   { id: '5' },
+//   { id: '6' },
+//   { id: '7' },
+// ];
 export default function Wishlist({ navigation }) {
+  const user_Id = useSelector(selectUser_Id);
+  const [wishlistItems,setWishlistItems]=useState([])
+  const isFocus=useIsFocused()
+useEffect(()=>{
+  const getWishlist=async()=>{
+    try {
+      const response = await getData(VIEW_WISHLIST_URL(user_Id));
+      const data = await response;
+      console.log("the message provided by view wishlist api is --- ---- ",data)
+      if(data.status){
+  setWishlistItems(data.result)
+      }
+      else{
+        showToast('error',"Login and Try after Sometime")
+      }   
+    }
+     catch (error) {
+      console.error('Error occured in view wishlist cart :', error.message);
+        showToast('error',"Login and Try after Sometime")
+    }
+  }
+  getWishlist()
+},[isFocus])
+
 
   return (
     <KeyboardAvoidingView
@@ -35,17 +64,19 @@ export default function Wishlist({ navigation }) {
           BackBtn={'BackBtn'}
           CenterBox={"TitleBox"}
         />
-        <ScrollView style={styles.ScrollView}>
+
+        
+        {/* <ScrollView style={styles.ScrollView}> */}
           <View style={styles.MainBox}>
             <FlatList
-              data={data}
-              renderItem={({ item }) => <PopularFruitsSliderItem />}
-              keyExtractor={item => item.id}
+              data={wishlistItems}
+              renderItem={({ item }) => <PopularFruitsSliderItem key={item.products_id}   productItem={item}   navigation={navigation}  />}
+              keyExtractor={item => item.products_id}
               numColumns={2}
               columnWrapperStyle={styles.column}
             />
           </View>
-        </ScrollView>
+        {/* </ScrollView> */}
       </SafeAreaView >
     </KeyboardAvoidingView >
   );

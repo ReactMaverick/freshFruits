@@ -26,6 +26,16 @@ export const DELETE_CART_PRODUCT_URL=(id)=>`${API_URL}deleteCartItem?id=${id}`
 
 
 
+//wishlist ------
+
+export const VIEW_WISHLIST_URL=(id)=>`${API_URL}viewWishlist?customers_id=${id}`
+
+export const ADD_WISHLIST_URL=`${API_URL}addWishlist`
+
+
+
+
+
 
 
 
