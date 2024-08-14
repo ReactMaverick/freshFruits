@@ -37,10 +37,10 @@ const dispatch=useDispatch();
       const fetchCartProducts = async () => {
         try {
           const products = await viewCartProducts(user_Id, userSession_Id);
-          // dispatch(storeCartItems(products))
+          dispatch(storeCartItems(products))
           setCartProducts([...products])
           // console.log("the cart product is ",products[0].customers_basket_quantity)
-          console.log("the response is",products)
+          // console.log("the response is --",products)
         } catch (error) {
           console.log("error occureed in view cart --",error)
         }
@@ -64,18 +64,19 @@ const dispatch=useDispatch();
           CenterBox={'TitleBox'}
         />
         {/* <Pressable  onPress={() => {
-        console.log("the value of")  
+        console.log("the clicked occur") ;
+        console.log("the value in redux is ",cartItems) 
         }}>
-          <Text>{text}</Text>
+          <Text>he.lo</Text>
         </Pressable> */}
         <View style={styles.MainBox}>
           <ScrollView style={styles.ScrollView}>
-            <View style={styles.OrderBox}>
-              {cartProducts.map(cartElements => (
+           {cartItems.length>0 ? <View style={styles.OrderBox}>
+              {cartItems.map(cartElements => (
                 <MyCartItem key={cartElements.products_id} item={cartElements} navigation={navigation} />
               ))}
               {/* <MyCartItem navigation={navigation} /> */}
-            </View>
+            </View> : <View><Text>It is Currently Empty</Text></View>}
 
 
 

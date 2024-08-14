@@ -17,9 +17,11 @@ export const addToCart = async (userId,sessionId,products_id,productAttributesId
       // console.log("the response message is ",data)
       if (data.status) {
         console.log("message from add cart",data.message)
+        console.log("the data is ",data)
      return {
       success:true,
       messgae:data.message,
+      newCartItems:data.cart
      }}
      else if(!data.status){
       console.log("message from add cart",data.message)
@@ -37,7 +39,6 @@ export const addToCart = async (userId,sessionId,products_id,productAttributesId
       }
     }
 };
-
 
 
 //viewing the total Cart products
@@ -67,7 +68,7 @@ export const updateProductQuantity=async(basketId,productId,quantity,attributeId
             AttributeIds:attributeIds
         });
         // const data = await response;
-        console.log("the data of add to cart is ",quantity)
+        console.log("the data of updae cart quantity is ",response)
       //   if (data.status) {
     
       // }
@@ -85,7 +86,13 @@ export const deleteCartproducts=async(id)=>{
         const data = await response;
         if (data.status) {
             // console.log("the data is ",data.cart)
-          console.log("ok deleted properly")
+          console.log("ok CART ITEM deleted properly AND RETURN DATA IS",data.status)  
+          return {
+            message:data.message,
+            // newCartItems:data.cart,
+            success:data.status
+          
+          }  
         }
       } catch (error) {
         console.error('Error fetching meeting data:', error);

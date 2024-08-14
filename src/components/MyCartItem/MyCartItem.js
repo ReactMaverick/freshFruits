@@ -13,16 +13,22 @@ import {BTNCARTTEXT, DISCOUNT, PRO2} from '../../constants/images';
 import Feather from 'react-native-vector-icons/Feather';
 import {deleteCartproducts, updateProductQuantity} from '../../values/CartUrls';
 import Loader from '../Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
+import { showToast } from '../../constants/constants';
 
 export default function MyCartItem({navigation, item}) {
     console.log("the quantiy is ",item.customers_basket_quantity)
   const [quantity, setQuantity] = useState(""); // Initialize quantity state
+  const cartItems = useSelector(state => state.cart.cartItems);
+  const [loader,setLoader]=useState(false)
+  const dispatch=useDispatch();
 
   useEffect(()=>{
     setQuantity(item.customers_basket_quantity)
   },[item])
 
-console.log("the state ",quantity)
+
   const incrementQuantity = () => {
     let newQuantity = quantity + 1;
     setQuantity(newQuantity);
@@ -46,6 +52,22 @@ console.log("the state ",quantity)
       item.attributes[0].products_attributes_id,
     );
   };
+
+const deleteCartItem=async()=>{
+  setLoader(true)
+  const response=await deleteCartproducts(item.customers_basket_id)
+  setLoader(false)
+  if(response.success){
+    // dispatch(storeCartItems(response.newCartItems))
+    const newCartUpdatedItems=cartItems.filter(elements=>elements.products_id !== item.products_id)
+    dispatch(storeCartItems(newCartUpdatedItems))
+
+    showToast('success',response.message)
+  }
+  else{
+    showToast('info',response.message || "Login and try Again!")
+  }
+}
 
   return (
     // <View key={item.products_id} style={styles.CardOuter}>
@@ -72,11 +94,12 @@ console.log("the state ",quantity)
               <Text style={styles.ProductName}>{item.products_name}</Text>
               <Text style={styles.ProductWeight}>1kg</Text>
             </View>
-            <Pressable
-              onPress={() => deleteCartproducts(item.customers_basket_id)}
+        {!loader ?  <Pressable
+              onPress={deleteCartItem}
               style={styles.RemoveBtn}>
               <Feather name="trash-2" style={styles.RemoveBtnIcon} />
-            </Pressable>
+            </Pressable> :  
+            <Loader/>}
           </View>
           <View style={styles.sliderCardBottom}>
             <View style={styles.sliderCardPriceBox}>

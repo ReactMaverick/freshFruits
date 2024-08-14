@@ -8,10 +8,11 @@ import {
   selectUser_Id,
   selectUser_session_Id,
 } from '../../redux/reducers/authReducer';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../Loader/Loader';
 import {showToast} from '../../constants/constants';
 import { addWishlistProduct } from '../../Utils/WishList_Func';
+import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
 
 export default function PopularFruitsSliderItem({
   navigation,
@@ -21,6 +22,7 @@ export default function PopularFruitsSliderItem({
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
   const [loader, setLoader] = useState(false);
+  const dispatch=useDispatch()
 
   const addItemsToCartFunc = async () => {
     setLoader(true);
@@ -36,6 +38,7 @@ export default function PopularFruitsSliderItem({
 
     if (returnData.success) {
       setLoader(false);
+dispatch(storeCartItems(returnData.newCartItems))
       showToast('success', returnData.messgae);
     } else {
       setLoader(false);
@@ -52,8 +55,8 @@ export default function PopularFruitsSliderItem({
         <Pressable
           // onPress={() => navigation.navigate('Wishlist')}
           onPress={() => {
-            addWishlistProduct(user_Id,productItem.products_id,productItem.attributes[0].values1[0].products_attributes_id)
-            console.log("ok")
+            console.log()
+             addWishlistProduct(user_Id,productItem.products_id,productItem.attributes[0].values1[0].products_attributes_id)  
           }}
           style={styles.wishlistBtn}>
           <AntDesign name="hearto" style={styles.wishlistIcon} />

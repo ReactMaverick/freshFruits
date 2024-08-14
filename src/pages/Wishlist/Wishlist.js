@@ -14,7 +14,7 @@ import PopularFruitsSliderItem from '../../components/PopularFruitsSliderItem/Po
 import { getData } from '../../values/api/apiprovider';
 import { VIEW_WISHLIST_URL } from '../../values/api/url';
 import { useSelector } from 'react-redux';
-import { selectUser_Id } from '../../redux/reducers/authReducer';
+import { selectUser_Id, selectUser_session_Id } from '../../redux/reducers/authReducer';
 import { useIsFocused } from '@react-navigation/native';
 
 // const data = [
@@ -28,27 +28,33 @@ import { useIsFocused } from '@react-navigation/native';
 // ];
 export default function Wishlist({ navigation }) {
   const user_Id = useSelector(selectUser_Id);
+  const userSession_Id = useSelector(selectUser_session_Id);
+  console.log("the user value is ",user_Id,userSession_Id)
   const [wishlistItems,setWishlistItems]=useState([])
   const isFocus=useIsFocused()
 useEffect(()=>{
-  const getWishlist=async()=>{
-    try {
-      const response = await getData(VIEW_WISHLIST_URL(user_Id));
-      const data = await response;
-      console.log("the message provided by view wishlist api is --- ---- ",data)
-      if(data.status){
-  setWishlistItems(data.result)
+  if(isFocus){
+    const getWishlist=async()=>{
+      console.log("wishlist fetching in progress")
+      try {
+        const response = await getData(VIEW_WISHLIST_URL(user_Id));
+        const data = await response;
+    console.log("the length of the wishlist response is",data.result.length)
+       console.log("the message provided by view wishlist api is --- ---- ",data)
+        if(data.status){
+    setWishlistItems(data.result)
+        }
+        else{
+          showToast('error',"Login and Try after Sometime")
+        }   
       }
-      else{
-        showToast('error',"Login and Try after Sometime")
-      }   
+       catch (error) {
+        console.error('Error occured in view wishlist cart :', error.message);
+          showToast('error',"Login and Try after Sometime")
+      }
     }
-     catch (error) {
-      console.error('Error occured in view wishlist cart :', error.message);
-        showToast('error',"Login and Try after Sometime")
-    }
+    getWishlist()
   }
-  getWishlist()
 },[isFocus])
 
 
