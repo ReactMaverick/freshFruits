@@ -17,7 +17,7 @@ export default function CustomDrawerContent(props) {
                 <Image source={PROFILEPIC} style={styles.profilePic} />
                 <View style={styles.profileContent}>
                     <Text style={styles.drawerHeaderName}>{userName}</Text>
-                    <Pressable>
+                    <Pressable onPress={()=>props.navigation.navigate('Profile')}>
                         <Text style={styles.drawerHeaderText}>View profile</Text>
                     </Pressable>
                 </View>

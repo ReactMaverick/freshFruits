@@ -29,6 +29,7 @@ export default function MyCart({navigation}) {
   const isFocused = useIsFocused();
   const [cartProducts, setCartProducts] = useState([]);
  const cartItems = useSelector(state => state.cart.cartItems);
+ console.log("the itemn in redux is ---",cartItems)
 const dispatch=useDispatch();
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const dispatch=useDispatch();
           console.log("error occureed in view cart --",error)
         }
       };
-      fetchCartProducts();
+      // fetchCartProducts();
     }
   }, [isFocused]);
 

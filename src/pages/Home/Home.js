@@ -27,7 +27,8 @@ import {
   selectUser_session_Id,
 } from '../../redux/reducers/authReducer';
 import {viewCartProducts} from '../../values/CartUrls';
-import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
+import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
+import {  storeProductsList } from '../../redux/reducers/productListReducer';
 
 export default function Home({navigation}) {
   const [loading, setLoading] = useState(true);
@@ -35,29 +36,31 @@ export default function Home({navigation}) {
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
   const dispatch = useDispatch();
+  const listOfProducts=useSelector(state => state.productList.totalProductsList)
+ // console.log("the list of total products are",listOfProducts)
   const getProductsList = async () => {
     try {
       const response = await getData(ALL_PRODUCTS_URL);
       const data = await response;
       if (data.status) {
-        console.log(data)
-        setAllProductsData(data.product_list.product_data);
+        console.log(data);
+        dispatch(storeProductsList(data.product_list.product_data))
+        //setAllProductsData(data.product_list.product_data);
       }
     } catch (error) {
       console.error('Error fetching meeting data:', error);
     }
   };
   useEffect(() => {
-    // Simulate a loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Adjust the delay as needed
-    getProductsList(); //for getting products in home page
-   const getCartItems=async()=>{
-    const data =await viewCartProducts(user_Id, userSession_Id); //for getting the cart products
-    dispatch(storeCartItems(data))
-   }
-   getCartItems()
+    }, 2000);
+    getProductsList();
+    const getCartItems = async () => {
+      const data = await viewCartProducts(user_Id, userSession_Id); //for getting the cart products
+      dispatch(storeCartItems(data));
+    };
+    getCartItems();
     return () => clearTimeout(timer);
   }, []);
 
@@ -121,7 +124,7 @@ export default function Home({navigation}) {
             {/* HeadingBox */}
             {/* Today Offer */}
 
-            {allProductsData.map(item => (
+            {listOfProducts.map(item => (
               <ProductItem
                 // item_key={item.products_id}
                 key={item.products_id}

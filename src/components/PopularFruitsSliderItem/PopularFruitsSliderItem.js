@@ -49,7 +49,9 @@ dispatch(storeCartItems(returnData.newCartItems))
   
   return (
     // <View key={item_key} style={styles.sliderCardOuter}>
-    <View  style={styles.sliderCardOuter}>
+    <Pressable onPress={()=>{navigation.navigate('ProductDetails',productItem);console.log("hello")}}>
+
+<View  style={styles.sliderCardOuter}>
       <View style={styles.sliderCardMain}>
         {/* wishlisted button  */}
         <Pressable
@@ -58,7 +60,9 @@ dispatch(storeCartItems(returnData.newCartItems))
             console.log()
              addWishlistProduct(user_Id,productItem.products_id,productItem.attributes[0].values1[0].products_attributes_id)  
           }}
-          style={styles.wishlistBtn}>
+          // style={styles.wishlistBtn  }
+          style={[styles.wishlistBtn, productItem.isWishlistShow=="Yes" && styles.wishlistBtn_active]}
+          >
           <AntDesign name="hearto" style={styles.wishlistIcon} />
         </Pressable>
         {/* <Image
@@ -72,21 +76,24 @@ dispatch(storeCartItems(returnData.newCartItems))
         <View style={styles.sliderCardContent}>
           <View style={styles.sliderCardTop}>
             <Text style={styles.sliderCardTitle}>
-              {productItem.products_name}
+              {productItem?.products_name }
             </Text>
             <View style={styles.ratingBox}>
-              <Text style={styles.ratingText}>{productItem.rating}</Text>
+              <Text style={styles.ratingText}>{productItem?.rating}</Text>
               <AntDesign name="star" style={styles.ratingIcon} />
             </View>
+           
           </View>
           <View style={styles.sliderCardBottom}>
             <View style={styles.sliderCardPriceBox}>
               <Text style={styles.sliderCardPrice}>
-                {productItem.products_price}
+                {Number(productItem?.products_price)}
+               
               </Text>
               <Text style={styles.sliderCardText}>
                 <Text style={styles.sliderCardTextBig}>
-                  ${productItem.discounted_price}/
+                  {/* ${Number(productItem?.discounted_price)}/ */}
+                  ${productItem?.discounted_price}/
                 </Text>
                 1Kg
               </Text>
@@ -104,5 +111,7 @@ dispatch(storeCartItems(returnData.newCartItems))
         </View>
       </View>
     </View>
+
+    </Pressable>
   );
 }

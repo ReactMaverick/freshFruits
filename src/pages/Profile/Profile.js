@@ -19,9 +19,13 @@ import { ICON1, ICON2, ICON3, ICON4, ICON5, LOGOUT, MASTERCARD, ONLINESUPPORT, P
 import { StatusBar } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import Feather from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
+import { selectUser_email, selectUser_name } from '../../redux/reducers/authReducer';
 
 
 export default function Profile({ navigation }) {
+  const user_name=useSelector(selectUser_name)
+  const user_email=useSelector(selectUser_email)
 
   return (
     <KeyboardAvoidingView
@@ -36,12 +40,12 @@ export default function Profile({ navigation }) {
 
             <View style={styles.UserBox}>
               <Avatar style={styles.ProfilePic} rounded size="large" source={PROFILEPIC} />
-              <View style={styles.UserBoxEdit}><Text style={styles.UserName}>Jenny Wilson</Text>
+              <View style={styles.UserBoxEdit}><Text style={styles.UserName}>{user_name}</Text>
                 <Pressable style={styles.EditBtn}>
                   <Feather name="edit-3" style={styles.textInputIcon} />
                 </Pressable>
               </View>
-              <Text style={styles.UserEmail}>jenny.wilson@example.com</Text>
+              <Text style={styles.UserEmail}>{user_email}</Text>
             </View>
             <View style={styles.ServiceBoxarea}>
               <View style={styles.ServiceItem}>

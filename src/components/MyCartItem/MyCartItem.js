@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {useState} from 'react';
 import {
   View,
@@ -13,24 +13,28 @@ import {BTNCARTTEXT, DISCOUNT, PRO2} from '../../constants/images';
 import Feather from 'react-native-vector-icons/Feather';
 import {deleteCartproducts, updateProductQuantity} from '../../values/CartUrls';
 import Loader from '../Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
-import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
-import { showToast } from '../../constants/constants';
+import {useDispatch, useSelector} from 'react-redux';
+import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
+import {showToast} from '../../constants/constants';
 
 export default function MyCartItem({navigation, item}) {
-    console.log("the quantiy is ",item.customers_basket_quantity)
-  const [quantity, setQuantity] = useState(""); // Initialize quantity state
+  console.log('the quantiy is ', item.customers_basket_quantity);
+  const [quantity, setQuantity] = useState(''); // Initialize quantity state
   const cartItems = useSelector(state => state.cart.cartItems);
-  const [loader,setLoader]=useState(false)
-  const dispatch=useDispatch();
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
+  const [isQuantityZero, setIsQuantityZero] = useState(false);
 
-  useEffect(()=>{
-    setQuantity(item.customers_basket_quantity)
-  },[item])
-
+  useEffect(() => {
+    if (item.customers_basket_quantity == 1) setIsQuantityZero(true);
+    setQuantity(item.customers_basket_quantity);
+  }, [item]);
 
   const incrementQuantity = () => {
     let newQuantity = quantity + 1;
+    if (newQuantity > 1) {
+      setIsQuantityZero(false);
+    }
     setQuantity(newQuantity);
 
     updateProductQuantity(
@@ -42,9 +46,15 @@ export default function MyCartItem({navigation, item}) {
   };
 
   const decrementQuantity = () => {
+    if (quantity === 1) {
+      setIsQuantityZero(true);
+      return;
+    }
     let newQuantity = quantity - 1;
     setQuantity(newQuantity);
-
+    if (newQuantity === 1) {
+      setIsQuantityZero(true);
+    }
     updateProductQuantity(
       item.customers_basket_id,
       item.products_id,
@@ -53,21 +63,22 @@ export default function MyCartItem({navigation, item}) {
     );
   };
 
-const deleteCartItem=async()=>{
-  setLoader(true)
-  const response=await deleteCartproducts(item.customers_basket_id)
-  setLoader(false)
-  if(response.success){
-    // dispatch(storeCartItems(response.newCartItems))
-    const newCartUpdatedItems=cartItems.filter(elements=>elements.products_id !== item.products_id)
-    dispatch(storeCartItems(newCartUpdatedItems))
+  const deleteCartItem = async () => {
+    setLoader(true);
+    const response = await deleteCartproducts(item.customers_basket_id);
+    setLoader(false);
+    if (response.success) {
+      // dispatch(storeCartItems(response.newCartItems))
+      const newCartUpdatedItems = cartItems.filter(
+        elements => elements.products_id !== item.products_id,
+      );
+      dispatch(storeCartItems(newCartUpdatedItems));
 
-    showToast('success',response.message)
-  }
-  else{
-    showToast('info',response.message || "Login and try Again!")
-  }
-}
+      showToast('success', response.message);
+    } else {
+      showToast('info', response.message || 'Login and try Again!');
+    }
+  };
 
   return (
     // <View key={item.products_id} style={styles.CardOuter}>
@@ -79,6 +90,7 @@ const deleteCartItem=async()=>{
             resizeMode="contain"
             style={styles.Discount}>
             <Text style={styles.DiscountText}>
+              {/* {Math.abs(item.prodDiscountRate)}%   pro_discount_rate */}
               {Math.abs(item.prodDiscountRate)}%
             </Text>
           </ImageBackground>
@@ -94,12 +106,13 @@ const deleteCartItem=async()=>{
               <Text style={styles.ProductName}>{item.products_name}</Text>
               <Text style={styles.ProductWeight}>1kg</Text>
             </View>
-        {!loader ?  <Pressable
-              onPress={deleteCartItem}
-              style={styles.RemoveBtn}>
-              <Feather name="trash-2" style={styles.RemoveBtnIcon} />
-            </Pressable> :  
-            <Loader/>}
+            {!loader ? (
+              <Pressable onPress={deleteCartItem} style={styles.RemoveBtn}>
+                <Feather name="trash-2" style={styles.RemoveBtnIcon} />
+              </Pressable>
+            ) : (
+              <Loader />
+            )}
           </View>
           <View style={styles.sliderCardBottom}>
             <View style={styles.sliderCardPriceBox}>
@@ -112,7 +125,12 @@ const deleteCartItem=async()=>{
               </Text>
             </View>
             <View style={styles.quantityPlusMinus}>
-              <Pressable style={styles.MinusBtn} onPress={decrementQuantity}>
+              <Pressable
+                style={[
+                  styles.MinusBtn,
+                  isQuantityZero && styles.deactivate_MinusBtn,
+                ]}
+                onPress={decrementQuantity}>
                 <Feather name="minus" style={styles.MinusIcon} />
               </Pressable>
               <Text style={styles.quantityText}>{quantity}Kg</Text>

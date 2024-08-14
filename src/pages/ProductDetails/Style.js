@@ -125,6 +125,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  deactivate_MinusBtn:{
+backgroundColor:"red",
+opacity:0.4
+  },
   MinusIcon: {
     fontSize: p,
     color: colors.PrimaryColor,
@@ -171,11 +175,15 @@ export const styles = StyleSheet.create({
     fontSize: small,
     color: colors.PrimaryColor,
   },
+  ProductReadMoreBtn:{
+    backgroundColor:"red",
+  },
   ProductReadMore: {
     fontFamily: fontFamily.Bold,
     fontSize: small,
     color: colors.PrimaryColor,
     marginLeft: deviceWidth * 0.01,
+  
   },
 
   ////////////////////// AddToCartBox //////////////////////

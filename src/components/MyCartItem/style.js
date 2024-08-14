@@ -116,6 +116,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    deactivate_MinusBtn:{
+opacity:0.5,
+backgroundColor:'red',
+    },
     MinusIcon: {
         fontSize: p,
         color: colors.PrimaryColor,

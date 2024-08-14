@@ -5,12 +5,14 @@ import {ADD_TO_CART_URL, DELETE_CART_PRODUCT_URL, UPDATE_CART_QUANTITY_URL, VIEW
 
 
 //adding products to cart
-export const addToCart = async (userId,sessionId,products_id,productAttributesId) => {
+export const addToCart = async (userId,sessionId,products_id,productAttributesId,quantity=1) => {
   console.log("item is being adding")
+  //------quantity=1   added(both value and parameter)
+  //in the quantity data which is send must be 1
   try {
       const response = await postData(ADD_TO_CART_URL,{
         products_id,prod_attributeids:productAttributesId,
-        customers_id:userId,session_id:sessionId,quantity:1
+        customers_id:userId,session_id:sessionId,quantity
       });
       const data = await response;
       //console.log("the data of add to cart is -<<<-------> ",data)
@@ -91,7 +93,6 @@ export const deleteCartproducts=async(id)=>{
             message:data.message,
             // newCartItems:data.cart,
             success:data.status
-          
           }  
         }
       } catch (error) {
