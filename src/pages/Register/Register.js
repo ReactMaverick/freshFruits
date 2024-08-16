@@ -30,6 +30,7 @@ export default function Register({navigation}) {
   // const [isLoading, setIsLoading] = useState(false);
   // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   // const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({
     fullname: '',
     email: '',
@@ -56,7 +57,7 @@ export default function Register({navigation}) {
 
   const handleSubmit = () => {
     let updatedErrors = {};
-    // Keyboard.dismiss(); // Dissmisses the keyboard
+    Keyboard.dismiss(); // Dissmisses the keyboard
 
     const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
       formData.email,
@@ -213,15 +214,24 @@ export default function Register({navigation}) {
                 error={errors.password !== ''}
                 errorText={errors.password}
                 hideLabel
-                // hiddenText
+                hiddenText={!isPasswordVisible}
+                leftIcon={isPasswordVisible ? 'unlock' : 'lock'}
+                rightIcon={isPasswordVisible ? 'eye' : 'eye-off'}
+                rightIconOnPress={() =>
+                  setIsPasswordVisible(!isPasswordVisible)
+                }
                 placeholderText="Password"
-                leftIcon
                 renderLeftIcon={() => (
-                  <AntDesign name="lock" style={styles.textInputIcon} />
+                  <AntDesign
+                    name={isPasswordVisible ? 'unlock' : 'lock'}
+                    style={styles.textInputIcon}
+                  />
                 )}
-                rightIcon
                 renderRightIcon={() => (
-                  <Feather name="eye-off" style={styles.textInputEyeIcon} />
+                  <Feather
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    style={styles.textInputEyeIcon}
+                  />
                 )}
               />
               <View style={styles.RowBox}>
@@ -247,7 +257,16 @@ export default function Register({navigation}) {
                 <Text style={styles.dontHaveAccountText}>
                   You have an account
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('Login');
+                    setFormData({
+                      fullname: '',
+                      email: '',
+                      phone: '',
+                      password: '',
+                    });
+                  }}>
                   <Text style={styles.registerText}>Sign In</Text>
                 </TouchableOpacity>
               </View>

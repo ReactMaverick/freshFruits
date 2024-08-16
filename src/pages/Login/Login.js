@@ -20,13 +20,12 @@ import {login} from '../../redux/reducers/authReducer';
 import {useDispatch} from 'react-redux';
 
 export default function Login({navigation}) {
- 
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     user_name: '',
     password: '',
   });
-
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [errors, setErrors] = useState({
     user_name: '',
     password: '',
@@ -42,7 +41,7 @@ export default function Login({navigation}) {
 
   const handleSubmit = () => {
     let updatedErrors = {};
-    // Keyboard.dismiss(); // Dissmisses the keyboard
+    Keyboard.dismiss(); // Dissmisses the keyboard
 
     if (!formData.user_name) {
       updatedErrors.user_name = 'User Name is required';
@@ -120,8 +119,8 @@ export default function Login({navigation}) {
               inputContainerStyle={styles.inputContainerStyle}
               textInputProps={{style: styles.textInputStyle}}
               labelTextStyle={styles.labelTextStyle}
-              // inputType="text"
-              placeholderText="Passwords"
+              inputType="password"
+              placeholderText="Password"
               value={formData.password}
               onTextChange={password => {
                 setFormData({
@@ -133,13 +132,21 @@ export default function Login({navigation}) {
               error={errors.password !== ''}
               errorText={errors.password}
               hideLabel
-              leftIcon
+              hiddenText={!isPasswordVisible}
+              leftIcon={isPasswordVisible ? 'unlock' : 'lock'}
+              rightIcon={isPasswordVisible ? 'eye' : 'eye-off'}
+              rightIconOnPress={() => setIsPasswordVisible(!isPasswordVisible)}
               renderLeftIcon={() => (
-                <AntDesign name="lock" style={styles.textInputIcon} />
+                <AntDesign
+                  name={isPasswordVisible ? 'unlock' : 'lock'}
+                  style={styles.textInputIcon}
+                />
               )}
-              rightIcon
               renderRightIcon={() => (
-                <Feather name="eye-off" style={styles.textInputEyeIcon} />
+                <Feather
+                  name={isPasswordVisible ? 'eye' : 'eye-off'}
+                  style={styles.textInputEyeIcon}
+                />
               )}
             />
             <View style={styles.RowBox}>
@@ -168,7 +175,14 @@ export default function Login({navigation}) {
               <Text style={styles.dontHaveAccountText}>
                 Don't have an account
               </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Register');
+                  setFormData({
+                    user_name: '',
+                    password: '',
+                  });
+                }}>
                 <Text style={styles.registerText}>Sign Up</Text>
               </TouchableOpacity>
             </View>

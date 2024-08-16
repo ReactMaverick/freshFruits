@@ -165,6 +165,7 @@ opacity:0.4
     color: colors.MediumGrayColor,
     lineHeight: deviceHeight * 0.03,
   },
+
   ReadMoreBtn: {
     flexDirection: 'row',
     alignItems: 'center',

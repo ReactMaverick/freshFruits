@@ -16,9 +16,11 @@ import { ORDERBOOK, TRUCK, WALLET1 } from '../../constants/images';
 import AddressBox from '../../components/AddressBox/AddressBox';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import PaymentMethod from '../../components/PaymentMethod/PaymentMethod';
+import { useSelector } from 'react-redux';
 
 
 export default function Checkout({ navigation }) {
+  const cartItems = useSelector(state => state.cart.cartItems);
 
   return (
     <KeyboardAvoidingView

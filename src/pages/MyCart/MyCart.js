@@ -29,12 +29,16 @@ export default function MyCart({navigation}) {
   const isFocused = useIsFocused();
   const [cartProducts, setCartProducts] = useState([]);
  const cartItems = useSelector(state => state.cart.cartItems);
+ const totalCartPrice = useSelector(state => state.cart.priceOfItems);
+
+
  console.log("the itemn in redux is ---",cartItems)
 const dispatch=useDispatch();
 
   useEffect(() => {
     if (isFocused) {
       console.log("fetching cart poducrts")
+      console.log('the cart total is ',totalCartPrice)
       const fetchCartProducts = async () => {
         try {
           const products = await viewCartProducts(user_Id, userSession_Id);
@@ -82,16 +86,16 @@ const dispatch=useDispatch();
 
 
 
-            <View style={styles.OrderSummaryBox}>
+            {cartItems.length >0 && <View style={styles.OrderSummaryBox}>
               <View style={styles.OrderSummary}>
                 <Divider style={styles.divider} />
                 <View style={styles.OrderSummaryRow}>
                   <Text style={styles.OrderSummaryLeftText}>Total items</Text>
-                  <Text style={styles.OrderSummaryRightText}>03</Text>
+                  <Text style={styles.OrderSummaryRightText}>{cartItems.length}</Text>
                 </View>
                 <View style={styles.OrderSummaryRow}>
                   <Text style={styles.OrderSummaryLeftText}>Price</Text>
-                  <Text style={styles.OrderSummaryRightText}>$55</Text>
+                  <Text style={styles.OrderSummaryRightText}>${totalCartPrice}</Text>
                 </View>
                 <View style={styles.OrderSummaryRow}>
                   <Text style={styles.OrderSummaryLeftText}>Delivery</Text>
@@ -103,7 +107,7 @@ const dispatch=useDispatch();
                 </View>
                 <View style={styles.TotalPriceRow}>
                   <Text style={styles.TotalPriceLeftText}>Total Price</Text>
-                  <Text style={styles.TotalPriceRightText}>$55</Text>
+                  <Text style={styles.TotalPriceRightText}>${}</Text>
                 </View>
                 <View style={styles.ApplyCouponBox}>
                   <FormInput
@@ -121,7 +125,7 @@ const dispatch=useDispatch();
                   <Text style={styles.CheckoutBtnText}>Checkout</Text>
                 </Pressable>
               </View>
-            </View>
+            </View>}
           </ScrollView>
         </View>
       </SafeAreaView>

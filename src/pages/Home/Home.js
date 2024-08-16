@@ -87,7 +87,7 @@ export default function Home({navigation}) {
             <BannerSlider />
             {/* BannerSlider */}
             {/* CatagoriesSlider */}
-            <CatagoriesSlider />
+            {/* <CatagoriesSlider /> */}
             {/* CatagoriesSlider */}
             {/* HeadingBox */}
             <View style={styles.HeadingBox}>
@@ -96,14 +96,14 @@ export default function Home({navigation}) {
                 style={styles.ViewAllBtn}
                 // onPress={() => navigation.navigate('Wishlist')}
                 // onPress={() => navigation.navigate('MyOrder')}
-                onPress={() => navigation.navigate('MyCart')}
+                onPress={() => navigation.navigate('popularFruits')}
                 // onPress={() => navigation.navigate('ProductDetails')}
                 // onPress={() => navigation.navigate('Checkout')}
                 // onPress={() => navigation.navigate('PaymentDetails')}
                 // onPress={() => navigation.navigate('PaymentSuccessful')}
               >
                 <Text style={styles.ViewAllBtnText}>See All</Text>
-              </Pressable>
+                  </Pressable>
             </View>
             {/* HeadingBox */}
             {/* PopularFruitsSlider  */}

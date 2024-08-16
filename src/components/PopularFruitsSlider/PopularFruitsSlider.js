@@ -22,6 +22,7 @@ export default function PopularFruitsSlider({ navigation,products }) {
             paginationStyleItemActive={styles.paginationStyleItemActive}
             paginationActiveColor={colors.PrimaryColor}
             paginationDefaultColor={'#AAADA6'}
+            
         >
             
            

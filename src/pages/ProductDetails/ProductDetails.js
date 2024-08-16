@@ -6,6 +6,7 @@ import {
   Pressable,
   SafeAreaView,
   ScrollView,
+  StyleSheet,
   Text,
   View,
 } from 'react-native';
@@ -31,82 +32,83 @@ import Feather from 'react-native-vector-icons/Feather';
 import OtherFruitsSlider from '../../components/OtherFruitsSlider/OtherFruitsSlider';
 import Header from '../../components/Header/Header';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import { addToCart } from '../../values/CartUrls';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUser_Id, selectUser_session_Id } from '../../redux/reducers/authReducer';
-import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
+import {addToCart} from '../../values/CartUrls';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  selectUser_Id,
+  selectUser_session_Id,
+} from '../../redux/reducers/authReducer';
+import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
 import Loader from '../../components/Loader/Loader';
+//  import HtmlToText from '../../common/htmlToText';
+import HTMLView from 'react-native-htmlview';
 
 export default function ProductDetails({navigation, route}) {
   const product = route.params;
   const user_Id = useSelector(selectUser_Id);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const userSession_Id = useSelector(selectUser_session_Id);
-  const [quantity, setQuantity] = useState('')
-  const [loader,setLoader]=useState(false)
+  const [quantity, setQuantity] = useState('');
+  const [loader, setLoader] = useState(false);
   const [fullDescription, setFullDescription] = useState([
     Math.round(product.products_description.length / 3),
     false,
   ]);
-  const [totalPrice,setTotalPrice]=useState("")
+  const [totalPrice, setTotalPrice] = useState('');
   const [isQuantityZero, setIsQuantityZero] = useState(false);
-useEffect(()=>{
-  let initialQuantity=2
-setTotalPrice(Number(product.discounted_price)*initialQuantity)
-setQuantity(initialQuantity)
-},[route])
+  useEffect(() => {
+    let initialQuantity = 2;
+    setTotalPrice(Number(product.discounted_price) * initialQuantity);
+    setQuantity(initialQuantity);
+  }, [route]);
 
-const incrementQuantity = () => {
-  let newQuantity = quantity + 1;
-  if (newQuantity > 1) {
-    setIsQuantityZero(false);
-  }
-  setQuantity(newQuantity);
-  setTotalPrice(newQuantity*Number(product.discounted_price))
+  const incrementQuantity = () => {
+    let newQuantity = quantity + 1;
+    if (newQuantity > 1) {
+      setIsQuantityZero(false);
+    }
+    setQuantity(newQuantity);
+    setTotalPrice(newQuantity * Number(product.discounted_price));
+  };
 
+  const decrementQuantity = () => {
+    if (quantity === 1) {
+      setIsQuantityZero(true);
+      return;
+    }
+    let newQuantity = quantity - 1;
+    setQuantity(newQuantity);
+    setTotalPrice(newQuantity * Number(product.discounted_price));
+    if (newQuantity === 1) {
+      setIsQuantityZero(true);
+    }
+  };
 
-};
+  const addItemsToCartFunc = async () => {
+    console.log('items added');
+    setLoader(true);
+    setTimeout(() => {
+      setLoader(false);
+    }, 4000);
+    const returnData = await addToCart(
+      user_Id,
+      userSession_Id,
+      product.products_id,
+      product.attributes[0].values1[0].products_attributes_id,
+      quantity,
+    );
 
-const decrementQuantity = () => {
-  if (quantity === 1) {
-    setIsQuantityZero(true);
-    return;
-  }
-  let newQuantity = quantity - 1;
-  setQuantity(newQuantity);
-  setTotalPrice(newQuantity*Number(product.discounted_price))
-  if (newQuantity === 1) {
-    setIsQuantityZero(true);
-  }
- 
-};
-
-
-
-const addItemsToCartFunc = async () => {
-  console.log("items added")
-  setLoader(true);
-  setTimeout(() => {
-    setLoader(false);
-  }, 4000);
-  const returnData = await addToCart(
-    user_Id,
-    userSession_Id,
-    product.products_id,
-    product.attributes[0].values1[0].products_attributes_id,
-quantity
-  );
-
-  if (returnData.success) {
-    setLoader(false);
-dispatch(storeCartItems(returnData.newCartItems))
-    showToast('success', returnData.messgae);
-  } else {
-    setLoader(false);
-    showToast('info', returnData.message);
-  }
-};
-
+    if (returnData.success) {
+      setLoader(false);
+      // showToast('success', returnData.messgae);
+      dispatch(storeCartItems(returnData.newCartItems));
+      navigation.navigate('MyCart');
+    } else {
+      setLoader(false);
+      showToast('info', returnData.message);
+    }
+  };
+  const htmlContent = '<p>This is <b>bold</b> and jhgd jhgjkdghasdjk asgkdfjkgJKGS agsfdkGIGSDd jhgjkdghasdjk asgkdfjkgJKGS agsfdkGIGSDjkdghasdjk asgkdfjkgJKGS agVVVVsfdkGIGSDFIAGU  <i>italic</i> text.</p>'; 
   return (
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
@@ -152,7 +154,10 @@ dispatch(storeCartItems(returnData.newCartItems))
                 paginationActiveColor={colors.PrimaryColor}
                 paginationDefaultColor={'#AAADA6'}>
                 <View style={styles.SliderItem}>
-                  <Image source={PRO1} style={styles.Productimage} />
+                  <Image
+                    source={{uri: product.image_path ?? PRO1}}
+                    style={styles.Productimage}
+                  />
                 </View>
                 <View style={styles.SliderItem}>
                   <Image source={PRO2} style={styles.Productimage} />
@@ -182,10 +187,12 @@ dispatch(storeCartItems(returnData.newCartItems))
                   </View>
                 </View>
                 <View style={styles.quantityPlusMinus}>
-                  <Pressable  onPress={decrementQuantity}   style={[
-                  styles.MinusBtn,
-                  isQuantityZero && styles.deactivate_MinusBtn,
-                ]}>
+                  <Pressable
+                    onPress={decrementQuantity}
+                    style={[
+                      styles.MinusBtn,
+                      isQuantityZero && styles.deactivate_MinusBtn,
+                    ]}>
                     <Feather name="minus" style={styles.MinusIcon} />
                   </Pressable>
                   <Text style={styles.quantityText}>{quantity}Kg</Text>
@@ -198,7 +205,24 @@ dispatch(storeCartItems(returnData.newCartItems))
                 <Text style={styles.ProductDetailsTitle}>Product Details </Text>
                 <Text style={styles.ProductDetailsText}>
                   {/* onPress={()=>fullDescription[1]?setFullDescription([Math.round(product.products_description.length/3),false]):setFullDescription([product.products_description.length,true])} */}
-                  {product.products_description.slice(0, fullDescription[0])}{!fullDescription[1] && "..."}
+                  {/* {product.products_description.slice(0, fullDescription[0])}   */}
+               
+                  {/* {fullDescription[1] ? ( */}
+              
+              
+        <HTMLView
+          value={product.products_description}
+        />
+  
+                  {/* ) : (
+                    <HTMLView
+                      value={product.products_description.slice(
+                        0,
+                        fullDescription[0],
+                      )}
+                    />
+                  )} */}
+                  {!fullDescription[1] && '...'}
                   <Text
                     onPress={() =>
                       fullDescription[1]
@@ -212,7 +236,7 @@ dispatch(storeCartItems(returnData.newCartItems))
                           ])
                     }
                     style={styles.ProductReadMore}>
-                   {!fullDescription[1]?"Read more":" Show less"}
+                    {!fullDescription[1] ? 'Read more' : ' Show less'}
                   </Text>
                 </Text>
               </View>
@@ -230,15 +254,16 @@ dispatch(storeCartItems(returnData.newCartItems))
               <Text style={styles.TotalText}>Total price</Text>
               <Text style={styles.PriceText}>${totalPrice}</Text>
             </View>
-           <Pressable
-              style={styles.AddToCartBtn}
-              onPress={addItemsToCartFunc}>
-               
-              <Text style={styles.AddToCartBtnText}>{!loader ? "Add to Cart":"Adding ..."}</Text>
-            </Pressable> 
+            <Pressable style={styles.AddToCartBtn} onPress={addItemsToCartFunc}>
+              <Text style={styles.AddToCartBtnText}>
+                {!loader ? 'Add to Cart' : 'Adding ...'}
+              </Text>
+            </Pressable>
           </View>
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }
+
+

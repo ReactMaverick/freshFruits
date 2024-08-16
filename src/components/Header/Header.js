@@ -70,8 +70,8 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                     <View style={styles.headerArea}>
                         {leftContent == "HomeLeft" &&
                             <View style={styles.headerLeft}>
-                                <Text style={styles.leftTitle}>Deliver In</Text>
-                                <Text style={styles.leftSubTitle}>Every Fruit 10 minutes</Text>
+                                {/* <Text style={styles.leftTitle}>Deliver In</Text> */}
+                                <Text style={styles.leftSubTitle}>Delivered in 10 minutes</Text>
                                 {/* location box */}
                                 <Pressable onPress={toggleBottomSheet} style={styles.locationBox}>
                                     <Octicons name="location"
@@ -86,7 +86,7 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                             <View style={styles.RightSide}>
                                 <Pressable
                                     style={styles.bellBtn}
-                                    onPress={() => { navigation.navigate('Notification') }}
+                                    onPress={() => { navigation.navigate('Login') }}
                                 >
                                     <Animated.View style={[animatedStyle, styles.NotificationBellIcon]}>
                                         <FontAwesome name="bell" style={styles.NotificationIcon} /></Animated.View>

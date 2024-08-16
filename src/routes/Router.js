@@ -28,6 +28,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from '../components/CustomDrawerContent/CustomDrawerContent';
 import { useSelector } from 'react-redux';
 import { selectUser_isLoggedIn } from '../redux/reducers/authReducer';
+import PopularFruitsSlider from '../components/PopularFruitsSlider/PopularFruitsSlider';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -272,6 +273,7 @@ const LoginStack = () => {
 const HomeStack = () => {
   return (
     <Stack.Navigator>
+
        <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -310,6 +312,13 @@ const HomeStack = () => {
       <Stack.Screen
         name="Wishlist"
         component={Wishlist}
+        options={{
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="popularFruits"
+        component={PopularFruitsSlider}
         options={{
           headerShown: false,
         }}

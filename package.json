@@ -24,6 +24,7 @@
     "react-native-formtastic": "^1.7.0",
     "react-native-gesture-handler": "^2.17.1",
     "react-native-gifted-charts": "^1.4.19",
+    "react-native-htmlview": "^0.17.0",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-modal": "^13.0.1",
     "react-native-onetapinput": "^1.4.2",

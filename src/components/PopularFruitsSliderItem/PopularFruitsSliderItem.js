@@ -49,7 +49,7 @@ dispatch(storeCartItems(returnData.newCartItems))
   
   return (
     // <View key={item_key} style={styles.sliderCardOuter}>
-    <Pressable onPress={()=>{navigation.navigate('ProductDetails',productItem);console.log("hello")}}>
+    <Pressable onPress={()=>navigation.navigate('ProductDetails',productItem)}>
 
 <View  style={styles.sliderCardOuter}>
       <View style={styles.sliderCardMain}>
@@ -58,7 +58,7 @@ dispatch(storeCartItems(returnData.newCartItems))
           // onPress={() => navigation.navigate('Wishlist')}
           onPress={() => {
             console.log()
-             addWishlistProduct(user_Id,productItem.products_id,productItem.attributes[0].values1[0].products_attributes_id)  
+             addWishlistProduct(user_Id,productItem.products_id,productItem.products_attributes_prices_id) 
           }}
           // style={styles.wishlistBtn  }
           style={[styles.wishlistBtn, productItem.isWishlistShow=="Yes" && styles.wishlistBtn_active]}
@@ -79,7 +79,7 @@ dispatch(storeCartItems(returnData.newCartItems))
               {productItem?.products_name }
             </Text>
             <View style={styles.ratingBox}>
-              <Text style={styles.ratingText}>{productItem?.rating}</Text>
+              <Text style={styles.ratingText}>{productItem?.rating }</Text>
               <AntDesign name="star" style={styles.ratingIcon} />
             </View>
            
@@ -88,7 +88,6 @@ dispatch(storeCartItems(returnData.newCartItems))
             <View style={styles.sliderCardPriceBox}>
               <Text style={styles.sliderCardPrice}>
                 {Number(productItem?.products_price)}
-               
               </Text>
               <Text style={styles.sliderCardText}>
                 <Text style={styles.sliderCardTextBig}>

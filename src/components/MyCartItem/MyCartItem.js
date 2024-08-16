@@ -43,6 +43,7 @@ export default function MyCartItem({navigation, item}) {
       newQuantity,
       item.attributes[0].products_attributes_id,
     );
+
   };
 
   const decrementQuantity = () => {
