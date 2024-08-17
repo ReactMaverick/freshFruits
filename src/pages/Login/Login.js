@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   Animated,
+  Keyboard,
 } from 'react-native';
 import {styles} from './Style';
 import {commonStyles} from '../../constants/styles';
@@ -18,9 +19,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import React, {useState, useEffect, useRef} from 'react';
 import {login} from '../../redux/reducers/authReducer';
 import {useDispatch} from 'react-redux';
+import Loader from '../../components/Loader/Loader';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
+  const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     user_name: '',
     password: '',
@@ -59,9 +63,10 @@ export default function Login({navigation}) {
     } else {
       // setIsLoading(true);
     }
-
-    dispatch(login(formData))
+setLoader(true)
+    dispatch(login(formData)) 
       .then(res => {
+     
         if (res.type === 'auth/login/fulfilled') {
           navigation.navigate('Home');
         } else {
@@ -72,19 +77,21 @@ export default function Login({navigation}) {
         console.log('Error ==> ', err);
       })
       .finally(() => {
-        // setIsLoading(false);
+        setLoader(false);
       });
   };
-
   const [isChecked, setIsChecked] = useState(false);
   const handlePress = () => {
     setIsChecked(!isChecked);
   };
 
+
+
   return (
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
+          <ScrollView>
       <SafeAreaView>
         <View style={styles.MainBox}>
           <Image style={styles.FreshFoodLogo} source={FRESHFOODLOGO} />
@@ -163,32 +170,39 @@ export default function Login({navigation}) {
               </Pressable>
             </View>
 
-            <Pressable
-              style={styles.loginBtn}
-              onPress={() => {
-                handleSubmit();
-              }}>
-              <Text style={styles.loginBtnText}>Login</Text>
-            </Pressable>
+            {!loader ? (
+              <>
+                <Pressable
+                  style={styles.loginBtn}
+                  onPress={() => {
+                    handleSubmit();
+                  }}>
+                  <Text style={styles.loginBtnText}>Login</Text>
+                </Pressable>
 
-            <View style={styles.dontHaveAccount}>
-              <Text style={styles.dontHaveAccountText}>
-                Don't have an account
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('Register');
-                  setFormData({
-                    user_name: '',
-                    password: '',
-                  });
-                }}>
-                <Text style={styles.registerText}>Sign Up</Text>
-              </TouchableOpacity>
-            </View>
+                <View style={styles.dontHaveAccount}>
+                  <Text style={styles.dontHaveAccountText}>
+                    Don't have an account
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Register');
+                      setFormData({
+                        user_name: '',
+                        password: '',
+                      });
+                    }}>
+                    <Text style={styles.registerText}>Sign Up</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            ) : (
+     <Text  style={{ margin: 70 }}>  <Loader/></Text>
+
+            )}
           </View>
         </View>
-      </SafeAreaView>
+      </SafeAreaView></ScrollView>
     </KeyboardAvoidingView>
   );
 }

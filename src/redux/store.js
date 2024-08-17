@@ -5,6 +5,7 @@ import authReducer from './reducers/authReducer';
 import loaderReducer from './reducers/loaderReducer';
 import cartItemsReducer from './reducers/cartItemsReducer';
 import productListReducer from './reducers/productListReducer';
+import WishListReducer from './reducers/WishListReducer';
 
 const persistConfig = {
   key: 'root',
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   authReducer: persistReducer(persistConfig, authReducer),
   loader:loaderReducer,
   cart:cartItemsReducer,
-  productList:productListReducer
+  productList:productListReducer,
+  wishlist:WishListReducer
 });
 
 export const store = configureStore({

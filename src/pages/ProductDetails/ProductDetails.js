@@ -205,14 +205,14 @@ export default function ProductDetails({navigation, route}) {
                 <Text style={styles.ProductDetailsTitle}>Product Details </Text>
                 <Text style={styles.ProductDetailsText}>
                   {/* onPress={()=>fullDescription[1]?setFullDescription([Math.round(product.products_description.length/3),false]):setFullDescription([product.products_description.length,true])} */}
-                  {/* {product.products_description.slice(0, fullDescription[0])}   */}
+                  {product.products_description.slice(0, fullDescription[0])}  
                
                   {/* {fullDescription[1] ? ( */}
               
               
-        <HTMLView
+        {/* <HTMLView
           value={product.products_description}
-        />
+        /> */}
   
                   {/* ) : (
                     <HTMLView

@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
         minWidth: deviceWidth * 0.42,
         borderTopLeftRadius: deviceHeight * 0.03,
         borderTopRightRadius: deviceHeight * 0.03,
-        flexDirection: 'row',
+        // flexDirection: 'row',   ------>initial
+        flexDirection: 'column',
         justifyContent: 'space-between',
         paddingHorizontal: deviceWidth * 0.04,
         paddingVertical: deviceHeight * 0.02,

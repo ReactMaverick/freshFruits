@@ -17,7 +17,9 @@ export default function LocationBottomSheet({ isVisible, onClose }) {
                 <View style={styles.CardInner}>
                     <Text style={styles.Title}>Location</Text>
                 </View>
+                    <Text style={styles.Title}>Locatizxdon</Text>
             </View>
+            
         </Modal>
     );
 }

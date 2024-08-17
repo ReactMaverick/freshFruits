@@ -26,14 +26,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from '../components/CustomDrawerContent/CustomDrawerContent';
-import { useSelector } from 'react-redux';
-import { selectUser_isLoggedIn } from '../redux/reducers/authReducer';
+import {useSelector} from 'react-redux';
+import {selectUser_isLoggedIn} from '../redux/reducers/authReducer';
 import PopularFruitsSlider from '../components/PopularFruitsSlider/PopularFruitsSlider';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
-
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
@@ -259,6 +258,7 @@ const LoginStack = () => {
           headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="Register"
         component={Register}
@@ -273,22 +273,28 @@ const LoginStack = () => {
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-
-       <Stack.Screen
-        name="SplashScreen"
-        component={SplashScreen}
+      <Stack.Screen
+        name="SplashScreen" 
+        component={SplashScreen} 
         options={{
           headerShown: false,
         }}
       />
-       <Stack.Screen
+    <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
         name="Home"
         component={HomeTabs}
         options={{
           headerShown: false,
         }}
       />
-       {/* <Stack.Screen
+      {/* <Stack.Screen
         name="Home"
         component={Home}
         options={{
@@ -316,7 +322,7 @@ const HomeStack = () => {
           headerShown: false,
         }}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="popularFruits"
         component={PopularFruitsSlider}
         options={{
@@ -373,13 +379,12 @@ const HomeStack = () => {
           headerShown: false,
         }}
       /> */}
-
     </Stack.Navigator>
   );
 };
 
 const MyDrawer = () => {
-  const isUserLoggedIn=useSelector(selectUser_isLoggedIn)
+  const isUserLoggedIn = useSelector(selectUser_isLoggedIn);
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -388,12 +393,11 @@ const MyDrawer = () => {
         drawerPosition: 'right',
         headerShown: false,
       }}>
-
       {isUserLoggedIn ? (
         <Drawer.Screen name="HomeStack" component={HomeStack} />
       ) : (
         <Drawer.Screen name="LoginStack" component={LoginStack} />
-     )}
+      )}
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="Wishlist" component={Wishlist} />

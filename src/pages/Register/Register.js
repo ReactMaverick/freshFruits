@@ -1,5 +1,6 @@
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Pressable,
   SafeAreaView,
