@@ -12,7 +12,7 @@ import PopularFruitsSliderItem from '../PopularFruitsSliderItem/PopularFruitsSli
 import { useSelector } from 'react-redux';
 
 export default function PopularFruitsSlider({ navigation,products }) {
-    const listOfProducts=useSelector(state => state.productList.totalProductsList)
+    const listOfProducts=useSelector(state => state.productList.newArrivedProductsList)
     return (
         <SwiperFlatList
             index={0}

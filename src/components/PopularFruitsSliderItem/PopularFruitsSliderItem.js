@@ -46,7 +46,9 @@ dispatch(storeCartItems(returnData.newCartItems))
     }
   };
 
-  
+  const addWishlist=async()=>{
+    const data=await  addWishlistProduct(user_Id,productItem.products_id,productItem.products_attributes_prices_id) 
+  }
   return (
     // <View key={item_key} style={styles.sliderCardOuter}>
     <Pressable onPress={()=>navigation.navigate('ProductDetails',productItem)}>
@@ -56,10 +58,7 @@ dispatch(storeCartItems(returnData.newCartItems))
         {/* wishlisted button  */}
         <Pressable
           // onPress={() => navigation.navigate('Wishlist')}
-          onPress={() => {
-            console.log()
-             addWishlistProduct(user_Id,productItem.products_id,productItem.products_attributes_prices_id) 
-          }}
+          onPress={addWishlist}
           // style={styles.wishlistBtn  }
           style={[styles.wishlistBtn, productItem.isWishlistShow=="Yes" && styles.wishlistBtn_active]}
           >

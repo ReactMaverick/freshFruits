@@ -97,19 +97,15 @@ export default function ProductDetails({navigation, route}) {
       product.attributes[0].values1[0].products_attributes_id,
       quantity,
     );
-
+    setLoader(false);
     if (returnData.success) {
-      setLoader(false);
-      // showToast('success', returnData.messgae);
       dispatch(storeCartItems(returnData.newCartItems));
       navigation.navigate('MyCart');
-    } else {
-      setLoader(false);
+    } else {   
       showToast('info', returnData.message);
     }
   };
-  const htmlContent = '<p>This is <b>bold</b> and jhgd jhgjkdghasdjk asgkdfjkgJKGS agsfdkGIGSDd jhgjkdghasdjk asgkdfjkgJKGS agsfdkGIGSDjkdghasdjk asgkdfjkgJKGS agVVVVsfdkGIGSDFIAGU  <i>italic</i> text.</p>'; 
-  return (
+   return (
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>

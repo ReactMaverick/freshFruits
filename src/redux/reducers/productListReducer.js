@@ -3,14 +3,18 @@ import {createSlice} from '@reduxjs/toolkit';
 const productSlice = createSlice({
   name: 'productList',
   initialState: {
-    totalProductsList: [],
+    newArrivedProductsList: [],
+    topSellerProductsList:[]
   },
   reducers: {
-    storeProductsList: (state, action) => {
-      state.totalProductsList = action.payload;
+    storeNewArrivedList: (state, action) => {
+      state.newArrivedProductsList = action.payload;
+    },
+    storeTopSellerList:(state, action) => {
+      state.topSellerProductsList = action.payload;
     },
   },
 });
 
-export const {storeProductsList} = productSlice.actions;
+export const {storeNewArrivedList,storeTopSellerList} = productSlice.actions;
 export default productSlice.reducer;

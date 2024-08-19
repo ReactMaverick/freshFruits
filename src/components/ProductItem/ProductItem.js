@@ -34,13 +34,11 @@ export default function ProductItem({ navigation,productItem }) {
         productItem.products_id,
         productItem.attributes[0].values1[0].products_attributes_id,
       );
-  
+      setLoader(false);
       if (returnData.success) {
-        setLoader(false);
   dispatch(storeCartItems(returnData.newCartItems))
         showToast('success', returnData.messgae);
       } else {
-        setLoader(false);
         showToast('info', returnData.message);
       }
     };

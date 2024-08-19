@@ -14,7 +14,13 @@ export const REGISTER_URL = `${API_URL}processSignup`;
 
 export const LOGIN_URL = `${API_URL}signIn`;
 
-export const ALL_PRODUCTS_URL = `${API_URL}newArrivedProduct`;
+//-------- products list ----------------
+
+ export const NEW_ARRIVED_FRUITS_URL = `${API_URL}newArrivedProduct`;
+
+export const TOP_SELLER_FRUITS_URL = `${API_URL}shopPage`;
+
+//-----cart urls -----------
 
 export const VIEW_CART_URL = (customersId,sessionId) => `${API_URL}viewCart?session_id=${sessionId}&customers_id=${customersId}`;
 

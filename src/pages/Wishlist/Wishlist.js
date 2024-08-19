@@ -5,17 +5,21 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-import { styles } from './Style';
-import { commonStyles } from '../../constants/styles';
-import { platform, showToast } from '../../constants/constants';
-import React, { useEffect, useState } from 'react';
+import {styles} from './Style';
+import {commonStyles} from '../../constants/styles';
+import {platform, showToast} from '../../constants/constants';
+import React, {useEffect, useState} from 'react';
 import Header from '../../components/Header/Header';
 import PopularFruitsSliderItem from '../../components/PopularFruitsSliderItem/PopularFruitsSliderItem';
-import { getData } from '../../values/api/apiprovider';
-import { VIEW_WISHLIST_URL } from '../../values/api/url';
-import { useSelector } from 'react-redux';
-import { selectUser_Id, selectUser_session_Id } from '../../redux/reducers/authReducer';
-import { useIsFocused } from '@react-navigation/native';
+import {getData} from '../../values/api/apiprovider';
+import {VIEW_WISHLIST_URL} from '../../values/api/url';
+import {useSelector} from 'react-redux';
+import {
+  selectUser_Id,
+  selectUser_session_Id,
+} from '../../redux/reducers/authReducer';
+import {useIsFocused} from '@react-navigation/native';
+import {Text} from 'react-native-elements';
 
 // const data = [
 //   { id: '1' },
@@ -26,64 +30,79 @@ import { useIsFocused } from '@react-navigation/native';
 //   { id: '6' },
 //   { id: '7' },
 // ];
-export default function Wishlist({ navigation }) {
+export default function Wishlist({navigation}) {
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
-  console.log("the user value is ",user_Id,userSession_Id)
-  const [wishlistItems,setWishlistItems]=useState([])
-  const isFocus=useIsFocused()
-useEffect(()=>{
-  if(isFocus){
-    const getWishlist=async()=>{
-      console.log("wishlist fetching in progress")
-      try {
-        const response = await getData(VIEW_WISHLIST_URL(user_Id));
-        const data = await response;
-    console.log("the length of the wishlist response is",data.result.length)
-       console.log("the message provided by view wishlist api is --- ---- ",data)
-        if(data.status){
-    setWishlistItems(data.result)
-        }
-        else{
-          showToast('error',"Login and Try after Sometime")
-        }   
-      }
-       catch (error) {
-        console.error('Error occured in view wishlist cart :', error.message);
-          showToast('error',"Login and Try after Sometime")
-      }
-    }
-    getWishlist()
-  }
-},[isFocus])
+  // const [wishlistItems,setWishlistItems]=useState([])
+  const wishListItems = useSelector(state => state.wishlist);
 
+  const isFocus = useIsFocused();
+  useEffect(() => {
+    console.log("eneterd in use effect")
+    if ( !wishListItems.success) {
+      showToast('info', 'Login and Try After Sometime');
+    }
+  }, [wishListItems.success]);
+  // const getWishlist=async()=>{
+  //   console.log("wishlist fetching in progress")
+  //   try {
+  //     const response = await getData(VIEW_WISHLIST_URL(user_Id));
+  //     const data = await response;
+  // console.log("the length of the wishlist response is",data.result.length)
+  //    console.log("the message provided by view wishlist api is --- ---- ",data)
+  //     if(data.status){
+  // setWishlistItems(data.result)
+  //     }
+  //     else{
+  //       showToast('error',"Login and Try after Sometime")
+  //     }
+  //   }
+  //    catch (error) {
+  //     console.error('Error occured in view wishlist cart :', error.message);
+  //       showToast('error',"Login and Try after Sometime")
+  //   }
+  // }
+  // getWishlist()
 
   return (
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
-        < Header
-          pageName={"Wishlist"}
+        <Header
+          pageName={'Wishlist'}
           navigation={navigation}
           InnerPagesHeader={'InnerHeader'}
           BackBtn={'BackBtn'}
-          CenterBox={"TitleBox"}
+          CenterBox={'TitleBox'}
         />
 
-        
         {/* <ScrollView style={styles.ScrollView}> */}
-          <View style={styles.MainBox}>
+        <View style={styles.MainBox}>
+          {wishListItems.wishlist_items.length > 0 ? (
             <FlatList
-              data={wishlistItems}
-              renderItem={({ item }) => <PopularFruitsSliderItem key={item.products_id}   productItem={item}   navigation={navigation}  />}
+              data={wishListItems.wishlist_items}
+              renderItem={({item}) => (
+                <PopularFruitsSliderItem
+                  key={item.products_id}
+                  productItem={item}
+                  navigation={navigation}
+                />
+              )}
               keyExtractor={item => item.products_id}
               numColumns={2}
               columnWrapperStyle={styles.column}
             />
-          </View>
+         ) : ( 
+             wishListItems.success ? (
+              <Text>Wishlist is empty</Text>
+            ) : (
+              <Text>Login and Try after some time</Text>
+            )
+          )} 
+        </View>
         {/* </ScrollView> */}
-      </SafeAreaView >
-    </KeyboardAvoidingView >
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

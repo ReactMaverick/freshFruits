@@ -6,7 +6,7 @@ import OtherFruitsSliderItem from '../OtherFruitsSliderItem/OtherFruitsSliderIte
 import { useSelector } from 'react-redux';
 
 export default function OtherFruitsSlider({ navigation,productId=0 }) {
-    const productList = useSelector(state => state.productList.totalProductsList);
+    const productList = useSelector(state => state.productList.newArrivedProductsList);
     return (
         <SwiperFlatList
             index={0}

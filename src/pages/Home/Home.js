@@ -19,7 +19,11 @@ import PopularFruitsSlider from '../../components/PopularFruitsSlider/PopularFru
 import ProductItem from '../../components/ProductItem/ProductItem';
 import Loader from '../../components/Loader/Loader';
 import {getData, postData} from '../../values/api/apiprovider';
-import {ALL_PRODUCTS_URL} from '../../values/api/url';
+import {
+  NEW_ARRIVED_FRUITS_URL,
+  TOP_SELLER_FRUITS_URL,
+  VIEW_WISHLIST_URL,
+} from '../../values/api/url';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   selectUser_Id,
@@ -28,39 +32,84 @@ import {
 } from '../../redux/reducers/authReducer';
 import {viewCartProducts} from '../../values/CartUrls';
 import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
-import {  storeProductsList } from '../../redux/reducers/productListReducer';
+import {
+  storeNewArrivedList,
+  storeTopSellerList,
+} from '../../redux/reducers/productListReducer';
+import {storeWishlistItems} from '../../redux/reducers/WishListReducer';
+import {viewWishlist} from '../../Utils/WishList_Func';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Home({navigation}) {
   const [loading, setLoading] = useState(true);
-  const [allProductsData, setAllProductsData] = useState([]);
+
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
   const dispatch = useDispatch();
-  const listOfProducts=useSelector(state => state.productList.totalProductsList)
- // console.log("the list of total products are",listOfProducts)
-  const getProductsList = async () => {
+  const isFocus = useIsFocused();
+  const listOfProducts = useSelector(
+    state => state.productList.newArrivedProductsList,
+  );
+  const listOfTopSellerProducts = useSelector(
+    state => state.productList.topSellerProductsList,
+  );
+
+  // console.log("the list of total products are",listOfProducts)
+  const getNewArrivedProducts = async () => {
     try {
-      const response = await getData(ALL_PRODUCTS_URL);
+      const response = await getData(NEW_ARRIVED_FRUITS_URL);
       const data = await response;
       if (data.status) {
-        console.log(data);
-        dispatch(storeProductsList(data.product_list.product_data))
-        //setAllProductsData(data.product_list.product_data);
+        // console.log(data);
+        dispatch(storeNewArrivedList(data.product_list.product_data));
       }
     } catch (error) {
-      console.error('Error fetching meeting data:', error);
+      console.error('Error fetching new arriverd products data');
+    }
+  };
+  const getTopSellerProducts = async () => {
+    try {
+      const response = await postData(TOP_SELLER_FRUITS_URL, {});
+      const data = await response;
+      if (data.status) {
+        // console.log(
+        //   'the data value of top seller products is ',
+        //   data.products.product_data,
+        // );
+        dispatch(storeTopSellerList(data.products.product_data));
+      }
+    } catch (error) {
+      console.error('Error fetching top seller products', error);
+    }
+  };
+  
+
+  const getWishlist = async () => {
+    const response = await viewWishlist(user_Id);
+    console.log('the view wishlist returns ------------------------------------------------------', response);
+    if (response.success) {
+      dispatch(storeWishlistItems(response));
+    }
+  };
+
+  useEffect(() => {
+    getWishlist()
+  }, [isFocus]);
+  const getCartItems = async () => {
+    const data = await viewCartProducts(user_Id, userSession_Id);
+    if (data.success) {
+      dispatch(storeCartItems(data.cartItems));
     }
   };
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-    getProductsList();
-    const getCartItems = async () => {
-      const data = await viewCartProducts(user_Id, userSession_Id); //for getting the cart products
-      dispatch(storeCartItems(data));
-    };
+
+    getNewArrivedProducts();
+    getTopSellerProducts();
     getCartItems();
+    getWishlist();
     return () => clearTimeout(timer);
   }, []);
 
@@ -94,22 +143,20 @@ export default function Home({navigation}) {
               <Text style={styles.HeadingText}>Popular Fruits</Text>
               <Pressable
                 style={styles.ViewAllBtn}
-                // onPress={() => navigation.navigate('Wishlist')}
-                // onPress={() => navigation.navigate('MyOrder')}
                 onPress={() => navigation.navigate('popularFruits')}
-                // onPress={() => navigation.navigate('ProductDetails')}
-                // onPress={() => navigation.navigate('Checkout')}
+
                 // onPress={() => navigation.navigate('PaymentDetails')}
                 // onPress={() => navigation.navigate('PaymentSuccessful')}
+                // onPress={() => navigation.navigate('MyOrder')}
               >
                 <Text style={styles.ViewAllBtnText}>See All</Text>
-                  </Pressable>
+              </Pressable>
             </View>
             {/* HeadingBox */}
             {/* PopularFruitsSlider  */}
             <PopularFruitsSlider
               navigation={navigation}
-              products={allProductsData}
+              products={listOfProducts}
             />
             {/* PopularFruitsSlider  */}
             {/* HeadingBox */}
@@ -124,7 +171,7 @@ export default function Home({navigation}) {
             {/* HeadingBox */}
             {/* Today Offer */}
 
-            {listOfProducts.map(item => (
+            {listOfTopSellerProducts.map(item => (
               <ProductItem
                 // item_key={item.products_id}
                 key={item.products_id}

@@ -69,15 +69,13 @@ export default function MyCartItem({navigation, item}) {
     const response = await deleteCartproducts(item.customers_basket_id);
     setLoader(false);
     if (response.success) {
-      // dispatch(storeCartItems(response.newCartItems))
       const newCartUpdatedItems = cartItems.filter(
         elements => elements.products_id !== item.products_id,
       );
       dispatch(storeCartItems(newCartUpdatedItems));
-
       showToast('success', response.message);
     } else {
-      showToast('info', response.message || 'Login and try Again!');
+      showToast('info', response.message);
     }
   };
 
