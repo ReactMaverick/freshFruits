@@ -44,7 +44,7 @@ export const addToCart = async (
     // console.error('Error adding item to cart :', error.message);
     return {
       success: false,
-      message: 'Server is in Maintainence...',
+      message: 'Login and try again',
     };
   }
 };
@@ -89,13 +89,27 @@ export const updateProductQuantity = async (
       cart_quantity: quantity,
       AttributeIds: attributeIds,
     });
-    // const data = await response;
-    console.log('the data of updae cart quantity is ', response);
-    //   if (data.status) {
-
-    // }
+    const data = await response;
+      if (data?.status) {
+        console.log("ok successs")
+return {
+  success:true,
+  message:data.message ||  "Quantity updated successfully"
+}
+    }
+    else{
+      console.log("ok error")
+      return {
+        success:false,
+        message:"Login and try again"
+      }
+    }
   } catch (error) {
-    console.error('Error fetching  data:', error);
+    console.log("ok error")
+    return {
+      success:false,
+      message:"Login and try again"
+    }
   }
 };
 

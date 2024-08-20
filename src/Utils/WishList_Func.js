@@ -10,17 +10,29 @@ export const addWishlistProduct=async(userId,productId,attributeId)=>{
         products_attributes_prices_id: attributeId
       });
       const data = await response;
-      console.log("the message provided by add wishlist api is --- ---- ",data)
-//       if(data.status){
-//   setWishlistItems(data.result)
-//       }
-//       else{
-//         showToast('error',"Login and Try after Sometime")
-//       }   
+     
+      if(data.status){
+ return {
+  success:true,
+  wishlist:data.wishlist_data,
+  message:data.result.message,
+ }
+      }
+      else{
+       return {
+        success:false,
+        wishlist:[],
+        message:"Login and Try Again"
+       }
+      }   
     }
      catch (error) {
-      console.error('Error occured in add wishlist cart :', error.message);
-        showToast('error',"Login and Try after Sometime")
+   
+      return {
+        success:false,
+        wishlist:[],
+        message:"Login and Try Again"
+       }
     }
   }
 

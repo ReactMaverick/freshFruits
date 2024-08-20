@@ -86,7 +86,6 @@ export default function Home({navigation}) {
 
   const getWishlist = async () => {
     const response = await viewWishlist(user_Id);
-    console.log('the view wishlist returns ------------------------------------------------------', response);
     if (response.success) {
       dispatch(storeWishlistItems(response));
     }

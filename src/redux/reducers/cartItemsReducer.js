@@ -8,12 +8,13 @@ const cartSlice = createSlice({
   },
   reducers: {
     storeCartItems: (state, action) => {
-      console.log("the action .payload is ", action.payload)
+    
       state.cartItems = action.payload;
     //   state.priceOfItems=action.payload.reduce((sum, item) => {
     //     return sum + Number(item.final_price); 
     // }, 0);
     },
+    
   },
 });
 

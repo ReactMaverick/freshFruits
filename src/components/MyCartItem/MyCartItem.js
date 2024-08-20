@@ -18,7 +18,7 @@ import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
 import {showToast} from '../../constants/constants';
 
 export default function MyCartItem({navigation, item}) {
-  console.log('the quantiy is ', item.customers_basket_quantity);
+console.log("------------------")
   const [quantity, setQuantity] = useState(''); // Initialize quantity state
   const cartItems = useSelector(state => state.cart.cartItems);
   const [loader, setLoader] = useState(false);
@@ -30,23 +30,35 @@ export default function MyCartItem({navigation, item}) {
     setQuantity(item.customers_basket_quantity);
   }, [item]);
 
-  const incrementQuantity = () => {
+  const incrementQuantity =async () => {
+    console.log("ok clicked to enter")
     let newQuantity = quantity + 1;
     if (newQuantity > 1) {
       setIsQuantityZero(false);
     }
     setQuantity(newQuantity);
-
-    updateProductQuantity(
+console.log("ok entering to update")
+   const data=await updateProductQuantity(
       item.customers_basket_id,
       item.products_id,
       newQuantity,
       item.attributes[0].products_attributes_id,
     );
-
+console.log("updateion done with resuklt",data)
+if(data.success){
+  console.log("entered in successs block")
+  const newUpdatedCartItems = cartItems.map(cartItem =>
+    cartItem.products_id === item.products_id
+      ? { ...cartItem, customers_basket_quantity: newQuantity }
+      : cartItem
+  );
+  console.log("calculations one")
+  console.log("the new itemis -- ------------           --------------          ------------  ",newUpdatedCartItems)
+  dispatch(storeCartItems(newUpdatedCartItems));
+}
   };
 
-  const decrementQuantity = () => {
+  const decrementQuantity =async () => {
     if (quantity === 1) {
       setIsQuantityZero(true);
       return;
@@ -56,12 +68,21 @@ export default function MyCartItem({navigation, item}) {
     if (newQuantity === 1) {
       setIsQuantityZero(true);
     }
-    updateProductQuantity(
+    const data= await updateProductQuantity(
       item.customers_basket_id,
       item.products_id,
       newQuantity,
       item.attributes[0].products_attributes_id,
     );
+    if(data.success){
+      const newUpdatedCartItems = cartItems.map(cartItem =>
+        cartItem.products_id === item.products_id
+          ? { ...cartItem, customers_basket_quantity: newQuantity }
+          : cartItem
+      );
+  console.log("the new itemis ",newUpdatedCartItems)
+      dispatch(storeCartItems(newUpdatedCartItems));
+    }
   };
 
   const deleteCartItem = async () => {

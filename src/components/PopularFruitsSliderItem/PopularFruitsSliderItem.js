@@ -13,11 +13,11 @@ import Loader from '../Loader/Loader';
 import {showToast} from '../../constants/constants';
 import { addWishlistProduct } from '../../Utils/WishList_Func';
 import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
+import { storeWishlistItems } from '../../redux/reducers/WishListReducer';
 
 export default function PopularFruitsSliderItem({
   navigation,
   productItem,
-  
 }) {
   const user_Id = useSelector(selectUser_Id);
   const userSession_Id = useSelector(selectUser_session_Id);
@@ -48,6 +48,13 @@ dispatch(storeCartItems(returnData.newCartItems))
 
   const addWishlist=async()=>{
     const data=await  addWishlistProduct(user_Id,productItem.products_id,productItem.products_attributes_prices_id) 
+    console.log("data of th wishlsit is",data)
+    if(data.success){
+      dispatch(storeWishlistItems(data))
+      showToast('success',data.message)
+      return
+    }
+    showToast("error",data.message)
   }
   return (
     // <View key={item_key} style={styles.sliderCardOuter}>
