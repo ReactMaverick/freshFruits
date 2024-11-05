@@ -274,13 +274,13 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SplashScreen" 
-        component={SplashScreen} 
+        name="SplashScreen"
+        component={SplashScreen}
         options={{
           headerShown: false,
         }}
       />
-    <Stack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{
@@ -414,7 +414,6 @@ const MyDrawer = () => {
 export default function Router() {
   // const UserLoggedIn=useSelector(selectUser_isLoggedIn)
 
-  // Change this to true to see the Home screen (@Suraj)
   // const [isUserLoggedIn, setUserLoggedIn] = useState(UserLoggedIn);
 
   // console.log('isLoggedIn ==> ', isUserLoggedIn);

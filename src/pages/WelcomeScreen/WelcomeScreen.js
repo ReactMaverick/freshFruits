@@ -3,22 +3,21 @@
 import {
   ImageBackground,
   KeyboardAvoidingView,
-  Pressable,
+  TouchableOpacity,
   SafeAreaView,
   Text,
   View,
   Image,
 } from 'react-native';
-import { styles } from './Style';
-import { commonStyles } from '../../constants/styles';
-import { platform } from '../../constants/constants';
+import {styles} from './Style';
+import {commonStyles} from '../../constants/styles';
+import {platform} from '../../constants/constants';
 import React from 'react';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import { SLIDER1, SLIDER2, SLIDER3, WELCOMEBG } from '../../constants/images';
-import { color } from 'react-native-elements/dist/helpers';
-import { colors } from '../../constants/colors';
-import { deviceHeight } from '../../constants/fontConstants';
-
+import {SwiperFlatList} from 'react-native-swiper-flatlist';
+import {SLIDER1, SLIDER2, SLIDER3, WELCOMEBG} from '../../constants/images';
+import {color} from 'react-native-elements/dist/helpers';
+import {colors} from '../../constants/colors';
+import {deviceHeight} from '../../constants/fontConstants';
 
 const slides = [
   {
@@ -38,15 +37,13 @@ const slides = [
     title: 'Fresh fruit Delivery Every time',
     text: 'Pluck Perfection, Every Time',
     image: SLIDER3,
-  }
+  },
 ];
 
-
-export default function WelcomeScreen({ navigation }) {
-
-  const handleGetStartedPress = () => {
-    navigation.navigate('Login');
-  };
+export default function WelcomeScreen({navigation}) {
+  // const handleGetStartedPress = () => {
+  //   navigation.navigate('Login');
+  // };
 
   return (
     <KeyboardAvoidingView
@@ -54,7 +51,7 @@ export default function WelcomeScreen({ navigation }) {
       style={commonStyles.keyboardAvoidingView}>
       <SafeAreaView>
         <ImageBackground source={WELCOMEBG} style={styles.MainBox}>
-          <SwiperFlatList
+          {/* <SwiperFlatList
             index={0}
             showPagination
             paginationStyle={styles.paginationStyle}
@@ -63,27 +60,53 @@ export default function WelcomeScreen({ navigation }) {
             paginationStyleItem={styles.paginationStyleItem}
             paginationStyleItemActive={styles.paginationStyleItemActive}
             data={slides}
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <View style={styles.SliderItem}>
                 <Image source={item.image} style={styles.SliderImage} />
                 <View style={styles.SliderContent}>
                   <Text style={styles.SliderTitle}>{item.title}</Text>
                   <Text style={styles.SliderText}>{item.text}</Text>
                   {index === slides.length - 1 ? (
-                    <Pressable style={styles.SliderButton} onPress={handleGetStartedPress}>
+                    <TouchableOpacity
+                      style={styles.SliderButton}
+                      onPress={handleGetStartedPress}>
                       <Text style={styles.SliderButtonText}>Get Started</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                   ) : (
-                    <Pressable style={styles.SliderButton}>
-                      <Text style={styles.SliderButtonText}>Get Started</Text>
-                    </Pressable>
+                    <TouchableOpacity style={styles.SliderButton}>
+                      <Text style={styles.SliderButtonText}>Next</Text>
+                    </TouchableOpacity>
                   )}
                 </View>
               </View>
             )}
-          />
+          /> */}
+
+          <Image source={SLIDER1} style={styles.SliderImage} />
+
+          <Text style={styles.SliderTitle}>
+            Nourish Your Body, Delight Your Senses
+          </Text>
+          <Text style={styles.SliderText}>
+            Zest Up Your Life, One Bite at a Time
+          </Text>
+          <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+            <TouchableOpacity
+              style={styles.SliderButton}
+              //</View> onPress={() => navigation.navigate('Login')}
+            >
+              <Text style={[commonStyles.DefaultFont, styles.SliderButtonText]}>
+                Previous
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.SliderButton}>
+              <Text style={[commonStyles.DefaultFont, styles.SliderButtonText]}>
+                Next
+              </Text>
+            </TouchableOpacity>
+          </View>
         </ImageBackground>
-      </SafeAreaView >
-    </KeyboardAvoidingView >
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

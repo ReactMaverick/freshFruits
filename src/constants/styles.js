@@ -1,7 +1,7 @@
-import { colors } from './colors';
-import { deviceHeight, deviceWidth } from './constants';
-import { fontFamily, H3, H5, p } from './fontConstants';
-import { StyleSheet } from 'react-native';
+import {colors} from './colors';
+import {deviceHeight, deviceWidth} from './constants';
+import {fontFamily, H3, H5, p} from './fontConstants';
+import {StyleSheet} from 'react-native';
 
 export const commonStyles = StyleSheet.create({
   container: {
@@ -30,7 +30,6 @@ export const commonStyles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 20,
     elevation: 5,
-
   },
   cardBox: {
     backgroundColor: colors.white,
@@ -73,11 +72,11 @@ export const commonStyles = StyleSheet.create({
     height: deviceHeight,
   },
   keyboardAvoidingView: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     flex: 1,
   },
   keyboardAvoidingView1: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   CustomBtn: {
     backgroundColor: colors.primary,
@@ -114,6 +113,8 @@ export const commonStyles = StyleSheet.create({
     color: colors.darkColor,
     lineHeight: deviceHeight / 35,
   },
-
-
+  DefaultFont: {
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+  },
 });
