@@ -415,14 +415,10 @@ const MyDrawer = () => {
 export default function Router() {
   const UserLoggedIn = useSelector(selectUser_isLoggedIn);
 
-  const [isUserLoggedIn, setUserLoggedIn] = useState(UserLoggedIn);
-
-  console.log('isLoggedIn ==> ', isUserLoggedIn);
-
   return (
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      {isUserLoggedIn ? <MyDrawer /> : <LoginStack />}
+      {UserLoggedIn ? <MyDrawer /> : <LoginStack />}
     </>
   );
 }
