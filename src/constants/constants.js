@@ -17,6 +17,7 @@
 //     visibilityTime: 2000,
 //   });
 // };\import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 // Screen dimensions

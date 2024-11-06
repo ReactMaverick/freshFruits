@@ -97,12 +97,12 @@ export default function WelcomeScreen({navigation}) {
               style={styles.SliderButton}
               //</View> onPress={() => navigation.navigate('Login')}
             >
-              <Text style={[commonStyles.DefaultFont, styles.SliderButtonText]}>
+              <Text style={commonStyles.DefaultFont}>
                 Previous
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.SliderButton}>
-              <Text style={[commonStyles.DefaultFont, styles.SliderButtonText]}>
+              <Text style={commonStyles.DefaultFont}>
                 Next
               </Text>
             </TouchableOpacity>

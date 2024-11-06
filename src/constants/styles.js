@@ -1,6 +1,6 @@
 import {colors} from './colors';
 import {deviceHeight, deviceWidth} from './constants';
-import {fontFamily, H3, H5, p} from './fontConstants';
+import {fontFamily, H2, H3, H5, p} from './fontConstants';
 import {StyleSheet} from 'react-native';
 
 export const commonStyles = StyleSheet.create({
@@ -116,5 +116,8 @@ export const commonStyles = StyleSheet.create({
   DefaultFont: {
     includeFontPadding: false,
     textAlignVertical: 'center',
+    fontSize:p,
+    color: colors.White,
+  
   },
 });
