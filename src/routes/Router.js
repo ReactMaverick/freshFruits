@@ -393,11 +393,12 @@ const MyDrawer = () => {
         drawerPosition: 'right',
         headerShown: false,
       }}>
-      {isUserLoggedIn ? (
+      <Drawer.Screen name="HomeStack" component={HomeStack} />
+      {/* {isUserLoggedIn ? (
         <Drawer.Screen name="HomeStack" component={HomeStack} />
       ) : (
         <Drawer.Screen name="LoginStack" component={LoginStack} />
-      )}
+      )} */}
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Notification" component={Notification} />
       <Drawer.Screen name="Wishlist" component={Wishlist} />
@@ -412,17 +413,16 @@ const MyDrawer = () => {
 };
 
 export default function Router() {
-  // const UserLoggedIn=useSelector(selectUser_isLoggedIn)
+  const UserLoggedIn = useSelector(selectUser_isLoggedIn);
 
-  // const [isUserLoggedIn, setUserLoggedIn] = useState(UserLoggedIn);
+  const [isUserLoggedIn, setUserLoggedIn] = useState(UserLoggedIn);
 
-  // console.log('isLoggedIn ==> ', isUserLoggedIn);
+  console.log('isLoggedIn ==> ', isUserLoggedIn);
 
   return (
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
-      {/* {isUserLoggedIn ? <HomeStack /> : <LoginStack />} */}
-      <MyDrawer />
+      {isUserLoggedIn ? <MyDrawer /> : <LoginStack />}
     </>
   );
 }
