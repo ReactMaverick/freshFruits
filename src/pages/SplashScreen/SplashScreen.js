@@ -19,7 +19,7 @@ export default function SplashScreen({navigation}) {
   useEffect(() => {
     Animated.timing(translateY, {
       toValue: 0, // End position (center)
-      duration: 1000, // Duration of the animation
+      duration: 2000, // Duration of the animation
       useNativeDriver: true,
     }).start(() => {
       // Animation complete, navigate to login screen
