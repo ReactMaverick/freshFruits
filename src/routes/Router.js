@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState, useCallback} from 'react';
+import {useState, useCallback, useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -93,7 +93,6 @@ function MyTabBar({state, descriptors, navigation}) {
             onPress={onPress}
             onLongPress={onLongPress}
             key={index}>
-            <></>
             {label === 'Home' && (
               <Animated.View
                 style={[
@@ -243,14 +242,14 @@ function HomeTabs() {
 
 const LoginStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <Stack.Navigator initialRouteName="WelcomeScreen">
+      {/* <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
@@ -294,20 +293,20 @@ const LoginStack = () => {
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
         options={{
           headerShown: false,
         }}
-      />
-      <Stack.Screen
+      /> */}
+      {/* <Stack.Screen
         name="Login"
         component={Login}
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
       <Stack.Screen
         name="Home"
         component={HomeTabs}
@@ -435,6 +434,17 @@ const MyDrawer = () => {
 
 export default function Router() {
   const UserLoggedIn = useSelector(selectUser_isLoggedIn);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  if (isLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <>

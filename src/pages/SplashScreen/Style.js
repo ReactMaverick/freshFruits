@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import {
   H1,
   p,
@@ -11,8 +11,8 @@ import {
   H2,
   smallS,
 } from '../../constants/fontConstants';
-import { colors } from '../../constants/colors';
-import { deviceWidth } from '../../constants/constants';
+import {colors} from '../../constants/colors';
+import {deviceWidth} from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -25,8 +25,7 @@ export const styles = StyleSheet.create({
   Logo: {
     width: deviceWidth * 0.8,
     height: deviceHeight / 5,
-    alignSelf: 'center',
-    objectFit: 'contain',
 
+    objectFit: 'contain',
   },
 });
