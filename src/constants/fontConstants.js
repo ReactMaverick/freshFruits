@@ -16,6 +16,13 @@ export const p = RFPercentage(2.4);
 export const small = RFPercentage(2.0);
 export const smallS = RFPercentage(1.8);
 
+// for padding
+export const padding5 = 5;
+export const padding10 = 10;
+
+// for border radius
+export const borderRadiusDefault = 10;
+
 export const fontFamily = {
   Bold: 'Nunito-Bold',
   Light: 'Nunito-Light',

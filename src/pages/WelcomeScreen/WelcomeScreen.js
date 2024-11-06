@@ -83,14 +83,16 @@ export default function WelcomeScreen({navigation}) {
           /> */}
 
           <Image source={SLIDER1} style={styles.SliderImage} />
-
-          <Text style={styles.SliderTitle}>
-            Nourish Your Body, Delight Your Senses
-          </Text>
-          <Text style={styles.SliderText}>
-            Zest Up Your Life, One Bite at a Time
-          </Text>
-          <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+          <View style={styles.FooterSection}>
+            <Text style={styles.SliderTitle}>
+              Nourish Your Body, Delight Your Senses
+            </Text>
+            <Text style={styles.SliderText}>
+              Zest Up Your Life, One Bite at a Time
+            </Text>
+           
+          </View>
+          <View style={styles.BtnSection}>
             <TouchableOpacity
               style={styles.SliderButton}
               //</View> onPress={() => navigation.navigate('Login')}

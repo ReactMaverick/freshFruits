@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {p, fontFamily, H3, H1BIG, H2} from '../../constants/fontConstants';
+import {p, fontFamily, H3, H1BIG, H2,borderRadiusDefault} from '../../constants/fontConstants';
 import {colors} from '../../constants/colors';
 import {
-  borderRadiusDefault,
   deviceHeight,
   deviceWidth,
+ 
   padding10,
+ 
   padding5,
 } from '../../constants/constants';
 
@@ -26,6 +27,13 @@ export const styles = StyleSheet.create({
     width: deviceWidth * 1,
     height: deviceHeight * 0.6,
     resizeMode: 'contain',
+    flex:5,
+    marginTop:deviceHeight/12
+  },
+  FooterSection:{
+    flex:2,
+    justifyContent:'center'
+   
   },
   SliderContent: {
     paddingHorizontal: deviceWidth / 20,
@@ -48,15 +56,20 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   SliderButton: {
+
     backgroundColor: colors.PrimaryColor,
-    paddingVertical: padding5,
-    borderRadius: borderRadiusDefault,
+    paddingVertical: padding10,
+    borderRadius: 5,
     // marginBottom: padding5,
     // marginTop: padding10,
     margin: 10,
     flex: 1,
+    height:50,
+
+    padding:5,
     justifyContent: 'center',
     alignItems: 'center',
+ 
   },
   SliderButtonText: {
     color: colors.White,
@@ -77,4 +90,10 @@ export const styles = StyleSheet.create({
     height: deviceHeight * 0.01,
     borderRadius: deviceHeight * 0.01,
   },
+  BtnSection:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection:'row'
+  }
 });
