@@ -1,4 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
+import {useState, useCallback} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -6,7 +7,6 @@ import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
 // import { PROFILE_AVATAR } from "../constants/images";
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
-import {useState} from 'react';
 import SplashScreen from '../pages/SplashScreen/SplashScreen';
 import {styles} from './Style';
 import WelcomeScreen from '../pages/WelcomeScreen/WelcomeScreen';
@@ -29,12 +29,27 @@ import CustomDrawerContent from '../components/CustomDrawerContent/CustomDrawerC
 import {useSelector} from 'react-redux';
 import {selectUser_isLoggedIn} from '../redux/reducers/authReducer';
 import PopularFruitsSlider from '../components/PopularFruitsSlider/PopularFruitsSlider';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+} from 'react-native-reanimated';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 function MyTabBar({state, descriptors, navigation}) {
+  const scale = useSharedValue(1);
+  const animatedIconStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+  const startAnimations = useCallback(() => {
+    scale.value = 0; // Reset scale
+    scale.value = withTiming(1, {duration: 900});
+  }, [scale]);
   return (
     <View style={styles.BottomBar}>
       {state.routes.map((route, index) => {
@@ -58,6 +73,7 @@ function MyTabBar({state, descriptors, navigation}) {
           if (!isFocused && !event.defaultPrevented) {
             navigation.navigate(route.name, route.params);
           }
+          startAnimations();
         };
 
         const onLongPress = () => {
@@ -79,9 +95,10 @@ function MyTabBar({state, descriptors, navigation}) {
             key={index}>
             <></>
             {label === 'Home' && (
-              <View
+              <Animated.View
                 style={[
                   styles.Iconbox,
+                  isFocused ? animatedIconStyle : {},
                   {
                     backgroundColor: isFocused
                       ? 'rgba(124, 186, 30, 0.2)'
@@ -93,12 +110,13 @@ function MyTabBar({state, descriptors, navigation}) {
                   size={20}
                   color={isFocused ? '#7CBA1E' : '#72776C'}
                 />
-              </View>
+              </Animated.View>
             )}
             {label === 'Wishlist' && (
-              <View
+              <Animated.View
                 style={[
                   styles.Iconbox,
+                  isFocused ? animatedIconStyle : {},
                   {
                     backgroundColor: isFocused
                       ? 'rgba(124, 186, 30, 0.2)'
@@ -110,12 +128,13 @@ function MyTabBar({state, descriptors, navigation}) {
                   size={20}
                   color={isFocused ? '#7CBA1E' : '#72776C'}
                 />
-              </View>
+              </Animated.View>
             )}
             {label === 'My Order' && (
-              <View
+              <Animated.View
                 style={[
                   styles.Iconbox,
+                  isFocused ? animatedIconStyle : {},
                   {
                     backgroundColor: isFocused
                       ? 'rgba(124, 186, 30, 0.2)'
@@ -127,12 +146,13 @@ function MyTabBar({state, descriptors, navigation}) {
                   size={20}
                   color={isFocused ? '#7CBA1E' : '#72776C'}
                 />
-              </View>
+              </Animated.View>
             )}
             {label === 'Cart' && (
-              <View
+              <Animated.View
                 style={[
                   styles.Iconbox,
+                  isFocused ? animatedIconStyle : {},
                   {
                     backgroundColor: isFocused
                       ? 'rgba(124, 186, 30, 0.2)'
@@ -144,15 +164,16 @@ function MyTabBar({state, descriptors, navigation}) {
                   size={20}
                   color={isFocused ? '#7CBA1E' : '#72776C'}
                 />
-              </View>
+              </Animated.View>
             )}
-            <Text
+            <Animated.Text
               style={[
                 styles.LabelText,
+                isFocused ? animatedIconStyle : {},
                 {color: isFocused ? '#7CBA1E' : '#72776C'},
               ]}>
               {label}
-            </Text>
+            </Animated.Text>
           </TouchableOpacity>
         );
       })}
