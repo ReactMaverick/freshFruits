@@ -116,8 +116,7 @@ export const commonStyles = StyleSheet.create({
   DefaultFont: {
     includeFontPadding: false,
     textAlignVertical: 'center',
-    fontSize:p,
+    fontSize: p,
     color: colors.White,
-  
   },
 });

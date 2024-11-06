@@ -1,12 +1,17 @@
 import {StyleSheet} from 'react-native';
-import {p, fontFamily, H3, H1BIG, H2,borderRadiusDefault} from '../../constants/fontConstants';
+import {
+  p,
+  fontFamily,
+  H3,
+  H1BIG,
+  H2,
+  borderRadiusDefault,
+} from '../../constants/fontConstants';
 import {colors} from '../../constants/colors';
 import {
   deviceHeight,
   deviceWidth,
- 
   padding10,
- 
   padding5,
 } from '../../constants/constants';
 
@@ -16,24 +21,23 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  SliderItem: {
-    justifyContent: 'flex-end',
-    alignItems: 'stretch',
-    width: deviceWidth * 1,
-    paddingBottom: deviceHeight / 30,
-  },
+  // SliderItem: {
+  //   justifyContent: 'flex-end',
+  //   alignItems: 'stretch',
+  //   width: deviceWidth * 1,
+  //   paddingBottom: deviceHeight / 30,
+  // },
 
   SliderImage: {
-    width: deviceWidth * 1,
-    height: deviceHeight * 0.6,
+    width: '100%',
+    height: '100%',
     resizeMode: 'contain',
-    flex:5,
-    marginTop:deviceHeight/12
+
+    //marginTop: deviceHeight / 12,
   },
-  FooterSection:{
-    flex:2,
-    justifyContent:'center'
-   
+  FooterSection: {
+    flex: 1,
+    justifyContent: 'center',
   },
   SliderContent: {
     paddingHorizontal: deviceWidth / 20,
@@ -56,7 +60,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   SliderButton: {
-
     backgroundColor: colors.PrimaryColor,
     paddingVertical: padding10,
     borderRadius: 5,
@@ -64,36 +67,34 @@ export const styles = StyleSheet.create({
     // marginTop: padding10,
     margin: 10,
     flex: 1,
-    height:50,
 
-    padding:5,
     justifyContent: 'center',
     alignItems: 'center',
- 
   },
   SliderButtonText: {
     color: colors.White,
     fontSize: H3,
     fontFamily: fontFamily.Regular,
   },
-  paginationStyle: {
-    bottom: deviceHeight * 0.32,
+  // paginationStyle: {
+  //   bottom: deviceHeight * 0.32,
+  // },
+  // paginationStyleItem: {
+  //   width: deviceHeight * 0.03,
+  //   height: deviceHeight * 0.01,
+  //   borderRadius: deviceHeight * 0.01,
+  //   marginHorizontal: deviceWidth * 0.01,
+  // },
+  // paginationStyleItemActive: {
+  //   width: deviceHeight * 0.05,
+  //   height: deviceHeight * 0.01,
+  //   borderRadius: deviceHeight * 0.01,
+  // },
+  BtnSection: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  paginationStyleItem: {
-    width: deviceHeight * 0.03,
-    height: deviceHeight * 0.01,
-    borderRadius: deviceHeight * 0.01,
-    marginHorizontal: deviceWidth * 0.01,
-  },
-  paginationStyleItemActive: {
-    width: deviceHeight * 0.05,
-    height: deviceHeight * 0.01,
-    borderRadius: deviceHeight * 0.01,
-  },
-  BtnSection:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-    flexDirection:'row'
-  }
 });

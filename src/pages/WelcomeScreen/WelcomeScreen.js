@@ -49,40 +49,17 @@ export default function WelcomeScreen({navigation}) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
-        <ImageBackground source={WELCOMEBG} style={styles.MainBox}>
-          {/* <SwiperFlatList
-            index={0}
-            showPagination
-            paginationStyle={styles.paginationStyle}
-            paginationActiveColor={colors.PrimaryColor}
-            paginationDefaultColor={'#BFB6B6'}
-            paginationStyleItem={styles.paginationStyleItem}
-            paginationStyleItemActive={styles.paginationStyleItemActive}
-            data={slides}
-            renderItem={({item, index}) => (
-              <View style={styles.SliderItem}>
-                <Image source={item.image} style={styles.SliderImage} />
-                <View style={styles.SliderContent}>
-                  <Text style={styles.SliderTitle}>{item.title}</Text>
-                  <Text style={styles.SliderText}>{item.text}</Text>
-                  {index === slides.length - 1 ? (
-                    <TouchableOpacity
-                      style={styles.SliderButton}
-                      onPress={handleGetStartedPress}>
-                      <Text style={styles.SliderButtonText}>Get Started</Text>
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity style={styles.SliderButton}>
-                      <Text style={styles.SliderButtonText}>Next</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
-              </View>
-            )}
-          /> */}
-
+      <SafeAreaView style={{flex: 1}}>
+        <View
+          style={{
+            flex: 5,
+            backgroundColor: 'red',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <Image source={SLIDER1} style={styles.SliderImage} />
+        </View>
+        <View style={{flex: 2, backgroundColor: 'Yellow'}}>
           <View style={styles.FooterSection}>
             <Text style={styles.SliderTitle}>
               Nourish Your Body, Delight Your Senses
@@ -90,24 +67,27 @@ export default function WelcomeScreen({navigation}) {
             <Text style={styles.SliderText}>
               Zest Up Your Life, One Bite at a Time
             </Text>
-           
           </View>
-          <View style={styles.BtnSection}>
-            <TouchableOpacity
-              style={styles.SliderButton}
-              //</View> onPress={() => navigation.navigate('Login')}
-            >
-              <Text style={commonStyles.DefaultFont}>
-                Previous
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.SliderButton}>
-              <Text style={commonStyles.DefaultFont}>
-                Next
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'green',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            style={styles.SliderButton}
+            onPress={() => navigation.navigate('Login')}
+            //</View> onPress={() => navigation.navigate('Login')}
+          >
+            <Text style={commonStyles.DefaultFont}>Previous</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.SliderButton}>
+            <Text style={commonStyles.DefaultFont}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
