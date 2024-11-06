@@ -49,17 +49,17 @@ export default function WelcomeScreen({navigation}) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1,padding:10}}>
         <View
           style={{
             flex: 5,
-            backgroundColor: 'red',
-            justifyContent: 'center',
-            alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
           }}>
           <Image source={SLIDER1} style={styles.SliderImage} />
         </View>
-        <View style={{flex: 2, backgroundColor: 'Yellow'}}>
+        <View style={{flex:1.5}}>
           <View style={styles.FooterSection}>
             <Text style={styles.SliderTitle}>
               Nourish Your Body, Delight Your Senses
@@ -72,7 +72,7 @@ export default function WelcomeScreen({navigation}) {
         <View
           style={{
             flex: 1,
-            backgroundColor: 'green',
+            // backgroundColor: 'green',
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
