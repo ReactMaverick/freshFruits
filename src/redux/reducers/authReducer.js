@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {LOGIN_URL, REGISTER_URL} from '../../values/api/url';
+import {LOGIN_URL, REGISTER_URL,FORGOT_PASSWORD_URL} from '../../values/api/url';
 import {postData} from '../../values/api/apiprovider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
@@ -27,7 +27,28 @@ export const register = createAsyncThunk(
     }
   },
 );
+export const forgot = createAsyncThunk(
+  'auth/forgot',
+  async (formData, {rejectWithValue}) => {
+    try {
+      const response = await postData(FORGOT_PASSWORD_URL, formData);
+    
+      if (!response.status) {
+        console.log('response.message is', response.message);
+        // showToast('error', response.message);
+        return rejectWithValue(response.message);
+      } else {
+        // showToast('success ', response.message);
 
+        console.log('response have the vaklue-', response);
+
+        return response.data;
+      }
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
 export const login = createAsyncThunk(
   'auth/login',
   async (formDataLogin, {rejectWithValue}) => {

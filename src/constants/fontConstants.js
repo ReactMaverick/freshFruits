@@ -6,6 +6,7 @@ export const deviceHeight = Dimensions.get('window').height;
 //Font constants
 export const BIG = RFPercentage(6);
 export const H1BIG = RFPercentage(5);
+export const H2BIG = RFPercentage(4.5);
 export const H1 = RFPercentage(4.5);
 export const H2 = RFPercentage(4);
 export const H3 = RFPercentage(3.5);

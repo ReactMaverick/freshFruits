@@ -74,7 +74,7 @@ export const commonStyles = StyleSheet.create({
   keyboardAvoidingView: {
     backgroundColor: '#fff',
     flex: 1,
-    elevation: 10,
+    
   },
   keyboardAvoidingView1: {
     backgroundColor: '#fff',
