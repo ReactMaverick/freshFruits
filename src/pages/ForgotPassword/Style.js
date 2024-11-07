@@ -6,6 +6,7 @@ import {
   H5,
   H1,
   H1BIG,
+  H2BIG,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
 import { deviceWidth, deviceHeight } from '../../constants/constants';
@@ -15,6 +16,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: deviceHeight / 40,
     minHeight: deviceHeight * 1,
+    
   },
   FreshFoodLogo: {
     width: deviceWidth * 0.9,
@@ -27,6 +29,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: deviceHeight / 100 / 2,
     paddingHorizontal: deviceWidth * 0.02,
+   
+    padding:5
   },
   TitleBox: {
     justifyContent: 'center',
@@ -36,9 +40,11 @@ export const styles = StyleSheet.create({
   },
   LoginText: {
     color: colors.HeadingColor,
-    fontSize: H1BIG,
+    fontSize: H2BIG,
+    width:"100%",
     fontFamily: fontFamily.Bold,
     textAlign: 'center',
+    
   },
   LoginPara: {
     color: colors.MediumGrayColor,
