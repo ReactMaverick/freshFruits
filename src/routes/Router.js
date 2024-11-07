@@ -241,8 +241,9 @@ function HomeTabs() {
 }
 
 const LoginStack = () => {
+  const UserLoggedIn = useSelector(selectUser_isLoggedIn);
   return (
-    <Stack.Navigator initialRouteName="WelcomeScreen">
+    <Stack.Navigator >
       {/* <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -250,13 +251,14 @@ const LoginStack = () => {
           headerShown: false,
         }}
       /> */}
-      <Stack.Screen
+      {UserLoggedIn == true ? (<Stack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
         options={{
           headerShown: false,
         }}
-      />
+      />) : null}
+      
       <Stack.Screen
         name="Login"
         component={Login}

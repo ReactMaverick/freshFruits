@@ -158,7 +158,7 @@ export default function Profile({navigation}) {
                 style={styles.LogoutBtn}
                 onPress={() => {
                   dispatch(logout());
-                  navigation.navigate('Login')
+                 // navigation.navigate('Login')
                 }}>
                 <Image
                   source={LOGOUT}
