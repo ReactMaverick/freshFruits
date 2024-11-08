@@ -62,3 +62,5 @@ export const INFOBG = require('../assets/images/sidebarInfoBg.png');
 export const TICK = require('../assets/images/SuccessIcon.png');
 export const BEST = require('../assets/images/best.png');
 export const STAR = require('../assets/images/star.png');
+export const CAMERA = require('../assets/images/camera.png');
+export const GALLERY = require('../assets/images/gallery.png');

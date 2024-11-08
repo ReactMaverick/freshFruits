@@ -18,12 +18,16 @@ import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { FORGOT_PASSWORD_URL } from '../../values/api/url';
 import { useDispatch } from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
+
 
 
 export default function ForgotPassword({ navigation }) {
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({email: '' });
-  const [errors, setErrors] = useState({email: ''});
+  // const [formData, setFormData] = useState({email: '' });
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState("");
+  const [loading, setLoading] = useState(false);
   const resetErrors = () => {
     let updatedErrors = {email: ''};
     setErrors(updatedErrors);
@@ -73,44 +77,83 @@ export default function ForgotPassword({ navigation }) {
   //     });
   //   }
   // };
-  const handleForgetPassword = () => {
-    let updatedErrors = {};
-    Keyboard.dismiss(); // Dissmisses the keyboard
-
-    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-      formData.email,
-    );
-    const isMobile = /^[0-9]{10}$/.test(formData.phone);
-
-    
+  const handleForgetPassword = async () => {
+    setErrors("");
+    setLoading(true);
+    Keyboard.dismiss();
   
-     if (!formData.email) {
-      console.log('email', errors);
-      updatedErrors.email = 'Email is required';
-      setErrors(updatedErrors);
-      return;
-    } else if (!isEmail) {
-      updatedErrors.email = 'Please enter a valid Email';
-      setErrors(updatedErrors);
-      return;
-    }  
-    dispatch(register(formData))
-      .then(res => {
-        if (res.type === 'auth/forgot/fulfilled') {
-          navigation.navigate('OTP');
-        } else {
-          // showToast('error', res.payload);
-        }
-      })
-      .catch(err => {
-        console.log('\n');
-        console.log('\n');
-        console.log('Error ==> ', err);
-      })
-      .finally(() => {
-        // setIsLoading(false);
+    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    if (!email) {
+      setErrors("Email is required");
+      Toast.show({
+        type: "error",
+        text1: "Validation Error",
+        text2: "Email is required"
       });
+      setLoading(false);
+      return;
+    } else if (!isEmail.test(email)) {
+      setErrors("Please enter a valid Email");
+      Toast.show({
+        type: "error",
+        text1: "Validation Error",
+        text2: "Please enter a valid Email"
+      });
+      setLoading(false);
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://194.163.131.163/greenway/public/api/forgetPassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      console.log('response',response.ok);
+      
+  
+      const result = await response.json();
+       console.log('result',result);
+      setLoading(false);
+  
+      if (response.ok ) {
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Please check your email",
+        });
+        navigation.navigate("OTP", { email });
+      } 
+      // else if (result.message) {
+      //   setErrors(result.message);
+      //   Toast.show({
+      //     type: "error",
+      //     text1: "Error",
+      //     text2: result.message,
+      //   });
+      // }
+       else {
+        setErrors("Something went wrong. Please try again");
+        Toast.show({
+          type: "error",
+          text1: "Error",
+          text2: "Something went wrong. Please try again",
+        });
+      }
+    } catch (error) {
+      setErrors("Network Error");
+      Toast.show({
+        type: "error",
+        text1: "Network Error",
+        text2: "Network Error",
+      });
+      setLoading(false);
+    }
   };
+  
 
   return (
     <KeyboardAvoidingView
@@ -129,21 +172,22 @@ export default function ForgotPassword({ navigation }) {
                 textInputProps={{style: styles.textInputStyle}}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Email"
-                value={formData.email}
-                onTextChange={email => {
-                  setFormData({
-                    ...formData,
-                    email,
-                  });
-                  resetErrors();
-                }}
-                error={errors.email !== ''}
-                errorText={errors.email}
+                value={email}
+                // onTextChange={email => {
+                //   setFormData({
+                //     ...formData,
+                //     email,
+                //   });
+                //   resetErrors();
+                // }}
+                onTextChange={setEmail}
+                error={errors !== ''}
+                errorText={errors}
                 hideLabel
-                leftIcon
-                renderLeftIcon={() => (
-                  <Feather name="mail" style={styles.textInputIcon} />
-                )}
+                // leftIcon
+                // renderLeftIcon={() => (
+                //   <Feather name="mail" style={styles.textInputIcon} />
+                // )}
               />
             <Pressable style={styles.loginBtn} onPress={handleForgetPassword}>
               <Text style={styles.loginBtnText}>Send OTP</Text>
