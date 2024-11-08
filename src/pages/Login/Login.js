@@ -21,6 +21,8 @@ import React, {useState, useEffect, useRef} from 'react';
 import {login} from '../../redux/reducers/authReducer';
 import {useDispatch} from 'react-redux';
 import Loader from '../../components/Loader/Loader';
+import Modal from 'react-native-modal';
+import Skeleton from "react-native-reanimated-skeleton";
 
 export default function Login({navigation}) {
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ export default function Login({navigation}) {
     user_name: '',
     password: '',
   });
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const resetErrors = () => {
     let updatedErrors = {
@@ -44,6 +47,7 @@ export default function Login({navigation}) {
   };
 
   const handleSubmit = () => {
+    setModalVisible(true)
     let updatedErrors = {};
     Keyboard.dismiss(); // Dissmisses the keyboard
 
@@ -64,6 +68,7 @@ export default function Login({navigation}) {
       // setIsLoading(true);
     }
     setLoader(true);
+    setModalVisible(true);
     dispatch(login(formData))
       .then(res => {
         if (res.type === 'auth/login/fulfilled') {
@@ -76,8 +81,10 @@ export default function Login({navigation}) {
         console.log('Error ==> ', err);
       })
       .finally(() => {
-        setLoader(false);
+        
+        setModalVisible(false)
       });
+      setIsPasswordVisible(true);
   };
   const [isChecked, setIsChecked] = useState(false);
   const handlePress = () => {
@@ -157,23 +164,23 @@ export default function Login({navigation}) {
               />
               <View style={styles.RowBox}>
                 {/* customCheckBox with images */}
-                <Pressable style={styles.customCheckBox} onPress={handlePress}>
+                {/* <Pressable style={styles.customCheckBox} onPress={handlePress}>
                   <Image
                     style={styles.checkboxImage}
                     source={isChecked ? SWITCHON : SWITCHOFF}
                   />
                   <Text style={styles.customCheckBoxText}>Remember me</Text>
-                </Pressable>
+                </Pressable> */}
                 <Pressable
                   onPress={() => navigation.navigate('ForgotPassword')}>
                   <Text style={styles.forgotPasswordText}>Forgot Password</Text>
                 </Pressable>
               </View>
 
-              {!loader ? (
+              
                 <>
                   <Pressable
-                    style={styles.loginBtn}
+                    style={commonStyles.MainBtn}
                     onPress={() => {
                       handleSubmit();
                     }}>
@@ -196,14 +203,20 @@ export default function Login({navigation}) {
                     </TouchableOpacity>
                   </View>
                 </>
-              ) : (
-                <Text style={{margin: 70}}>
-                  {' '}
-                  <Loader />
-                </Text>
-              )}
+              
             </View>
           </View>
+
+          {/* modal */}
+          <Modal
+  isVisible={isModalVisible}
+  onBackdropPress={() => setModalVisible(false)}
+  style={{ justifyContent: 'flex-end', margin: 0 }} 
+  animationIn="slideInUp" 
+  animationOut="slideOutDown"
+>
+ <Loader/>
+</Modal>
         </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>

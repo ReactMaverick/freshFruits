@@ -10,6 +10,8 @@ import {
   Text,
   View,
   StatusBar,
+  Platform,
+  PermissionsAndroid,
 } from 'react-native';
 import { styles } from './Style';
 import { commonStyles } from '../../constants/styles';
@@ -65,8 +67,37 @@ export default function Profile({ navigation }) {
     console.log(confirmPassword);
     
   }
+  const requestCameraPermission = async () => {
+    try {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Camera Permission',
+            message: 'This app needs camera access to take photos',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          }
+        );
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      }
+      return true; // iOS doesn't need explicit permission request
+    } catch (err) {
+      console.warn(err);
+      return false;
+    }
+    
+  };
 
-  const openCamera = () => {
+  // Open Camera
+  const openCamera = async () => {
+    const isCameraPermitted = await requestCameraPermission();
+    if (!isCameraPermitted) {
+      Alert.alert('Permission Denied', 'Camera permission is required to take photos.');
+      return;
+    }
+
     const options = {
       mediaType: 'photo',
       saveToPhotos: true,
@@ -83,8 +114,10 @@ export default function Profile({ navigation }) {
         setImageUri(uri);
       }
     });
+    setModalProfile(false)
   };
 
+  // Open Gallery
   const openGallery = () => {
     const options = {
       mediaType: 'photo',
@@ -101,22 +134,9 @@ export default function Profile({ navigation }) {
         setImageUri(uri);
       }
     });
+    setModalProfile(false)
   };
-
-  // const selectImage=()=>{
-  //   let options={
-  //     mediaType:'photo',
-  //     maxHeight:550,
-  //     maxWidth:300,
-  //     quality:1,
-
-  //   }
-  // }
-
-  // const handleCamera = () => {
-  //   setCameraVisible(true); 
-  //   setModalProfile(false); 
-  // };
+  
 
  
 
@@ -131,19 +151,26 @@ export default function Profile({ navigation }) {
           <Image source={PROFILEBG} resizeMode="cover" style={styles.BGImage} />
           <View style={styles.MainBox}>
             <View style={styles.UserBox}>
-              {/* <Avatar
-                style={styles.ProfilePic}
-                rounded
-                size="large"
-                source={PROFILEPIC}
-              /> */}
+             
               <View style={{ position: 'relative' }}>
-  <Avatar
+              
+        <Avatar
+        source={
+          imageUri
+            ? { uri: imageUri }
+            : require("../../assets/images/avtar.png")
+        }
+          style={styles.ProfilePic}
+          rounded
+          size="large"
+        />
+     
+  {/* <Avatar
     style={styles.ProfilePic}
     rounded
     size="large"
     source={PROFILEPIC}
-  />
+  /> */}
 
   {/* Edit Icon Overlay */}
   <TouchableOpacity
@@ -420,12 +447,14 @@ export default function Profile({ navigation }) {
 </View>
   </View>
 </Modal>
-{imageUri && (
-        <Image
-          source={{ uri: imageUri }}
-          style={{ width: 200, height: 200, marginTop: 20 }}
-        />
-      )}
+{/* <Image
+        source={
+          imageUri
+            ? { uri: imageUri }
+            : require('../../constants/images')
+        }
+        style={{ width: 200, height: 200, marginTop: 20 }}
+      /> */}
 
 
         

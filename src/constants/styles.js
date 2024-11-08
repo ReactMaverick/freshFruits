@@ -120,4 +120,14 @@ export const commonStyles = StyleSheet.create({
     fontSize: p,
     color: colors.White,
   },
+  MainBtn:{
+    backgroundColor: colors.PrimaryColor,
+    width: deviceWidth * 0.9,
+    paddingVertical: deviceHeight / 50,
+    paddingHorizontal: deviceWidth / 10,
+    borderRadius: deviceHeight * 0.05,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: deviceHeight * 0.02,
+  }
 });

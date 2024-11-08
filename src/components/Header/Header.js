@@ -71,15 +71,16 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                         {leftContent == "HomeLeft" &&
                             <View style={styles.headerLeft}>
                                 {/* <Text style={styles.leftTitle}>Deliver In</Text> */}
-                                <Text style={styles.leftSubTitle}>Delivered in 10 minutes</Text>
+                                <Text style={styles.leftSubTitle}>Welcome...</Text>
+                                <Text style={{fontSize: 15,fontWeight: '600',color: 'gray',}}>Gouranga Ghosh</Text>
                                 {/* location box */}
-                                <Pressable onPress={toggleBottomSheet} style={styles.locationBox}>
+                                {/* <Pressable onPress={toggleBottomSheet} style={styles.locationBox}>
                                     <Octicons name="location"
                                         style={styles.locationIcon} />
                                     <Text style={styles.locationText}> {truncateText(locationText, 5)}</Text>
                                     <Octicons name="chevron-down" style={styles.locationIcon} />
                                     <LocationBottomSheet isVisible={isBottomSheetVisible} onClose={toggleBottomSheet} />
-                                </Pressable>
+                                </Pressable> */}
                             </View>}
 
                         {rightContent == "HomeRight" &&
@@ -110,6 +111,24 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                     </View>
                     {BottomBar == "SearchBox" &&
                         <View style={styles.SearchBox}>
+                            {/* <Skeleton
+  containerStyle={{
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    gap:40,
+    marginTop:100
+  }}
+  isLoading={loading}
+  layout={[{ key: "button", width: "90%", height: 120, borderRadius: 8, }]}>
+
+  </Skeleton> */}
                             <FormInput
                                 mainContainerStyle={styles.mainContainerStyle}
                                 inputContainerStyle={styles.inputContainerStyle}
@@ -118,11 +137,11 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                                 placeholderText="Search fruit....."
                                 leftIcon
                                 renderLeftIcon={() => <FontAwesome name="search" style={styles.textInputIcon} />}
-                                rightIcon
-                                rightIconOnPress={toggleFilterPopup}
-                                renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
+                                // rightIcon
+                                // rightIconOnPress={toggleFilterPopup}
+                                // renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
                             />
-                            <FilterPopup isVisible={isFilterPopupVisible} onClose={toggleFilterPopup} />
+                            {/* <FilterPopup isVisible={isFilterPopupVisible} onClose={toggleFilterPopup} /> */}
                         </View>}
                 </View>}
             {InnerPagesHeader == "InnerHeader" &&

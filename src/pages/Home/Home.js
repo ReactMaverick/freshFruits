@@ -39,6 +39,7 @@ import {
 import {storeWishlistItems} from '../../redux/reducers/WishListReducer';
 import {viewWishlist} from '../../Utils/WishList_Func';
 import { useIsFocused } from '@react-navigation/native';
+import Skeleton from "react-native-reanimated-skeleton";
 
 export default function Home({navigation}) {
   const [loading, setLoading] = useState(true);
@@ -112,14 +113,18 @@ export default function Home({navigation}) {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
+
+
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
-      style={commonStyles.keyboardAvoidingView}>
+      style={commonStyles.keyboardAvoidingView}>    
+       
+
       <Header
         navigation={navigation}
         leftContent={'HomeLeft'}
@@ -128,6 +133,58 @@ export default function Home({navigation}) {
         BottomBar={'SearchBox'}
         HomeHeader={'HomeHeader'}
       />
+
+<Skeleton
+  containerStyle={{
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    gap:20,
+    marginTop:100
+  }}
+  isLoading={loading}
+  layout={[
+    // {
+    //   key: "header",
+    //   flexDirection: "row",
+    //   alignItems: "center",
+    //   justifyContent: "center",
+    //   gap:65,
+    //   children: [
+    //     { key: "logo", width: 150, height: 20, marginRight: 20 },
+    //     { key: "title", width: 50, height: 40,borderRadius:20 },
+    //   ],
+    //   // marginBottom: 20,
+    // },
+    
+    
+     
+        { key: "input1", width: "85%", height: "29%", marginRight: 10, borderRadius: 5,marginBottom: 35, },
+       
+    
+     
+    
+    // { key: "button", width: "80%", height: 50, borderRadius: 8, },
+    {
+      key: "footerRow",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap:13,
+      children: [
+        { key: "footer1", width: "45%", height: 170, marginRight: 6 ,borderRadius:8},
+        { key: "footer2", width: "45%", height: 170,borderRadius:8 },
+      ],
+    },
+    { key: "button", width: "90%", height: 120, borderRadius: 8, },
+  ]}
+>
       <ScrollView>
         <SafeAreaView>
           <View style={styles.MainBox}>
@@ -184,6 +241,8 @@ export default function Home({navigation}) {
           </View>
         </SafeAreaView>
       </ScrollView>
+      </Skeleton>
     </KeyboardAvoidingView>
+   
   );
 }

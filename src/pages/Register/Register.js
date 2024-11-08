@@ -235,8 +235,8 @@ export default function Register({navigation}) {
                   />
                 )}
               />
-              <View style={styles.RowBox}>
-                {/* customCheckBox with images */}
+              {/* <View style={styles.RowBox}>
+              
                 <Pressable style={styles.customCheckBox} onPress={handlePress}>
                   <Image
                     style={styles.checkboxImage}
@@ -244,13 +244,13 @@ export default function Register({navigation}) {
                   />
                   <Text style={styles.customCheckBoxText}>Remember me</Text>
                 </Pressable>
-              </View>
+              </View> */}
 
               <Pressable
                 onPress={() => {
                   handleSubmit();
                 }}
-                style={styles.loginBtn}>
+                style={commonStyles.MainBtn}>
                 <Text style={styles.loginBtnText}>Sign Up</Text>
               </Pressable>
 
