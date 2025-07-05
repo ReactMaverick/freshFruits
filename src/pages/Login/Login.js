@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {styles} from './Style';
 import {commonStyles} from '../../constants/styles';
-import {platform} from '../../constants/constants';
+import {platform, showToast} from '../../constants/constants';
 import {FRESHFOODLOGO, SWITCHOFF, SWITCHON} from '../../constants/images';
 import {FormInput} from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
@@ -72,9 +72,9 @@ export default function Login({navigation}) {
     dispatch(login(formData))
       .then(res => {
         if (res.type === 'auth/login/fulfilled') {
-          // navigation.navigate('HomeStack');
+          navigation.navigate('HomeStack');
         } else {
-          // showToast('error', res.payload);
+          showToast('error', res.payload);
         }
       })
       .catch(err => {
