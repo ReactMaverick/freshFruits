@@ -17,8 +17,15 @@
 //     visibilityTime: 2000,
 //   });
 // };\import { Dimensions, Platform } from 'react-native';
-import { Dimensions } from 'react-native';
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from 'react-native-responsive-screen';
+import { Dimensions, Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
+
+export const wp = widthPercentageToDP;
+export const hp = heightPercentageToDP;
 
 // Screen dimensions
 export const deviceWidth = Dimensions.get('window').width;
@@ -26,7 +33,7 @@ export const deviceHeight = Dimensions.get('window').height;
 
 // Padding and Border Radius
 export const padding5 = 5;
-export const padding10 = 10; 
+export const padding10 = 10;
 export const borderRadiusDefault = 10;
 
 // Platform info

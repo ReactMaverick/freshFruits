@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         zIndex: 1,
     },
-    wishlistBtn_active:{
- backgroundColor:"red",
+    wishlistBtn_active: {
+        backgroundColor: "red",
     },
     wishlistIcon: {
         fontSize: p,

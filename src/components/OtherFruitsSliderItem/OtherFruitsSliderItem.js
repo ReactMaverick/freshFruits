@@ -9,6 +9,7 @@ import {
 import styles from './style';
 import { BTNCART, PRO1, PRO10, PRO8 } from '../../constants/images';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ctext from '../Ctext';
 
 export default function OtherFruitsSliderItem({ navigation,productDetails }) {
     return (
@@ -22,13 +23,13 @@ export default function OtherFruitsSliderItem({ navigation,productDetails }) {
                 />
                 <View style={styles.sliderCardContent}>
                     <View style={styles.sliderCardTop}>
-                        <Text style={styles.sliderCardTitle}>{productDetails?.products_name || "dragon"}</Text>
+                        <Ctext style={styles.sliderCardTitle}>{productDetails?.products_name || "dragon"}</Ctext>
                     </View>
                     <View style={styles.sliderCardBottom}>
                         <View style={styles.sliderCardPriceBox}>
-                            <Text style={styles.sliderCardPrice}>2Kg</Text>
-                            <Text style={styles.sliderCardText}> ${Number(productDetails?.discounted_price) || "18"} <Text style={styles.sliderCardTextCut}>
-                                ${Number(productDetails?.products_price) || "32"}</Text> </Text>
+                            <Ctext style={styles.sliderCardPrice}>2Kg</Ctext>
+                            <Ctext style={styles.sliderCardText}> ${Number(productDetails?.discounted_price) || "18"} <Ctext style={styles.sliderCardTextCut}>
+                                ${Number(productDetails?.products_price) || "32"}</Ctext> </Ctext>
                         </View>
                         {/* <Pressable
                             onPress={() => Alert.alert('Add to Cart')}

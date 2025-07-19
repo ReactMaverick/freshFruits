@@ -11,14 +11,34 @@ import {colors} from '../../constants/colors';
 import {
   deviceHeight,
   deviceWidth,
+  hp,
   padding10,
   padding5,
+  wp,
 } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
     minHeight: deviceHeight * 1,
     flex: 1,
+  },
+
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  backgroundImage: {
+    height: hp('100%'),
+    width: wp('100%'),
+  },
+  skipBTN: {
+    position: 'absolute',
+    right: wp('5%'),
+    top: wp('5%'),
+    zIndex: 99999,
   },
 
   // SliderItem: {

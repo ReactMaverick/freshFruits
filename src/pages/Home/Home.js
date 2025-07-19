@@ -1,47 +1,48 @@
 import {
-  KeyboardAvoidingView,
-  SafeAreaView,
   View,
   ScrollView,
   Pressable,
   Text,
   ActivityIndicator,
 } from 'react-native';
-import {styles} from './Style';
-import {commonStyles} from '../../constants/styles';
-import {platform} from '../../constants/constants';
-import React, {useState, useEffect} from 'react';
+import { styles } from './Style';
+import { commonStyles } from '../../constants/styles';
+import { platform } from '../../constants/constants';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
-import {colors} from '../../constants/colors';
+import { colors } from '../../constants/colors';
 import BannerSlider from '../../components/BannerSlider/BannerSlider';
 import CatagoriesSlider from '../../components/CategoriesSlider/CategoriesSlider';
 import PopularFruitsSlider from '../../components/PopularFruitsSlider/PopularFruitsSlider';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import Loader from '../../components/Loader/Loader';
-import {getData, postData} from '../../values/api/apiprovider';
+import { getData, postData } from '../../values/api/apiprovider';
 import {
   NEW_ARRIVED_FRUITS_URL,
   TOP_SELLER_FRUITS_URL,
   VIEW_WISHLIST_URL,
 } from '../../values/api/url';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUser_Id,
   selectUser_isLoggedIn,
   selectUser_session_Id,
 } from '../../redux/reducers/authReducer';
-import {viewCartProducts} from '../../values/CartUrls';
-import {storeCartItems} from '../../redux/reducers/cartItemsReducer';
+import { viewCartProducts } from '../../values/CartUrls';
+import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
 import {
   storeNewArrivedList,
   storeTopSellerList,
 } from '../../redux/reducers/productListReducer';
-import {storeWishlistItems} from '../../redux/reducers/WishListReducer';
-import {viewWishlist} from '../../Utils/WishList_Func';
+import { storeWishlistItems } from '../../redux/reducers/WishListReducer';
+import { viewWishlist } from '../../Utils/WishList_Func';
 import { useIsFocused } from '@react-navigation/native';
 import Skeleton from "react-native-reanimated-skeleton";
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Ctext from '../../components/Ctext';
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
 
   const user_Id = useSelector(selectUser_Id);
@@ -83,7 +84,7 @@ export default function Home({navigation}) {
       console.error('Error fetching top seller products', error);
     }
   };
-  
+
 
   const getWishlist = async () => {
     const response = await viewWishlist(user_Id);
@@ -113,80 +114,79 @@ export default function Home({navigation}) {
     return () => clearTimeout(timer);
   }, []);
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
 
 
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
-      style={commonStyles.keyboardAvoidingView}>    
-       
+      style={commonStyles.keyboardAvoidingView}>
+      <SafeAreaView style={{ ...commonStyles.safeAreaView }}>
 
-      <Header
-        navigation={navigation}
-        leftContent={'HomeLeft'}
-        rightContent={'HomeRight'}
-        BGCOLOR={colors.White}
-        BottomBar={'SearchBox'}
-        HomeHeader={'HomeHeader'}
-      />
+        <Header
+          navigation={navigation}
+          leftContent={'HomeLeft'}
+          rightContent={'HomeRight'}
+          BGCOLOR={colors.White}
+          BottomBar={'SearchBox'}
+          HomeHeader={'HomeHeader'}
+        />
 
-<Skeleton
-  containerStyle={{
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    gap:20,
-    marginTop:100
-  }}
-  isLoading={loading}
-  layout={[
-    // {
-    //   key: "header",
-    //   flexDirection: "row",
-    //   alignItems: "center",
-    //   justifyContent: "center",
-    //   gap:65,
-    //   children: [
-    //     { key: "logo", width: 150, height: 20, marginRight: 20 },
-    //     { key: "title", width: 50, height: 40,borderRadius:20 },
-    //   ],
-    //   // marginBottom: 20,
-    // },
-    
-    
-     
-        { key: "input1", width: "85%", height: "29%", marginRight: 10, borderRadius: 5,marginBottom: 35, },
-       
-    
-     
-    
-    // { key: "button", width: "80%", height: 50, borderRadius: 8, },
-    {
-      key: "footerRow",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      gap:13,
-      children: [
-        { key: "footer1", width: "45%", height: 170, marginRight: 6 ,borderRadius:8},
-        { key: "footer2", width: "45%", height: 170,borderRadius:8 },
-      ],
-    },
-    { key: "button", width: "90%", height: 120, borderRadius: 8, },
-  ]}
->
-      <ScrollView>
-        <SafeAreaView>
+        {/* <Skeleton
+          containerStyle={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            width: "100%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 20,
+            marginTop: 100,
+          }}
+          isLoading={loading}
+          layout={[
+            // {
+            //   key: "header",
+            //   flexDirection: "row",
+            //   alignItems: "center",
+            //   justifyContent: "center",
+            //   gap:65,
+            //   children: [
+            //     { key: "logo", width: 150, height: 20, marginRight: 20 },
+            //     { key: "title", width: 50, height: 40,borderRadius:20 },
+            //   ],
+            //   // marginBottom: 20,
+            // },
+
+
+
+            { key: "input1", width: "85%", height: "29%", marginRight: 10, borderRadius: 5, marginBottom: 35, },
+
+
+
+
+            // { key: "button", width: "80%", height: 50, borderRadius: 8, },
+            {
+              key: "footerRow",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 13,
+              children: [
+                { key: "footer1", width: "45%", height: 170, marginRight: 6, borderRadius: 8 },
+                { key: "footer2", width: "45%", height: 170, borderRadius: 8 },
+              ],
+            },
+            { key: "button", width: "90%", height: 120, borderRadius: 8, },
+          ]}
+        > */}
+        <ScrollView>
           <View style={styles.MainBox}>
             {/* BannerSlider */}
             <BannerSlider />
@@ -196,16 +196,16 @@ export default function Home({navigation}) {
             {/* CatagoriesSlider */}
             {/* HeadingBox */}
             <View style={styles.HeadingBox}>
-              <Text style={styles.HeadingText}>Popular Fruits</Text>
+              <Ctext style={styles.HeadingText}>Popular Fruits</Ctext>
               <Pressable
                 style={styles.ViewAllBtn}
                 onPress={() => navigation.navigate('popularFruits')}
 
-                // onPress={() => navigation.navigate('PaymentDetails')}
-                // onPress={() => navigation.navigate('PaymentSuccessful')}
-                // onPress={() => navigation.navigate('MyOrder')}
+              // onPress={() => navigation.navigate('PaymentDetails')}
+              // onPress={() => navigation.navigate('PaymentSuccessful')}
+              // onPress={() => navigation.navigate('MyOrder')}
               >
-                <Text style={styles.ViewAllBtnText}>See All</Text>
+                <Ctext style={styles.ViewAllBtnText}>See All</Ctext>
               </Pressable>
             </View>
             {/* HeadingBox */}
@@ -217,11 +217,11 @@ export default function Home({navigation}) {
             {/* PopularFruitsSlider  */}
             {/* HeadingBox */}
             <View style={styles.HeadingBox}>
-              <Text style={styles.HeadingText}>Today Offer</Text>
+              <Ctext style={styles.HeadingText}>Today Offer</Ctext>
               <Pressable
                 style={styles.ViewAllBtn}
                 onPress={() => navigation.navigate('Profile')}>
-                <Text style={styles.ViewAllBtnText}>See All</Text>
+                <Ctext style={styles.ViewAllBtnText}>See All</Ctext>
               </Pressable>
             </View>
             {/* HeadingBox */}
@@ -239,10 +239,10 @@ export default function Home({navigation}) {
 
             {/* Today Offer */}
           </View>
-        </SafeAreaView>
-      </ScrollView>
-      </Skeleton>
+        </ScrollView>
+        {/* </Skeleton> */}
+      </SafeAreaView>
     </KeyboardAvoidingView>
-   
+
   );
 }

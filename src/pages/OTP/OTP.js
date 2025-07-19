@@ -1,6 +1,4 @@
 import {
-  KeyboardAvoidingView,
-  SafeAreaView,
   Text,
   View,
 } from 'react-native';
@@ -9,6 +7,9 @@ import { commonStyles } from '../../constants/styles';
 import { platform } from '../../constants/constants';
 import { useState } from "react";
 import { OneTapInput, ResendOTPButton } from "react-native-onetapinput";
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function OTP({ navigation }) {
   const [otp, setOtp] = useState('');
@@ -18,12 +19,12 @@ export default function OTP({ navigation }) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         <View style={styles.MainBox}>
 
           <View style={styles.TitleBox}>
-            <Text style={styles.LoginText}>Verify OTP</Text>
-            <Text style={styles.LoginPara}>Please enter four digit code we send your mobile no.</Text>
+            <Ctext style={styles.LoginText}>Verify OTP</Ctext>
+            <Ctext style={styles.LoginPara}>Please enter four digit code we send your mobile no.</Ctext>
           </View>
 
           <View style={styles.formBox}>
@@ -43,7 +44,7 @@ export default function OTP({ navigation }) {
               otpBoxSuccessStyle={styles.otpBoxSuccess}
               otpBoxSuccessTextStyle={styles.otpBoxSuccessText}
             />
-            <Text style={styles.otpText}>Dont you receive any code</Text>
+            <Ctext style={styles.otpText}>Dont you receive any code</Ctext>
             <ResendOTPButton
               hash={hash}
               setHash={setHash}

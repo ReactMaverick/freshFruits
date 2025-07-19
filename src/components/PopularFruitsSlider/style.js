@@ -21,8 +21,12 @@ const styles = StyleSheet.create({
         height: 6,
         borderRadius: deviceHeight * 0.01,
         marginHorizontal: 0,
-    }
-
+    },
+    pageBody: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: "space-evenly",
+    },
 });
 
 export default styles;

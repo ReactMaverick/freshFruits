@@ -118,7 +118,7 @@ export const styles = StyleSheet.create({
     },
     InfoText: {
         fontFamily: fontFamily.Bold,
-        fontSize: H5,
+        fontSize: p,
         color: colors.WhiteColor,
     },
     InfosubText: {
@@ -135,13 +135,13 @@ export const styles = StyleSheet.create({
     },
     CopyRightText: {
         fontFamily: fontFamily.Medium,
-        fontSize: H6,
+        fontSize: p,
         color: colors.LightGrayColor,
         textAlign: 'center',
     },
     CopyRightTextCont: {
         fontFamily: fontFamily.Medium,
-        fontSize: p,
+        fontSize: small,
         color: colors.LightGrayColor,
         textAlign: 'center',
     },

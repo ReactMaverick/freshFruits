@@ -1,8 +1,9 @@
 import {
     View,
-    KeyboardAvoidingView,
     Pressable,
     Animated,
+    TextInput,
+    TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import Octicons from 'react-native-vector-icons/Octicons';
@@ -19,6 +20,8 @@ import { colors } from '../../constants/colors';
 import { FormInput } from 'react-native-formtastic';
 import LocationBottomSheet from '../LocationBottomSheet/LocationBottomSheet';
 import FilterPopup from '../FilterPopup/FilterPopup';
+import Ctext from '../Ctext';
+import { p } from '../../constants/fontConstants';
 
 // import Animated from 'react-native-reanimated';
 const truncateText = (text, maxWords) => {
@@ -62,22 +65,20 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
     };
 
     return (
-        <KeyboardAvoidingView
-            behavior={platform === 'ios' ? 'padding' : 'height'}
-            style={commonStyles.keyboardAvoidingView1}>
+        <>
             {HomeHeader == "HomeHeader" &&
                 <View style={[styles.headerAreaOuter, { backgroundColor: BGCOLOR }]}>
                     <View style={styles.headerArea}>
                         {leftContent == "HomeLeft" &&
                             <View style={styles.headerLeft}>
-                                {/* <Text style={styles.leftTitle}>Deliver In</Text> */}
-                                <Text style={styles.leftSubTitle}>Welcome...</Text>
-                                <Text style={{fontSize: 15,fontWeight: '600',color: 'gray',}}>Gouranga Ghosh</Text>
+                                {/* <Ctext style={styles.leftTitle}>Deliver In</Ctext> */}
+                                <Ctext style={styles.leftSubTitle}>Welcome...</Ctext>
+                                <Ctext style={{ fontSize: 15, fontWeight: '600', color: 'gray', }}>Gouranga Ghosh</Ctext>
                                 {/* location box */}
                                 {/* <Pressable onPress={toggleBottomSheet} style={styles.locationBox}>
                                     <Octicons name="location"
                                         style={styles.locationIcon} />
-                                    <Text style={styles.locationText}> {truncateText(locationText, 5)}</Text>
+                                    <Ctext style={styles.locationText}> {truncateText(locationText, 5)}</Ctext>
                                     <Octicons name="chevron-down" style={styles.locationIcon} />
                                     <LocationBottomSheet isVisible={isBottomSheetVisible} onClose={toggleBottomSheet} />
                                 </Pressable> */}
@@ -87,10 +88,11 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                             <View style={styles.RightSide}>
                                 <Pressable
                                     style={styles.bellBtn}
-                                    onPress={() => { navigation.navigate('Login') }}
+                                    onPress={() => { navigation.navigate('Notification') }}
                                 >
                                     <Animated.View style={[animatedStyle, styles.NotificationBellIcon]}>
-                                        <FontAwesome name="bell" style={styles.NotificationIcon} /></Animated.View>
+                                        <FontAwesome name="bell" style={styles.NotificationIcon} />
+                                    </Animated.View>
                                     <Badge value={notificationCount > 0 ? notificationCount.toString() : ""}
                                         status="success"
                                         badgeStyle={{ backgroundColor: colors.SecondoryColor }}
@@ -111,25 +113,8 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                     </View>
                     {BottomBar == "SearchBox" &&
                         <View style={styles.SearchBox}>
-                            {/* <Skeleton
-  containerStyle={{
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    gap:40,
-    marginTop:100
-  }}
-  isLoading={loading}
-  layout={[{ key: "button", width: "90%", height: 120, borderRadius: 8, }]}>
 
-  </Skeleton> */}
-                            <FormInput
+                            {/* <FormInput
                                 mainContainerStyle={styles.mainContainerStyle}
                                 inputContainerStyle={styles.inputContainerStyle}
                                 textInputProps={{ style: styles.textInputStyle }}
@@ -137,11 +122,15 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                                 placeholderText="Search fruit....."
                                 leftIcon
                                 renderLeftIcon={() => <FontAwesome name="search" style={styles.textInputIcon} />}
-                                // rightIcon
-                                // rightIconOnPress={toggleFilterPopup}
-                                // renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
-                            />
-                            {/* <FilterPopup isVisible={isFilterPopupVisible} onClose={toggleFilterPopup} /> */}
+
+                            // renderRightIcon={() => <View style={styles.filterIconBox}><Image source={FILTER} style={styles.filterIcon} /></View>}
+                            /> */}
+                            <FontAwesome name="search" style={styles.textInputIcon} />
+                            <TextInput placeholderTextColor={colors.black} placeholder="Search fruit....." style={styles.textInputStyle} />
+                            <TouchableOpacity onPress={toggleFilterPopup} style={styles.filterBTN}>
+                                <FontAwesome name="filter" style={{ color: colors.black, fontSize: p, alignSelf: 'center' }} />
+                            </TouchableOpacity>
+                            <FilterPopup isVisible={isFilterPopupVisible} onClose={toggleFilterPopup} />
                         </View>}
                 </View>}
             {InnerPagesHeader == "InnerHeader" &&
@@ -154,7 +143,7 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                         </View>}
                     {CenterBox == "TitleBox" &&
                         <View style={styles.InnerHeaderCenter}>
-                            <Text style={styles.InnerHeaderTitle}>{pageName}</Text>
+                            <Ctext style={styles.InnerHeaderTitle}>{pageName}</Ctext>
                         </View>}
                     <View style={styles.InnerHeaderRight}>
                         {BlankBox == "Blank" &&
@@ -165,13 +154,13 @@ export default function Header({ leftContent, HomeHeader, InnerPagesHeader, righ
                             </View>}
                         {ClearAllBtn == "ClearAll" &&
                             <Pressable style={styles.ClearAllBox}>
-                                <Text style={styles.ClearAllText}>Clear All</Text>
+                                <Ctext style={styles.ClearAllText}>Clear All</Ctext>
                             </Pressable>}
 
 
                     </View>
                 </View>}
 
-        </KeyboardAvoidingView>
+        </>
     );
 }

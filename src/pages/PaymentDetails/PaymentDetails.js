@@ -1,8 +1,6 @@
 import {
   Image,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
@@ -15,6 +13,9 @@ import Header from '../../components/Header/Header';
 import { VISA } from '../../constants/images';
 import { FormInput } from 'react-native-formtastic';
 import { colors } from '../../constants/colors';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function PaymentDetails({ navigation }) {
@@ -23,7 +24,7 @@ export default function PaymentDetails({ navigation }) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         < Header
           pageName={"Payment Details"}
           navigation={navigation}
@@ -35,15 +36,15 @@ export default function PaymentDetails({ navigation }) {
           <View style={styles.MainBox}>
             <View style={styles.AddressBox}>
               <Pressable style={styles.OrderTitleBox}>
-                <Text style={styles.OrderTitle}>+Add new card</Text>
+                <Ctext style={styles.OrderTitle}>+Add new card</Ctext>
               </Pressable>
               <View style={styles.PaymentMethodUl}>
                 <View style={styles.PaymentMethodLi}>
                   <View style={styles.PaymentMethodLiInner}>
                     <Image source={VISA} style={styles.PaymentMethodLiImage} />
-                    <Text style={styles.PaymentMethodText}>Visa Card</Text>
+                    <Ctext style={styles.PaymentMethodText}>Visa Card</Ctext>
                   </View>
-                  <Text style={styles.PaymentMethodText}>$55</Text>
+                  <Ctext style={styles.PaymentMethodText}>$55</Ctext>
                 </View>
               </View>
               <View style={styles.CardForm}>
@@ -91,15 +92,15 @@ export default function PaymentDetails({ navigation }) {
 
             <View style={styles.AddressBox}>
               <Pressable style={styles.OrderTitleBox}>
-                <Text style={styles.OrderTitle}>+Add new card</Text>
+                <Ctext style={styles.OrderTitle}>+Add new card</Ctext>
               </Pressable>
               <View style={styles.PaymentMethodUl}>
                 <View style={styles.PaymentMethodLi}>
                   <View style={styles.PaymentMethodLiInner}>
                     <Image source={VISA} style={styles.PaymentMethodLiImage} />
-                    <Text style={styles.PaymentMethodText}>Visa Card</Text>
+                    <Ctext style={styles.PaymentMethodText}>Visa Card</Ctext>
                   </View>
-                  <Text style={styles.PaymentMethodText}>$55</Text>
+                  <Ctext style={styles.PaymentMethodText}>$55</Ctext>
                 </View>
               </View>
               <View style={styles.CardForm}>
@@ -147,15 +148,15 @@ export default function PaymentDetails({ navigation }) {
 
             <View style={styles.AddressBox}>
               <Pressable style={styles.OrderTitleBox}>
-                <Text style={styles.OrderTitle}>+Add new card</Text>
+                <Ctext style={styles.OrderTitle}>+Add new card</Ctext>
               </Pressable>
               <View style={styles.PaymentMethodUl}>
                 <View style={styles.PaymentMethodLi}>
                   <View style={styles.PaymentMethodLiInner}>
                     <Image source={VISA} style={styles.PaymentMethodLiImage} />
-                    <Text style={styles.PaymentMethodText}>Visa Card</Text>
+                    <Ctext style={styles.PaymentMethodText}>Visa Card</Ctext>
                   </View>
-                  <Text style={styles.PaymentMethodText}>$55</Text>
+                  <Ctext style={styles.PaymentMethodText}>$55</Ctext>
                 </View>
               </View>
               <View style={styles.CardForm}>
@@ -207,7 +208,7 @@ export default function PaymentDetails({ navigation }) {
           <Pressable style={styles.CheckOutButton}
             onPress={() => navigation.navigate('Checkout')}
           >
-            <Text style={styles.CheckOutButtonText}>Pay Now $55</Text>
+            <Ctext style={styles.CheckOutButtonText}>Pay Now $55</Ctext>
           </Pressable>
         </View>
       </SafeAreaView >

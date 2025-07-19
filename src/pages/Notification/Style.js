@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
   NotificationBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
     paddingVertical: deviceHeight * 0.02,
     backgroundColor: colors.White,
     borderRadius: deviceHeight * 0.02,

@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import Modal from 'react-native-modal';
+import Ctext from '../Ctext';
 export default function LocationBottomSheet({ isVisible, onClose }) {
 
     return (
@@ -15,9 +16,9 @@ export default function LocationBottomSheet({ isVisible, onClose }) {
         >
             <View style={styles.CardOuter}>
                 <View style={styles.CardInner}>
-                    <Text style={styles.Title}>Location</Text>
+                    <Ctext style={styles.Title}>Location</Ctext>
                 </View>
-                    <Text style={styles.Title}>Locatizxdon</Text>
+                    <Ctext style={styles.Title}>Locatizxdon</Ctext>
             </View>
             
         </Modal>

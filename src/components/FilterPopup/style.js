@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../constants/colors";
-import { deviceHeight, deviceWidth } from "../../constants/constants";
+import { deviceHeight, deviceWidth, wp } from "../../constants/constants";
 import { BIG, fontFamily, H1BIG, H3, H4, H5, H6, p, small, smallS } from "../../constants/fontConstants";
 
 const styles = StyleSheet.create({
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     closeIconBtn: {
         position: 'absolute',
         left: deviceWidth * 0.42,
-        top: -deviceHeight * 0.1,
+        top: wp("-13%"),
         width: deviceWidth * 0.15,
         height: deviceWidth * 0.15,
-        borderRadius: 100,
+        borderRadius: wp("8%"),
         backgroundColor: 'rgba(48, 53, 43, 1)',
         justifyContent: 'center',
         alignItems: 'center',

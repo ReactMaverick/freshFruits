@@ -2,7 +2,7 @@
 import { StyleSheet } from "react-native";
 import { colors } from "../../constants/colors";
 import { fontFamily, H3, H4, H5, H6, p, small, smallS } from "../../constants/fontConstants";
-import { deviceHeight, deviceWidth } from "../../constants/constants";
+import { deviceHeight, deviceWidth, hp, wp } from "../../constants/constants";
 
 export const styles = StyleSheet.create({
     headerAreaOuter: {
@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 10,
         elevation: 10,
+        height: hp('15%'),
     },
     headerArea: {
         flexDirection: 'row',
@@ -82,14 +83,17 @@ export const styles = StyleSheet.create({
         gap: deviceWidth * 0.04,
     },
     SearchBox: {
-        borderRadius: deviceHeight * 0.05,
-        backgroundColor: '#fff',
+        borderRadius: wp('5%'),
         shadowColor: 'rgba(72, 92, 40, 0.50)',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 1,
         shadowRadius: 10,
         elevation: 10,
-        marginTop: deviceHeight * 0.01,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: colors.White,
+        margin: wp('2%'),
+        paddingHorizontal: wp('3%'),
     },
     mainContainerStyle: {
         margin: 0,
@@ -101,11 +105,12 @@ export const styles = StyleSheet.create({
         padding: 0,
     },
     textInputStyle: {
-        color: colors.HeadingColor,
+        color: colors.black,
         fontFamily: fontFamily.Regular,
         fontSize: p,
-        paddingLeft: deviceWidth * 0.11,
-        paddingRight: deviceWidth * 0.15,
+        width: "70%"
+    },
+    searchSection: {
     },
     labelTextStyle: {
         fontFamily: fontFamily.Regular,
@@ -114,7 +119,7 @@ export const styles = StyleSheet.create({
     textInputIcon: {
         color: colors.MediumGrayColor,
         fontSize: p,
-        bottom: deviceHeight / 100 / 4,
+        width: "15%"
     },
     filterIconBox: {
         position: 'absolute',
@@ -131,6 +136,11 @@ export const styles = StyleSheet.create({
         height: "100%",
         width: "100%",
         objectFit: 'cover',
+    },
+    filterBTN: {
+        flex: 1,
+        borderLeftWidth: 1,
+        borderColor: colors.black
     },
 
 

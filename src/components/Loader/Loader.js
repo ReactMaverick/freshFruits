@@ -8,7 +8,7 @@ export default function Loader({text}) {
     return (
         <View style={styles.container}>
             <ActivityIndicator size="large" color={colors.PrimaryColor} />
-            {/* <Text>{text}</Text> */}
+            {/* <Ctext>{text}</Ctext> */}
         </View>
     );
 }

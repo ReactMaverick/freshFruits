@@ -11,7 +11,7 @@ import {
   smallS,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
-import { deviceWidth, deviceHeight } from '../../constants/constants';
+import { deviceWidth, deviceHeight, wp } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -189,8 +189,7 @@ opacity:0.4
 
   ////////////////////// AddToCartBox //////////////////////
   AddToCartBox: {
-    minWidth: deviceWidth * 1,
-    backgroundColor: "#FDFFFA",
+    backgroundColor: colors.White,
     paddingHorizontal: deviceWidth * 0.04,
     paddingVertical: deviceHeight * 0.02,
     flexDirection: 'row',
@@ -202,19 +201,20 @@ opacity:0.4
   },
   TotalText: {
     fontFamily: fontFamily.Bold,
-    fontSize: H4,
+    fontSize: p,
     color: colors.MediumGrayColor,
   },
   PriceText: {
     fontFamily: fontFamily.Bold,
-    fontSize: H4,
+    fontSize: p,
     color: colors.PrimaryColor,
   },
   AddToCartBtn: {
-    flex: 2,
+    flex: 1,
     backgroundColor: colors.PrimaryColor,
-    paddingVertical: deviceHeight * 0.018,
-    borderRadius: deviceHeight * 0.015,
+    paddingVertical: wp("2%"),
+    borderRadius: wp("3%"),
+    paddingHorizontal: wp("5%"),
     alignItems: 'center',
     shadowOffset: { width: 1, height: -10 },
     shadowOpacity: 1,
@@ -225,7 +225,7 @@ opacity:0.4
   AddToCartBtnText: {
     color: colors.White,
     fontFamily: fontFamily.Bold,
-    fontSize: H5,
+    fontSize: p,
   },
   ////////////////////////////////// slider styles ////////////////////////////////
 
@@ -246,5 +246,8 @@ opacity:0.4
     height: 6,
     borderRadius: deviceHeight * 0.01,
     marginHorizontal: 0,
-  }
+  },
+  ScrollView: {
+    paddingBottom: wp('20%'),
+  },
 });

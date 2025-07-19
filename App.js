@@ -7,16 +7,19 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import { persistor, store } from './src/redux/store';
 import Toast from 'react-native-toast-message';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 export default function App() {
 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-    <NavigationContainer>
-      <Router />
-    </NavigationContainer>
-    <Toast/>
-    </PersistGate>
+        <NavigationContainer>
+          <KeyboardProvider>
+            <Router />
+          </KeyboardProvider>
+        </NavigationContainer>
+        <Toast />
+      </PersistGate>
     </Provider>
   );
 }

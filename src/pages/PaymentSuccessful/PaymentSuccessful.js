@@ -1,8 +1,5 @@
 import {
   Image,
-  KeyboardAvoidingView,
-  SafeAreaView,
-  Text,
   View,
 } from 'react-native';
 import { styles } from './Style';
@@ -10,6 +7,9 @@ import { commonStyles } from '../../constants/styles';
 import { platform } from '../../constants/constants';
 import React, { } from 'react';
 import { SUCCESS } from '../../constants/images';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function PaymentSuccessful({ navigation }) {
@@ -18,13 +18,13 @@ export default function PaymentSuccessful({ navigation }) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         <View style={styles.MainBox}>
           <Image source={SUCCESS} style={styles.PaymentMethodLiImage} />
           <View style={styles.SuccessBox}>
-            <Text style={styles.SuccessText}>Payment Successful</Text>
-            <Text style={styles.SuccessPara}>Your payment was successful</Text>
-            <Text style={styles.Payment}>$55</Text>
+            <Ctext style={styles.SuccessText}>Payment Successful</Ctext>
+            <Ctext style={styles.SuccessPara}>Your payment was successful</Ctext>
+            <Ctext style={styles.Payment}>$55</Ctext>
           </View>
         </View>
 

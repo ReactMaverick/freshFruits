@@ -9,7 +9,7 @@ import {
   smallS,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
-import { deviceWidth, deviceHeight } from '../../constants/constants';
+import { deviceWidth, deviceHeight, wp } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   OrderTabBtn: {
     paddingVertical: deviceWidth * 0.03,
-    paddingHorizontal: deviceWidth * 0.03,
+    paddingHorizontal: wp("1%"),
     borderRadius: deviceHeight * 0.01,
     width: deviceWidth * 0.3,
     alignItems: 'center',
@@ -35,8 +35,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.PrimaryColor,
   },
   OrderTabText: {
-    fontFamily: fontFamily.Bold,
-    fontSize: p,
+    fontSize: small,
     color: colors.HeadingColor,
   },
   OrderTabBtnActive: {
@@ -45,13 +44,13 @@ export const styles = StyleSheet.create({
     borderRadius: deviceHeight * 0.01,
     width: deviceWidth * 0.3,
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: colors.PrimaryColor,
     backgroundColor: colors.PrimaryColor,
   },
   OrderTabTextActive: {
     fontFamily: fontFamily.Bold,
-    fontSize: p,
+    fontSize: small,
     color: colors.White,
   },
   OrderItemBox: {

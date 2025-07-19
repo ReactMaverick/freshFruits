@@ -1,9 +1,7 @@
 import React from 'react';
 import styles from './style';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import { colors } from '../../constants/colors'; // Ensure colors is imported if used
 import BannerSliderItem from '../BannerSliderItem/BannerSliderItem';
-import { Text } from 'react-native-elements';
 
 export default function BannerSlider({ navigation }) {
     return (
@@ -17,7 +15,7 @@ export default function BannerSlider({ navigation }) {
             <BannerSliderItem />
             <BannerSliderItem />
             <BannerSliderItem />
-            {/* <Text>hhh</Text> */}
+            {/* <Ctext>hhh</Ctext> */}
         </SwiperFlatList>
     );
 }

@@ -10,7 +10,7 @@ import {
   smallS,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
-import { deviceWidth, deviceHeight } from '../../constants/constants';
+import { deviceWidth, deviceHeight, wp } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
   CheckOutButtonBox: {
     paddingTop: deviceHeight * 0.02,
     paddingBottom: deviceHeight * 0.01,
+    marginBottom: wp("15%")
   },
   CheckOutButton: {
     backgroundColor: colors.PrimaryColor,
@@ -51,8 +52,7 @@ export const styles = StyleSheet.create({
   },
   CheckOutButtonText: {
     fontFamily: fontFamily.Bold,
-    fontSize: H4,
+    fontSize: H6,
     color: colors.White,
   },
-
 });

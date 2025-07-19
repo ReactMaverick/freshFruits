@@ -1,8 +1,6 @@
 import {
   Image,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   View,
@@ -10,21 +8,24 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
-import {styles} from './Style';
-import {commonStyles} from '../../constants/styles';
-import {platform, showToast} from '../../constants/constants';
-import {FRESHFOODLOGO, SWITCHOFF, SWITCHON} from '../../constants/images';
-import {FormInput} from 'react-native-formtastic';
+import { styles } from './Style';
+import { commonStyles } from '../../constants/styles';
+import { platform, showToast } from '../../constants/constants';
+import { FRESHFOODLOGO, SWITCHOFF, SWITCHON } from '../../constants/images';
+import { FormInput } from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
-import React, {useState, useEffect, useRef} from 'react';
-import {login} from '../../redux/reducers/authReducer';
-import {useDispatch} from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react';
+import { login } from '../../redux/reducers/authReducer';
+import { useDispatch } from 'react-redux';
 import Loader from '../../components/Loader/Loader';
 import Modal from 'react-native-modal';
 import Skeleton from "react-native-reanimated-skeleton";
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
@@ -71,9 +72,7 @@ export default function Login({navigation}) {
     setModalVisible(true);
     dispatch(login(formData))
       .then(res => {
-        if (res.type === 'auth/login/fulfilled') {
-          navigation.navigate('HomeStack');
-        } else {
+        if (res.type !== 'auth/login/fulfilled') {
           showToast('error', res.payload);
         }
       })
@@ -81,10 +80,10 @@ export default function Login({navigation}) {
         console.log('Error ==> ', err);
       })
       .finally(() => {
-        
+
         setModalVisible(false)
       });
-      setIsPasswordVisible(true);
+    setIsPasswordVisible(true);
   };
   const [isChecked, setIsChecked] = useState(false);
   const handlePress = () => {
@@ -95,19 +94,19 @@ export default function Login({navigation}) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <ScrollView>
-        <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
+        <ScrollView>
           <View style={styles.MainBox}>
             <Image style={styles.FreshFoodLogo} source={FRESHFOODLOGO} />
             <View style={styles.TitleBox}>
-              <Text style={styles.LoginText}>Welcome Back</Text>
-              <Text style={styles.LoginPara}>Login your account</Text>
+              <Ctext style={styles.LoginText}>Welcome Back</Ctext>
+              <Ctext style={styles.LoginPara}>Login your account</Ctext>
             </View>
 
             <View style={styles.formBox}>
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Email Or Mobile Number"
                 value={formData.user_name}
@@ -128,7 +127,7 @@ export default function Login({navigation}) {
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 inputType="password"
                 placeholderText="Password"
@@ -169,56 +168,56 @@ export default function Login({navigation}) {
                     style={styles.checkboxImage}
                     source={isChecked ? SWITCHON : SWITCHOFF}
                   />
-                  <Text style={styles.customCheckBoxText}>Remember me</Text>
+                  <Ctext style={styles.customCheckBoxText}>Remember me</Ctext>
                 </Pressable> */}
                 <Pressable
                   onPress={() => navigation.navigate('ForgotPassword')}>
-                  <Text style={styles.forgotPasswordText}>Forgot Password</Text>
+                  <Ctext style={styles.forgotPasswordText}>Forgot Password</Ctext>
                 </Pressable>
               </View>
 
-              
-                <>
-                  <Pressable
-                    style={commonStyles.MainBtn}
-                    onPress={() => {
-                      handleSubmit();
-                    }}>
-                    <Text style={styles.loginBtnText}>Login</Text>
-                  </Pressable>
 
-                  <View style={styles.dontHaveAccount}>
-                    <Text style={styles.dontHaveAccountText}>
-                      Don't have an account
-                    </Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.navigate('Register');
-                        setFormData({
-                          user_name: '',
-                          password: '',
-                        });
-                      }}>
-                      <Text style={styles.registerText}>Sign Up</Text>
-                    </TouchableOpacity>
-                  </View>
-                </>
-              
+              <>
+                <Pressable
+                  style={commonStyles.MainBtn}
+                  onPress={() => {
+                    handleSubmit();
+                  }}>
+                  <Ctext style={styles.loginBtnText}>Login</Ctext>
+                </Pressable>
+
+                <View style={styles.dontHaveAccount}>
+                  <Ctext style={styles.dontHaveAccountText}>
+                    Don't have an account
+                  </Ctext>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Register');
+                      setFormData({
+                        user_name: '',
+                        password: '',
+                      });
+                    }}>
+                    <Ctext style={styles.registerText}>Sign Up</Ctext>
+                  </TouchableOpacity>
+                </View>
+              </>
+
             </View>
           </View>
 
           {/* modal */}
           <Modal
-  isVisible={isModalVisible}
-  onBackdropPress={() => setModalVisible(false)}
-  style={{ justifyContent: 'flex-end', margin: 0 }} 
-  animationIn="slideInUp" 
-  animationOut="slideOutDown"
->
- <Loader/>
-</Modal>
-        </SafeAreaView>
-      </ScrollView>
+            isVisible={isModalVisible}
+            onBackdropPress={() => setModalVisible(false)}
+            style={{ justifyContent: 'flex-end', margin: 0 }}
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+          >
+            <Loader />
+          </Modal>
+        </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }

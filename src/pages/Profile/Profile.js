@@ -3,11 +3,8 @@ import {
   Alert,
   Image,
   ImageBackground,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   ScrollView,
-  Text,
   View,
   StatusBar,
   Platform,
@@ -43,20 +40,23 @@ import {
 import Modal from 'react-native-modal';
 import { TouchableOpacity } from 'react-native';
 import Toast from 'react-native-toast-message';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Profile({ navigation }) {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [modalProfile, setModalProfile]=useState(false);
+  const [modalProfile, setModalProfile] = useState(false);
   const user_name = useSelector(selectUser_name);
   const user_email = useSelector(selectUser_email);
   const dispatch = useDispatch();
-  const [password,setPassword]=useState("");
-  const [confirmPassword,setConfirmPassword]=useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [profileImage, setProfileImage] = useState('');
   const [imageUri, setImageUri] = useState(null);
 
-  const handelSubmit=()=>{
+  const handelSubmit = () => {
     setModalVisible(false);
     Toast.show({
       type: "success",
@@ -65,7 +65,7 @@ export default function Profile({ navigation }) {
     });
     console.log(password);
     console.log(confirmPassword);
-    
+
   }
   const requestCameraPermission = async () => {
     try {
@@ -87,7 +87,7 @@ export default function Profile({ navigation }) {
       console.warn(err);
       return false;
     }
-    
+
   };
 
   // Open Camera
@@ -136,9 +136,9 @@ export default function Profile({ navigation }) {
     });
     setModalProfile(false)
   };
-  
 
- 
+
+
 
   return (
     <KeyboardAvoidingView
@@ -146,54 +146,54 @@ export default function Profile({ navigation }) {
       style={commonStyles.keyboardAvoidingView}
     >
       <StatusBar backgroundColor="#DCDDAE" barStyle="dark-content" />
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         <ScrollView style={styles.ScrollView}>
           <Image source={PROFILEBG} resizeMode="cover" style={styles.BGImage} />
           <View style={styles.MainBox}>
             <View style={styles.UserBox}>
-             
-              <View style={{ position: 'relative' }}>
-              
-        <Avatar
-        source={
-          imageUri
-            ? { uri: imageUri }
-            : require("../../assets/images/avtar.png")
-        }
-          style={styles.ProfilePic}
-          rounded
-          size="large"
-        />
-     
-  {/* <Avatar
-    style={styles.ProfilePic}
-    rounded
-    size="large"
-    source={PROFILEPIC}
-  /> */}
 
-  {/* Edit Icon Overlay */}
-  <TouchableOpacity
-    style={{
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      backgroundColor: 'white', // Optional, to make the icon background more visible
-      borderRadius: 15,
-      padding: 5,
-    }}
-    onPress={() => {setModalProfile(true)}}
-  >
-    <Feather name="edit-3" size={18} color="black" />
-  </TouchableOpacity>
-</View>
+              <View style={{ position: 'relative' }}>
+
+                <Avatar
+                  source={
+                    imageUri
+                      ? { uri: imageUri }
+                      : PROFILEPIC
+                  }
+                  style={styles.ProfilePic}
+                  rounded
+                  size="large"
+                />
+
+                {/* <Avatar
+                  style={styles.ProfilePic}
+                  rounded
+                  size="large"
+                  source={PROFILEPIC}
+                /> */}
+
+                {/* Edit Icon Overlay */}
+                <TouchableOpacity
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    backgroundColor: 'white', // Optional, to make the icon background more visible
+                    borderRadius: 15,
+                    padding: 5,
+                  }}
+                  onPress={() => { setModalProfile(true) }}
+                >
+                  <Feather name="edit-3" size={18} color="black" />
+                </TouchableOpacity>
+              </View>
               <View style={styles.UserBoxEdit}>
-                <Text style={styles.UserName}>{user_name}</Text>
+                <Ctext style={styles.UserName}>{user_name}</Ctext>
                 <Pressable style={styles.EditBtn}>
                   <Feather name="edit-3" style={styles.textInputIcon} />
                 </Pressable>
               </View>
-              <Text style={styles.UserEmail}>{user_email}</Text>
+              <Ctext style={styles.UserEmail}>{user_email}</Ctext>
             </View>
 
             <View style={styles.ServiceBoxarea}>
@@ -204,7 +204,7 @@ export default function Profile({ navigation }) {
                     resizeMode="cover"
                     style={styles.ServiceIcon}
                   />
-                  <Text style={styles.ServiceText}>Payment</Text>
+                  <Ctext style={styles.ServiceText}>Payment</Ctext>
                 </Pressable>
                 <Pressable style={styles.ServiceBox}>
                   <Image
@@ -212,7 +212,7 @@ export default function Profile({ navigation }) {
                     resizeMode="cover"
                     style={styles.ServiceIcon}
                   />
-                  <Text style={styles.ServiceText}>Customer Support</Text>
+                  <Ctext style={styles.ServiceText}>Customer Support</Ctext>
                 </Pressable>
                 <Pressable style={styles.ServiceBox}>
                   <Image
@@ -220,7 +220,7 @@ export default function Profile({ navigation }) {
                     resizeMode="cover"
                     style={styles.ServiceIcon}
                   />
-                  <Text style={styles.ServiceText}>Wallet</Text>
+                  <Ctext style={styles.ServiceText}>Wallet</Ctext>
                 </Pressable>
               </View>
             </View>
@@ -234,7 +234,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Address</Text>
+                    <Ctext style={styles.MenuText}>Address</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -245,7 +245,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Transaction</Text>
+                    <Ctext style={styles.MenuText}>Transaction</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -256,7 +256,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Personal Info</Text>
+                    <Ctext style={styles.MenuText}>Personal Info</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -267,7 +267,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Settings</Text>
+                    <Ctext style={styles.MenuText}>Settings</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -278,7 +278,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Change Language</Text>
+                    <Ctext style={styles.MenuText}>Change Language</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -293,7 +293,7 @@ export default function Profile({ navigation }) {
                       resizeMode="cover"
                       style={styles.MenuIcon}
                     />
-                    <Text style={styles.MenuText}>Change Password</Text>
+                    <Ctext style={styles.MenuText}>Change Password</Ctext>
                   </View>
                   <Feather name="chevron-right" style={styles.MenuArrow} />
                 </Pressable>
@@ -313,141 +313,141 @@ export default function Profile({ navigation }) {
                   resizeMode="cover"
                   style={styles.LogOutIcon}
                 />
-                <Text style={styles.LogoutText}>Log Out</Text>
+                <Ctext style={styles.LogoutText}>Log Out</Ctext>
               </Pressable>
             </View>
           </View>
 
-         
-{/* change password modal */}
 
-<Modal
-  isVisible={isModalVisible}
-  onBackdropPress={() => setModalVisible(false)}
-  style={{ justifyContent: 'flex-end', margin: 0 }} 
-  animationIn="slideInUp" 
-  animationOut="slideOutDown"
->
-  <View
-    style={{
-      height: '35%',
-      width: '100%',
-      backgroundColor: 'white',
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      padding: 20,
-      justifyContent: 'flex-start', 
-      alignItems: 'center',
-    }}
-  >
+          {/* change password modal */}
 
-<Text style={{ color: 'white', fontSize: 20 ,color:"black"}}>Change Password</Text>
-    {/* Password Input */}
-    <FormInput
-      hideLabel
-      inputType="password"
-      placeholderText="Password"
-      value={password}
-      onTextChange={setPassword}
-      renderLeftIcon={() => (
-        <AntDesign
-          name={isPasswordVisible ? 'unlock' : 'lock'}
-          style={styles.textInputIcon}
-        />
-      )}
-      renderRightIcon={() => (
-        <Feather
-          name={isPasswordVisible ? 'eye' : 'eye-off'}
-          style={styles.textInputEyeIcon}
-        />
-      )}
-    />
+          <Modal
+            isVisible={isModalVisible}
+            onBackdropPress={() => setModalVisible(false)}
+            style={{ justifyContent: 'flex-end', margin: 0 }}
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+          >
+            <View
+              style={{
+                height: '35%',
+                width: '100%',
+                backgroundColor: 'white',
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                padding: 20,
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}
+            >
 
-    {/* Confirm Password Input */}
-    <FormInput
-      hideLabel
-      value={confirmPassword}
-      onTextChange={setConfirmPassword}
-      inputType="password"
-      placeholderText="Confirm Password"
-      renderLeftIcon={() => (
-        <AntDesign
-          name="lock"
-          style={styles.textInputIcon}
-        />
-      )}
-      renderRightIcon={() => (
-        <Feather
-          name={isPasswordVisible ? 'eye' : 'eye-off'}
-          style={styles.textInputEyeIcon}
-        />
-      )}
-    />
+              <Ctext style={{ color: 'white', fontSize: 20, color: "black" }}>Change Password</Ctext>
+              {/* Password Input */}
+              <FormInput
+                hideLabel
+                inputType="password"
+                placeholderText="Password"
+                value={password}
+                onTextChange={setPassword}
+                renderLeftIcon={() => (
+                  <AntDesign
+                    name={isPasswordVisible ? 'unlock' : 'lock'}
+                    style={styles.textInputIcon}
+                  />
+                )}
+                renderRightIcon={() => (
+                  <Feather
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    style={styles.textInputEyeIcon}
+                  />
+                )}
+              />
 
-    {/* Submit Button */}
-    <TouchableOpacity
-      onPress={() => {handelSubmit()}}
-      style={{
-        marginTop: 20,
-        backgroundColor:"blue",
-        paddingVertical: 10,
-        paddingHorizontal: 40,
-        borderRadius: 10,
-        width: '100%',
-        alignItems: 'center',
-      }}
-    >
-      <Text style={styles.registerText}>Submit</Text>
-    </TouchableOpacity>
-  </View>
-</Modal>
+              {/* Confirm Password Input */}
+              <FormInput
+                hideLabel
+                value={confirmPassword}
+                onTextChange={setConfirmPassword}
+                inputType="password"
+                placeholderText="Confirm Password"
+                renderLeftIcon={() => (
+                  <AntDesign
+                    name="lock"
+                    style={styles.textInputIcon}
+                  />
+                )}
+                renderRightIcon={() => (
+                  <Feather
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    style={styles.textInputEyeIcon}
+                  />
+                )}
+              />
 
-{/* profile modal */}
-<Modal
-  isVisible={modalProfile}
-  onBackdropPress={() => setModalProfile(false)}
-  style={{ justifyContent: 'flex-end', margin: 0 }} 
-  animationIn="slideInUp" 
-  animationOut="slideOutDown"
->
-  <View
-    style={{
-      height: '35%',
-      width: '100%',
-      backgroundColor: 'white',
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      padding: 20,
-      justifyContent: 'flex-start', 
-      alignItems: 'center',
-    }}
-  >
-<Text style={{ color: 'white', fontSize: 20 ,color:"black",fontWeight:"bold"}}>Select One</Text>
-<View style={{flex:1,flexDirection:"row",marginTop:50,gap:60}}>
-  <TouchableOpacity style={{gap:10}} onPress={openGallery}>
-<Avatar
-    style={styles.ProfilePic}
-    rounded
-    size="large"
-    source={GALLERY}
-  />
-  <Text style={{fontWeight:"800",color:"black",alignItems:"center",textAlign:"center",}}>Gallery</Text>
-  </TouchableOpacity>
+              {/* Submit Button */}
+              <TouchableOpacity
+                onPress={() => { handelSubmit() }}
+                style={{
+                  marginTop: 20,
+                  backgroundColor: "blue",
+                  paddingVertical: 10,
+                  paddingHorizontal: 40,
+                  borderRadius: 10,
+                  width: '100%',
+                  alignItems: 'center',
+                }}
+              >
+                <Ctext style={styles.registerText}>Submit</Ctext>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          {/* profile modal */}
+          <Modal
+            isVisible={modalProfile}
+            onBackdropPress={() => setModalProfile(false)}
+            style={{ justifyContent: 'flex-end', margin: 0 }}
+            animationIn="slideInUp"
+            animationOut="slideOutDown"
+          >
+            <View
+              style={{
+                height: '35%',
+                width: '100%',
+                backgroundColor: 'white',
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                padding: 20,
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}
+            >
+              <Ctext style={{ color: 'white', fontSize: 20, color: "black", fontWeight: "bold" }}>Select One</Ctext>
+              <View style={{ flex: 1, flexDirection: "row", marginTop: 50, gap: 60 }}>
+                <TouchableOpacity style={{ gap: 10 }} onPress={openGallery}>
+                  <Avatar
+                    style={styles.ProfilePic}
+                    rounded
+                    size="large"
+                    source={GALLERY}
+                  />
+                  <Ctext style={{ fontWeight: "800", color: "black", alignItems: "center", textAlign: "center", }}>Gallery</Ctext>
+                </TouchableOpacity>
 
 
-  <TouchableOpacity style={{gap:10}} onPress={openCamera} >
-   <Avatar
-    style={styles.ProfilePic}
-    rounded
-    size="large"
-    source={CAMERA}
-  />
-   <Text style={{fontWeight:"800",color:"black",alignItems:"center",textAlign:"center",}}>Camera</Text>
-  </TouchableOpacity>
-</View>
-  </View>
-</Modal>
-{/* <Image
+                <TouchableOpacity style={{ gap: 10 }} onPress={openCamera} >
+                  <Avatar
+                    style={styles.ProfilePic}
+                    rounded
+                    size="large"
+                    source={CAMERA}
+                  />
+                  <Ctext style={{ fontWeight: "800", color: "black", alignItems: "center", textAlign: "center", }}>Camera</Ctext>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          {/* <Image
         source={
           imageUri
             ? { uri: imageUri }
@@ -457,7 +457,7 @@ export default function Profile({ navigation }) {
       /> */}
 
 
-        
+
         </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>

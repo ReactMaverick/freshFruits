@@ -9,7 +9,7 @@ import {
   smallS,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
-import { deviceWidth, deviceHeight } from '../../constants/constants';
+import { deviceWidth, deviceHeight, wp } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -67,10 +67,9 @@ export const styles = StyleSheet.create({
   },
   OrderSummaryBox: {
     minWidth: deviceWidth * 1,
-    backgroundColor: "transparent",
+    backgroundColor: colors.White,
     paddingHorizontal: deviceWidth * 0.04,
     paddingVertical: deviceHeight * 0.02,
-    minHeight: deviceHeight * 0.15,
   },
   divider: {
     backgroundColor: '#DFE0DD',
@@ -117,5 +116,14 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.Bold,
     fontSize: H5,
   },
-
+  EmptyText: {
+    textAlign: 'center',
+    fontSize: H4,
+    fontFamily: fontFamily.Bold,
+    color: colors.PrimaryColor,
+    marginVertical: wp('5%'),
+  },
+  ScrollView: {
+    paddingBottom: wp('20%'),
+  },
 });

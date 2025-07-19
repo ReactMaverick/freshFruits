@@ -129,5 +129,8 @@ export const commonStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: deviceHeight * 0.02,
-  }
+  },
+  safeAreaView: {
+    flex: 1,
+  },
 });

@@ -1,17 +1,15 @@
 import {
   Image,
   Keyboard,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {styles} from './Style';
-import {commonStyles} from '../../constants/styles';
-import {platform} from '../../constants/constants';
+import { styles } from './Style';
+import { commonStyles } from '../../constants/styles';
+import { platform } from '../../constants/constants';
 import {
   FACEBOOK,
   FRESHFOODLOGO,
@@ -19,14 +17,17 @@ import {
   SWITCHOFF,
   SWITCHON,
 } from '../../constants/images';
-import {FormInput} from 'react-native-formtastic';
+import { FormInput } from 'react-native-formtastic';
 import AntDesign from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
-import {useState} from 'react';
-import {register} from '../../redux/reducers/authReducer';
-import {useDispatch} from 'react-redux';
+import { useState } from 'react';
+import { register } from '../../redux/reducers/authReducer';
+import { useDispatch } from 'react-redux';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function Register({navigation}) {
+export default function Register({ navigation }) {
   const dispatch = useDispatch();
   // const [isLoading, setIsLoading] = useState(false);
   // const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -126,19 +127,19 @@ export default function Register({navigation}) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <ScrollView>
-        <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
+        <ScrollView>
           <View style={styles.MainBox}>
             <Image style={styles.FreshFoodLogo} source={FRESHFOODLOGO} />
             <View style={styles.TitleBox}>
-              <Text style={styles.LoginText}>Created Account</Text>
-              <Text style={styles.LoginPara}>Sign up to get started!</Text>
+              <Ctext style={styles.LoginText}>Created Account</Ctext>
+              <Ctext style={styles.LoginPara}>Sign up to get started!</Ctext>
             </View>
 
             <View style={styles.formBox}>
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Name"
                 value={formData.fullname}
@@ -159,7 +160,7 @@ export default function Register({navigation}) {
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Email"
                 value={formData.email}
@@ -180,7 +181,7 @@ export default function Register({navigation}) {
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 placeholderText="Mobile No."
                 value={formData.phone}
@@ -201,7 +202,7 @@ export default function Register({navigation}) {
               />
               <FormInput
                 inputContainerStyle={styles.inputContainerStyle}
-                textInputProps={{style: styles.textInputStyle}}
+                textInputProps={{ style: styles.textInputStyle }}
                 labelTextStyle={styles.labelTextStyle}
                 inputType="text"
                 value={formData.password}
@@ -242,7 +243,7 @@ export default function Register({navigation}) {
                     style={styles.checkboxImage}
                     source={isChecked ? SWITCHON : SWITCHOFF}
                   />
-                  <Text style={styles.customCheckBoxText}>Remember me</Text>
+                  <Ctext style={styles.customCheckBoxText}>Remember me</Ctext>
                 </Pressable>
               </View> */}
 
@@ -251,13 +252,13 @@ export default function Register({navigation}) {
                   handleSubmit();
                 }}
                 style={commonStyles.MainBtn}>
-                <Text style={styles.loginBtnText}>Sign Up</Text>
+                <Ctext style={styles.loginBtnText}>Sign Up</Ctext>
               </Pressable>
 
               <View style={styles.dontHaveAccount}>
-                <Text style={styles.dontHaveAccountText}>
+                <Ctext style={styles.dontHaveAccountText}>
                   You have an account
-                </Text>
+                </Ctext>
                 <TouchableOpacity
                   onPress={() => {
                     navigation.navigate('Login');
@@ -268,14 +269,14 @@ export default function Register({navigation}) {
                       password: '',
                     });
                   }}>
-                  <Text style={styles.registerText}>Sign In</Text>
+                  <Ctext style={styles.registerText}>Sign In</Ctext>
                 </TouchableOpacity>
               </View>
               {/* Or login with  */}
               <View style={styles.socialBox}>
                 <View style={styles.socialLineBox}>
                   <View style={styles.socialLine} />
-                  <Text style={styles.socialText}>Or login with</Text>
+                  <Ctext style={styles.socialText}>Or login with</Ctext>
                   <View style={styles.socialLine} />
                 </View>
                 <View style={styles.socialLoginBox}>
@@ -289,8 +290,8 @@ export default function Register({navigation}) {
               </View>
             </View>
           </View>
-        </SafeAreaView>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 }

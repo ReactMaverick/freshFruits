@@ -12,6 +12,7 @@ import styles from './style';
 import { commonStyles } from '../../constants/styles';
 import { platform } from '../../constants/constants';
 import { BANNERSLIDER1 } from '../../constants/images';
+import Ctext from '../Ctext';
 
 export default function BannerSliderItem({ navigation }) {
     return (
@@ -22,10 +23,10 @@ export default function BannerSliderItem({ navigation }) {
                 <View style={styles.sliderCardMain}>
                     <ImageBackground source={BANNERSLIDER1} resizeMode='cover' style={styles.sliderCard}>
                         <View style={styles.sliderCardLeft}>
-                            <Text style={styles.sliderText}>Spring Harvest<Text style={styles.TextColorChange}> Sale</Text></Text>
-                            <Text style={styles.sliderSubText}>Create your perfect fruit basket and save<Text style={styles.TextColorChange}> 20%</Text></Text>
+                            <Ctext style={styles.sliderText}>Spring Harvest<Ctext style={styles.TextColorChange}> Sale</Ctext></Ctext>
+                            <Ctext style={styles.sliderSubText}>Create your perfect fruit basket and save<Ctext style={styles.TextColorChange}> 20%</Ctext></Ctext>
                             <Pressable style={styles.sliderButton}>
-                                <Text style={styles.sliderButtonText}>Shop Now</Text>
+                                <Ctext style={styles.sliderButtonText}>Shop Now</Ctext>
                             </Pressable>
                         </View>
                     </ImageBackground>

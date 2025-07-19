@@ -27,7 +27,7 @@ export const BTNCART = require('../assets/images/btnCart.png');
 export const BTNCARTTEXT = require('../assets/images/btnCartText.png');
 export const DISCOUNT = require('../assets/images/Discount.png');
 export const PROFILEBG = require('../assets/images/ProfileBg.png');
-export const PROFILEPIC = require('../assets/images/avtar.png');
+export const PROFILEPIC = require('../assets/images/dummy_profile_image.jpg');
 export const MASTERCARD = require('../assets/images/MasterCard.png');
 export const ONLINESUPPORT = require('../assets/images/OnlineSupport.png');
 export const WALLET = require('../assets/images/Wallet.png');
@@ -64,3 +64,5 @@ export const BEST = require('../assets/images/best.png');
 export const STAR = require('../assets/images/star.png');
 export const CAMERA = require('../assets/images/camera.png');
 export const GALLERY = require('../assets/images/gallery.png');
+export const STARTINGPAGE_BACK_TEXTURE = require('../assets/images/startingPage_back_texture.png');
+

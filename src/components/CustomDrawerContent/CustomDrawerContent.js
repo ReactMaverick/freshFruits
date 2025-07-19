@@ -7,43 +7,45 @@ import { styles } from "./Style";
 import { INFOBG, INFORMATION, LOCK, PROFILEPIC, RECEIPT, SETTINGS, SHARE, SHOP, SIDEBAR, TICKET } from '../../constants/images';
 import { useSelector } from 'react-redux';
 import { selectUser_name } from '../../redux/reducers/authReducer';
+import Ctext from '../Ctext';
+import { wp } from '../../constants/constants';
 
 
 export default function CustomDrawerContent(props) {
-    const userName=useSelector(selectUser_name)
+    const userName = useSelector(selectUser_name)
     return (
         <DrawerContentScrollView {...props}>
             <ImageBackground source={SIDEBAR} style={styles.drawerHeader}>
                 <Image source={PROFILEPIC} style={styles.profilePic} />
                 <View style={styles.profileContent}>
-                    <Text style={styles.drawerHeaderName}>{userName}</Text>
-                    <Pressable onPress={()=>props.navigation.navigate('Profile')}>
-                        <Text style={styles.drawerHeaderText}>View profile</Text>
+                    <Ctext style={styles.drawerHeaderName}>{userName}</Ctext>
+                    <Pressable onPress={() => props.navigation.navigate('Profile')}>
+                        <Ctext style={styles.drawerHeaderText}>View profile</Ctext>
                     </Pressable>
                 </View>
             </ImageBackground>
             <View style={styles.mainbox}>
                 <View style={styles.ULBox}>
-                    <Text style={styles.Heading}>Your Information</Text>
+                    <Ctext style={styles.Heading}>Your Information</Ctext>
                     <View style={styles.ManuBox}>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={RECEIPT} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>Today Deals</Text>
+                                <Ctext style={styles.MenuText}>Today Deals</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={SHOP} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>Gift voucher</Text>
+                                <Ctext style={styles.MenuText}>Gift voucher</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={TICKET} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>My coupons</Text>
+                                <Ctext style={styles.MenuText}>My coupons</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
@@ -51,33 +53,33 @@ export default function CustomDrawerContent(props) {
                     </View>
                 </View>
                 <View style={styles.ULBox}>
-                    <Text style={styles.Heading}>Other Information</Text>
+                    <Ctext style={styles.Heading}>Other Information</Ctext>
                     <View style={styles.ManuBox}>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={LOCK} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>Privacy</Text>
+                                <Ctext style={styles.MenuText}>Privacy</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={SETTINGS} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>Setting</Text>
+                                <Ctext style={styles.MenuText}>Setting</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={INFORMATION} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>FAQ</Text>
+                                <Ctext style={styles.MenuText}>FAQ</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
                         <Pressable style={styles.MenuList}>
                             <View style={styles.MenuListLeft}>
                                 <Image source={SHARE} resizeMode='cover' style={styles.MenuIcon} />
-                                <Text style={styles.MenuText}>Share App</Text>
+                                <Ctext style={styles.MenuText}>Share App</Ctext>
                             </View>
                             <Feather name="chevron-right" style={styles.MenuArrow} />
                         </Pressable>
@@ -86,14 +88,14 @@ export default function CustomDrawerContent(props) {
                 <View style={styles.BottomBoxs}>
                     <ImageBackground resizeMode='cover' source={INFOBG} style={styles.Infobg}>
                         <View style={styles.InfoBox}>
-                            <Text style={styles.InfoText}>Rate our App</Text>
-                            <Text style={styles.InfosubText}>We love appreciation & Feedback</Text>
+                            <Ctext style={styles.InfoText}>Rate our App</Ctext>
+                            <Ctext style={styles.InfosubText}>We love appreciation & Feedback</Ctext>
                         </View>
                     </ImageBackground>
                     <View style={styles.CopyRightbox}>
-                        <Text style={styles.CopyRightText}>App version 45.69.6</Text>
-                        <Text style={styles.CopyRightTextCont}><Text style={styles.CopyRightTextColor}>User agreement. Terms of Service, </Text>
-                            and <Text style={styles.CopyRightTextColor}>Privacy Policy</Text> of Fresh Fruit</Text>
+                        <Ctext style={styles.CopyRightText}>App version 45.69.6</Ctext>
+                        <Ctext style={styles.CopyRightTextCont}><Ctext style={styles.CopyRightTextColor}>User agreement. Terms of Service, </Ctext>
+                            and <Ctext style={styles.CopyRightTextColor}>Privacy Policy</Ctext> of Fresh Fruit</Ctext>
                     </View>
                 </View>
             </View>

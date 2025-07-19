@@ -1,8 +1,6 @@
 import {
   Image,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   ScrollView,
   Text,
   View,
@@ -17,6 +15,9 @@ import AddressBox from '../../components/AddressBox/AddressBox';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import PaymentMethod from '../../components/PaymentMethod/PaymentMethod';
 import { useSelector } from 'react-redux';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 export default function Checkout({ navigation }) {
@@ -26,7 +27,7 @@ export default function Checkout({ navigation }) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         < Header
           pageName={"Checkout"}
           navigation={navigation}
@@ -38,27 +39,27 @@ export default function Checkout({ navigation }) {
           <ScrollView style={styles.ScrollView}>
             <View style={styles.OrderTitleBox}>
               <Image source={TRUCK} style={styles.OrderTitleImage} />
-              <Text style={styles.OrderTitle}>Shipping Address</Text>
+              <Ctext style={styles.OrderTitle}>Shipping Address</Ctext>
             </View>
             <View style={styles.OrderAddressBox}>
               <AddressBox />
             </View>
             <View style={styles.OrderTitleBox}>
               <Image source={ORDERBOOK} style={styles.OrderTitleImage} />
-              <Text style={styles.OrderTitle}>Order Summary</Text>
+              <Ctext style={styles.OrderTitle}>Order Summary</Ctext>
             </View>
             {/* <OrderSummary /> */}
             <OrderSummary />
             <View style={styles.OrderTitleBox}>
               <Image source={WALLET1} style={styles.OrderTitleImage} />
-              <Text style={styles.OrderTitle}>Payment Method</Text>
+              <Ctext style={styles.OrderTitle}>Payment Method</Ctext>
             </View>
             <PaymentMethod />
           </ScrollView>
           <View style={styles.CheckOutButtonBox}>
             <Pressable style={styles.CheckOutButton}
               onPress={() => navigation.navigate('PaymentDetails')}>
-              <Text style={styles.CheckOutButtonText}>Pay Now</Text>
+              <Ctext style={styles.CheckOutButtonText}>Pay Now</Ctext>
             </Pressable>
           </View>
         </View>

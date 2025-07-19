@@ -1,14 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
-import {useState, useCallback, useEffect} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { useState, useCallback, useEffect } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import {StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import { StatusBar, Text, TouchableOpacity, View } from 'react-native';
 // import { PROFILE_AVATAR } from "../constants/images";
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import SplashScreen from '../pages/SplashScreen/SplashScreen';
-import {styles} from './Style';
+import { styles } from './Style';
 import WelcomeScreen from '../pages/WelcomeScreen/WelcomeScreen';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import OTP from '../pages/OTP/OTP';
@@ -24,42 +24,43 @@ import PaymentDetails from '../pages/PaymentDetails/PaymentDetails';
 import PaymentSuccessful from '../pages/PaymentSuccessful/PaymentSuccessful';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from '../components/CustomDrawerContent/CustomDrawerContent';
-import {useSelector} from 'react-redux';
-import {selectUser_isLoggedIn} from '../redux/reducers/authReducer';
+import { useSelector } from 'react-redux';
+import { selectUser_isLoggedIn } from '../redux/reducers/authReducer';
 import PopularFruitsSlider from '../components/PopularFruitsSlider/PopularFruitsSlider';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated';
+import { wp } from '../constants/constants';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({ state, descriptors, navigation }) {
   const scale = useSharedValue(1);
   const animatedIconStyle = useAnimatedStyle(() => {
     return {
-      transform: [{scale: scale.value}],
+      transform: [{ scale: scale.value }],
     };
   });
   const startAnimations = useCallback(() => {
     scale.value = 0; // Reset scale
-    scale.value = withTiming(1, {duration: 900});
+    scale.value = withTiming(1, { duration: 900 });
   }, [scale]);
   return (
     <View style={styles.BottomBar}>
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -87,7 +88,7 @@ function MyTabBar({state, descriptors, navigation}) {
           <TouchableOpacity
             style={styles.BottomBarBtn}
             accessibilityRole="button"
-            accessibilityState={isFocused ? {selected: true} : {}}
+            accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
@@ -169,7 +170,7 @@ function MyTabBar({state, descriptors, navigation}) {
               style={[
                 styles.LabelText,
                 isFocused ? animatedIconStyle : {},
-                {color: isFocused ? '#7CBA1E' : '#72776C'},
+                { color: isFocused ? '#7CBA1E' : '#72776C' },
               ]}>
               {label}
             </Animated.Text>
@@ -181,8 +182,8 @@ function MyTabBar({state, descriptors, navigation}) {
 }
 
 function HomeTabs() {
-  const customScreenOptions = ({route}) => ({
-    tabBarIcon: ({focused, color, size}) => {
+  const customScreenOptions = ({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
       let iconName;
 
       if (route.name === 'HomeTab') {
@@ -207,7 +208,7 @@ function HomeTabs() {
         options={{
           headerShown: false,
           tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
         }}
@@ -241,7 +242,7 @@ function HomeTabs() {
 }
 
 const LoginStack = () => {
-  
+
   return (
     <Stack.Navigator >
       {/* <Stack.Screen
@@ -258,7 +259,7 @@ const LoginStack = () => {
           headerShown: false,
         }}
       />
-      
+
       <Stack.Screen
         name="Login"
         component={Login}
@@ -295,7 +296,7 @@ const LoginStack = () => {
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-     
+
       <Stack.Screen
         name="Home"
         component={HomeTabs}
@@ -333,9 +334,10 @@ const HomeStack = () => {
       />
       <Stack.Screen
         name="popularFruits"
-        component={PopularFruitsSlider}
+        component={(props) => <PopularFruitsSlider screen={true} {...props} />}
         options={{
-          headerShown: false,
+          headerShown: true,
+          title: 'Popular Fruits',
         }}
       />
       <Stack.Screen
@@ -401,6 +403,9 @@ const MyDrawer = () => {
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
+        drawerStyle: {
+          width: wp('80%'),
+        },
       }}>
       <Drawer.Screen name="HomeStack" component={HomeStack} />
       {/* {isUserLoggedIn ? (

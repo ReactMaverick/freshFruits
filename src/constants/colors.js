@@ -14,4 +14,6 @@ export const colors = {
   otp: '#F0F0F0',
   sliderBg: '#D8EBBC',
   btnBgGray: '#ECECEC',
+  black: '#000000',
+  white: "#FFFFFF",
 };

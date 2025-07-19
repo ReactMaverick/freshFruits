@@ -1,7 +1,5 @@
 import {
   FlatList,
-  KeyboardAvoidingView,
-  SafeAreaView,
   ScrollView,
   View,
 } from 'react-native';
@@ -20,6 +18,9 @@ import {
 } from '../../redux/reducers/authReducer';
 import {useIsFocused} from '@react-navigation/native';
 import {Text} from 'react-native-elements';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // const data = [
 //   { id: '1' },
@@ -68,7 +69,7 @@ export default function Wishlist({navigation}) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         <Header
           pageName={'Wishlist'}
           navigation={navigation}
@@ -95,9 +96,9 @@ export default function Wishlist({navigation}) {
             />
          ) : ( 
              wishListItems.success ? (
-              <Text>Wishlist is empty</Text>
+              <Ctext style={styles.nullText}>Wishlist is empty</Ctext>
             ) : (
-              <Text>Login and Try after some time</Text>
+              <Ctext>Login and Try after some time</Ctext>
             )
           )} 
         </View>

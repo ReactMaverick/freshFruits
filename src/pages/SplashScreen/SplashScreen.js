@@ -1,15 +1,15 @@
 import {
   Image,
-  KeyboardAvoidingView,
-  SafeAreaView,
   View,
   Animated,
 } from 'react-native';
-import {styles} from './Style';
-import React, {useEffect, useRef} from 'react';
-import {commonStyles} from '../../constants/styles';
-import {platform} from '../../constants/constants';
-import {LOGO} from '../../constants/images';
+import { styles } from './Style';
+import React, { useEffect, useRef } from 'react';
+import { commonStyles } from '../../constants/styles';
+import { platform } from '../../constants/constants';
+import { LOGO } from '../../constants/images';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 // import {useSelector} from 'react-redux';
 // import {selectUser_isLoggedIn} from '../../redux/reducers/authReducer';
 
@@ -28,13 +28,17 @@ export default function SplashScreen() {
   }, [translateY]);
 
   return (
-    <SafeAreaView>
-      {/* splash screen logo animation */}
-      <View style={styles.MainBox}>
-        <Animated.View style={{transform: [{translateY}]}}>
-          <Image style={styles.Logo} source={LOGO} />
-        </Animated.View>
-      </View>
-    </SafeAreaView>
+    <KeyboardAvoidingView
+      behavior={platform === 'ios' ? 'padding' : 'height'}
+      style={commonStyles.keyboardAvoidingView}>
+      <SafeAreaView style={commonStyles.safeAreaView}>
+        {/* splash screen logo animation */}
+        <View style={styles.MainBox}>
+          <Animated.View style={{ transform: [{ translateY }] }}>
+            <Image style={styles.Logo} source={LOGO} />
+          </Animated.View>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

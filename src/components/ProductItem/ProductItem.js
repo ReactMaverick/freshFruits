@@ -16,6 +16,7 @@ import { addToCart } from '../../values/CartUrls';
 import { showToast } from '../../constants/constants';
 import Loader from '../Loader/Loader';
 import { storeCartItems } from '../../redux/reducers/cartItemsReducer';
+import Ctext from '../Ctext';
 
 export default function ProductItem({ navigation,productItem }) {
     const user_Id = useSelector(selectUser_Id);
@@ -49,25 +50,25 @@ export default function ProductItem({ navigation,productItem }) {
             <View style={styles.CardInner}>
                <View style={styles.ProductImageBox}>
                      {/* <ImageBackground source={DISCOUNT} resizeMode='contain' style={styles.Discount}>
-                        <Text style={styles.DiscountText}>{productItem?.rating }%</Text>
+                        <Ctext style={styles.DiscountText}>{productItem?.rating }%</Ctext>
                     </ImageBackground>  */}   
                     <Image  source={{uri: productItem.image_path ?? PRO2}}style={styles.ProductImage} />
                 </View>
                 <View style={styles.ProductDetails}>
                     <View style={styles.ProductDetailsTop}>
                         <View style={styles.ProductDetailsLeft}>
-                            <Text style={styles.ProductName}>{productItem.products_name}</Text>
-                            <Text style={styles.ProductWeight}>1kg</Text>
+                            <Ctext style={styles.ProductName}>{productItem.products_name}</Ctext>
+                            <Ctext style={styles.ProductWeight}>1kg</Ctext>
                         </View>
                         <View style={styles.ratingBox}>
-                            <Text style={styles.ratingText}>{productItem.rating}</Text>
+                            <Ctext style={styles.ratingText}>{productItem.rating}</Ctext>
                             <AntDesign name="star" style={styles.ratingIcon} />
                         </View>
                     </View>
                     <View style={styles.sliderCardBottom}>
                         <View style={styles.sliderCardPriceBox}>
-                            <Text style={styles.sliderCardText}> ${Number(productItem.discounted_price)}/<Text style={styles.sliderCardTextCut}>
-                                ${Number(productItem.products_price)}</Text> </Text>
+                            <Ctext style={styles.sliderCardText}> ${Number(productItem.discounted_price)}/<Ctext style={styles.sliderCardTextCut}>
+                                ${Number(productItem.products_price)}</Ctext> </Ctext>
                         </View>
                         <Pressable
                             onPress={addItemsToCartFunc}

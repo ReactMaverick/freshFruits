@@ -10,6 +10,7 @@ import styles from './style';
 import Modal from 'react-native-modal';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { BEST, STAR } from '../../constants/images';
+import Ctext from '../Ctext';
 export default function FilterPopup({ isVisible, onClose }) {
 
     return (
@@ -25,59 +26,59 @@ export default function FilterPopup({ isVisible, onClose }) {
                 </Pressable>
                 <View style={styles.CardInner}>
                     <View style={styles.CardInnerTop}>
-                        <Text style={styles.Title}>Filters and Sorting</Text>
+                        <Ctext style={styles.Title}>Filters and Sorting</Ctext>
                     </View>
                     <ScrollView>
                         <View style={styles.cardCenter}>
                             <View style={styles.BoxCardMain}>
                                 <View style={styles.BoxCardArea}>
-                                    <Text style={styles.BoxCardItemTitle}>Top Picks</Text>
+                                    <Ctext style={styles.BoxCardItemTitle}>Top Picks</Ctext>
                                     <View style={styles.BoxCardItemRow}>
                                         <Pressable style={styles.BoxCardItem}>
                                             <Image source={BEST} style={styles.BoxCardItemImg} />
-                                            <Text style={styles.BoxCardItemText}>Best Seller</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Best Seller</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
                                             <Image source={STAR} style={styles.BoxCardItemImg} />
-                                            <Text style={styles.BoxCardItemText}>Rated 4+</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Rated 4+</Ctext>
                                         </Pressable>
                                     </View>
                                 </View>
                             </View>
                             <View style={styles.BoxCardMain}>
                                 <View style={styles.BoxCardArea}>
-                                    <Text style={styles.BoxCardItemTitle}>Categories</Text>
+                                    <Ctext style={styles.BoxCardItemTitle}>Categories</Ctext>
                                     <View style={styles.BoxCardItemRow}>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>All</Text>
+                                            <Ctext style={styles.BoxCardItemText}>All</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Berries</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Berries</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Apples & Pears</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Apples & Pears</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Citrus Fruits</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Citrus Fruits</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Stone Fruits</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Stone Fruits</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Tropical Fruits</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Tropical Fruits</Ctext>
                                         </Pressable>
                                     </View>
                                 </View>
                             </View>
                             <View style={styles.BoxCardMain}>
                                 <View style={styles.BoxCardArea}>
-                                    <Text style={styles.BoxCardItemTitle}>Availability</Text>
+                                    <Ctext style={styles.BoxCardItemTitle}>Availability</Ctext>
                                     <View style={styles.BoxCardItemRow}>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>In Stock</Text>
+                                            <Ctext style={styles.BoxCardItemText}>In Stock</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Out of Stock</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Out of Stock</Ctext>
                                         </Pressable>
 
                                     </View>
@@ -85,28 +86,28 @@ export default function FilterPopup({ isVisible, onClose }) {
                             </View>
                             <View style={styles.BoxCardMain}>
                                 <View style={styles.BoxCardArea}>
-                                    <Text style={styles.BoxCardItemTitle}>Sort By</Text>
+                                    <Ctext style={styles.BoxCardItemTitle}>Sort By</Ctext>
                                     <View style={styles.BoxCardItemRow}>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Price - Low to High</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Price - Low to High</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Price - High to Low</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Price - High to Low</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Rating- High to Low</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Rating- High to Low</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Rating - High to Low</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Rating - High to Low</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>New Arrivals</Text>
+                                            <Ctext style={styles.BoxCardItemText}>New Arrivals</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Popularity</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Popularity</Ctext>
                                         </Pressable>
                                         <Pressable style={styles.BoxCardItem}>
-                                            <Text style={styles.BoxCardItemText}>Customer Rating</Text>
+                                            <Ctext style={styles.BoxCardItemText}>Customer Rating</Ctext>
                                         </Pressable>
 
                                     </View>
@@ -117,10 +118,10 @@ export default function FilterPopup({ isVisible, onClose }) {
 
                     <View style={styles.cardBottom}>
                         <Pressable style={styles.Textbtn}>
-                            <Text style={styles.TextbtnText}>Clear All</Text>
+                            <Ctext style={styles.TextbtnText}>Clear All</Ctext>
                         </Pressable>
                         <Pressable style={styles.sliderButton}>
-                            <Text style={styles.sliderButtonText}>Apply All</Text>
+                            <Ctext style={styles.sliderButtonText}>Apply All</Ctext>
                         </Pressable>
                     </View>
                 </View>

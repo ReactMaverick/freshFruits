@@ -8,7 +8,7 @@ import {
   small,
 } from '../../constants/fontConstants';
 import { colors } from '../../constants/colors';
-import { deviceWidth, deviceHeight } from '../../constants/constants';
+import { deviceWidth, deviceHeight, wp } from '../../constants/constants';
 
 export const styles = StyleSheet.create({
   MainBox: {
@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
   column: {
     justifyContent: 'space-between',
   },
-
+  nullText: {
+    fontFamily: fontFamily.Bold,
+    color: colors.PrimaryColor,
+    textAlign: 'center',
+    paddingVertical: wp("5%"),
+  },
 
 });

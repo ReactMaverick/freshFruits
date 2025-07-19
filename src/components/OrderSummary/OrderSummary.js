@@ -3,6 +3,7 @@ import {View, Image, Text} from 'react-native';
 import styles from './style';
 import {PRO2, PRO3, PRO6} from '../../constants/images';
 import {useSelector} from 'react-redux';
+import Ctext from '../Ctext';
 
 export default function OrderSummary({navigation}) {
   const cartItems = useSelector(state => state.cart.cartItems);
@@ -15,16 +16,16 @@ export default function OrderSummary({navigation}) {
               <View style={styles.OrderSummaryLeft}>
                 <Image source={PRO2} style={styles.OrderSummaryImg} />
                 <View style={styles.OrderSummaryText}>
-                  <Text style={styles.OrderSummaryTitle}>{item.products_name}</Text>
-                  <Text style={styles.ProductWeight}>1kg</Text>
-                  <Text style={styles.sliderCardText}>
+                  <Ctext style={styles.OrderSummaryTitle}>{item.products_name}</Ctext>
+                  <Ctext style={styles.ProductWeight}>1kg</Ctext>
+                  <Ctext style={styles.sliderCardText}>
                     {' '}
-                    ${Number(item.afterDiscountPrice)} <Text style={styles.sliderCardTextCut}> ${Number(item.final_price)}</Text>
-                  </Text>
+                    ${Number(item.afterDiscountPrice)} <Ctext style={styles.sliderCardTextCut}> ${Number(item.final_price)}</Ctext>
+                  </Ctext>
                 </View>
               </View>
               <View style={styles.OrderSummaryRight}>
-                <Text style={styles.OrderSummaryQuantity}>{item.customers_basket_quantity}x</Text>
+                <Ctext style={styles.OrderSummaryQuantity}>{item.customers_basket_quantity}x</Ctext>
               </View>
             </View>
           ))}
@@ -33,38 +34,38 @@ export default function OrderSummary({navigation}) {
                         <View style={styles.OrderSummaryLeft}>
                             <Image source={PRO3} style={styles.OrderSummaryImg} />
                             <View style={styles.OrderSummaryText}>
-                                <Text style={styles.OrderSummaryTitle}>Mango</Text>
-                                <Text style={styles.ProductWeight}>1kg</Text>
-                                <Text style={styles.sliderCardText}> $19 <Text style={styles.sliderCardTextCut}> $22</Text></Text>
+                                <Ctext style={styles.OrderSummaryTitle}>Mango</Ctext>
+                                <Ctext style={styles.ProductWeight}>1kg</Ctext>
+                                <Ctext style={styles.sliderCardText}> $19 <Ctext style={styles.sliderCardTextCut}> $22</Ctext></Ctext>
                             </View>
                         </View>
                         <View style={styles.OrderSummaryRight}>
-                            <Text style={styles.OrderSummaryQuantity}>1x</Text>
+                            <Ctext style={styles.OrderSummaryQuantity}>1x</Ctext>
                         </View>
                     </View>
 */}
         </View>
         <View style={styles.OrderitemsUl}>
           <View style={styles.OrderSummaryRow}>
-            <Text style={styles.OrderSummaryLeftText}>Total items</Text>
-            <Text style={styles.OrderSummaryRightText}>03</Text>
+            <Ctext style={styles.OrderSummaryLeftText}>Total items</Ctext>
+            <Ctext style={styles.OrderSummaryRightText}>03</Ctext>
           </View>
           <View style={styles.OrderSummaryRow}>
-            <Text style={styles.OrderSummaryLeftText}>Price</Text>
-            <Text style={styles.OrderSummaryRightText}>$55</Text>
+            <Ctext style={styles.OrderSummaryLeftText}>Price</Ctext>
+            <Ctext style={styles.OrderSummaryRightText}>$55</Ctext>
           </View>
           <View style={styles.OrderSummaryRow}>
-            <Text style={styles.OrderSummaryLeftText}>Delivery</Text>
-            <Text style={styles.OrderSummaryRightText}>$3</Text>
+            <Ctext style={styles.OrderSummaryLeftText}>Delivery</Ctext>
+            <Ctext style={styles.OrderSummaryRightText}>$3</Ctext>
           </View>
           <View style={styles.OrderSummaryRow}>
-            <Text style={styles.OrderSummaryLeftText}>Discount</Text>
-            <Text style={styles.OrderSummaryRightText}>$18</Text>
+            <Ctext style={styles.OrderSummaryLeftText}>Discount</Ctext>
+            <Ctext style={styles.OrderSummaryRightText}>$18</Ctext>
           </View>
         </View>
         <View style={styles.TotalPriceRow}>
-          <Text style={styles.TotalPriceLeftText}>Total Price</Text>
-          <Text style={styles.TotalPriceRightText}>$55</Text>
+          <Ctext style={styles.TotalPriceLeftText}>Total Price</Ctext>
+          <Ctext style={styles.TotalPriceRightText}>$55</Ctext>
         </View>
       </View>
     </View>

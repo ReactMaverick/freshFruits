@@ -9,6 +9,7 @@ import {
 import styles from './style';
 import { TOGGLEICON } from '../../constants/images';
 import Feather from 'react-native-vector-icons/Feather';
+import Ctext from '../Ctext';
 
 export default function AddressBox({ navigation }) {
     return (
@@ -19,15 +20,15 @@ export default function AddressBox({ navigation }) {
                 </Pressable>
                 <View style={styles.addressBox}>
                     <View style={styles.TitleRow}>
-                        <Text style={styles.addressTitle}>Home</Text>
+                        <Ctext style={styles.addressTitle}>Home</Ctext>
                         <Pressable style={styles.EditBtn}
                             onPress={() => Alert.alert('Edit Address')}>
-                            <Text style={styles.EditBtnText}>Change</Text>
+                            <Ctext style={styles.EditBtnText}>Change</Ctext>
                             <Feather name="edit-3" style={styles.EditBtnIcon} />
                         </Pressable>
                     </View>
-                    <Text style={styles.addressText}>1901 Thornridge Cir. Shiloh, Hawaii</Text>
-                    <Text style={styles.addressText}>Phone number <Text style={styles.addressTextColor}>(704) 555-0127</Text></Text>
+                    <Ctext style={styles.addressText}>1901 Thornridge Cir. Shiloh, Hawaii</Ctext>
+                    <Ctext style={styles.addressText}>Phone number <Ctext style={styles.addressTextColor}>(704) 555-0127</Ctext></Ctext>
                 </View>
             </View>
         </View>

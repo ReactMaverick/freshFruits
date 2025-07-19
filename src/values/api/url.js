@@ -8,7 +8,7 @@ export const BASE_URL ='http://194.163.131.163/';
 //export const API_URL = BASE_URL + '/intelliTalks/api/v1/'; //Server IP
 export const API_URL = BASE_URL + 'greenway/public/api/'; //Server IP
 
-// export const IMAGE_BASE_URL = BASE_URL + '/intelliTalks/';
+export const IMAGE_BASE_URL = BASE_URL + 'greenway/public/';
 
 export const REGISTER_URL = `${API_URL}processSignup`;
 

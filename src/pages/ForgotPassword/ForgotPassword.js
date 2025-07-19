@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import {
   Image,
   Keyboard,
-  KeyboardAvoidingView,
   Pressable,
-  SafeAreaView,
   Text,
   View,
 } from 'react-native';
@@ -19,6 +17,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import { FORGOT_PASSWORD_URL } from '../../values/api/url';
 import { useDispatch } from 'react-redux';
 import { TextInput } from 'react-native-gesture-handler';
+import Ctext from '../../components/Ctext';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -159,11 +160,11 @@ export default function ForgotPassword({ navigation }) {
     <KeyboardAvoidingView
       behavior={platform === 'ios' ? 'padding' : 'height'}
       style={commonStyles.keyboardAvoidingView}>
-      <SafeAreaView>
+      <SafeAreaView style={commonStyles.safeAreaView}>
         <View style={styles.MainBox}>
           <View style={styles.TitleBox}>
-            <Text style={styles.LoginText}>Forgot Password</Text>
-            <Text style={styles.LoginPara}>Please enter your email or phone to reset your password</Text>
+            <Ctext style={styles.LoginText}>Forgot Password</Ctext>
+            <Ctext style={styles.LoginPara}>Please enter your email or phone to reset your password</Ctext>
           </View>
 
           <View style={styles.formBox}>
@@ -190,7 +191,7 @@ export default function ForgotPassword({ navigation }) {
                 // )}
               />
             <Pressable style={styles.loginBtn} onPress={handleForgetPassword}>
-              <Text style={styles.loginBtnText}>Send OTP</Text>
+              <Ctext style={styles.loginBtnText}>Send OTP</Ctext>
             </Pressable>
           </View>
         </View>

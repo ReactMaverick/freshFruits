@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import { colors } from '../../constants/colors';
+import Ctext from '../Ctext';
 
 export default function CategoriesSlider({ navigation }) {
     const fruits = [
@@ -36,7 +37,7 @@ export default function CategoriesSlider({ navigation }) {
             renderItem={({ item }) => (
                 <View style={styles.categoryBox}>
                     <Pressable style={styles.categoryBtn}>
-                        <Text style={styles.categoryBtnText}>{item}</Text>
+                        <Ctext style={styles.categoryBtnText}>{item}</Ctext>
                     </Pressable>
                 </View>
             )}
