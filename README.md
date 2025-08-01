@@ -1,4 +1,4 @@
-# Fresh Fruits - Local Fruit Ordering App Built with React Nativ
+# Fresh Fruits - Local Fruit Ordering App Built with React Native
 ![Image of Fresh Fruits](./src/assets/images/readme-hero-image.png)
 
 # Getting Started
