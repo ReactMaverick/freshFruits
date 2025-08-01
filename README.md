@@ -58,4 +58,4 @@ This is one way to run your app — you can also run it directly from within And
 - Top items highlight
 - Account settings
 
-Powered by <a href="https://websadroit.com" target="_blank">Websadroit</a>
+Powered by <a href="https://www.websadroit.com" target="_blank">Websadroit</a>
